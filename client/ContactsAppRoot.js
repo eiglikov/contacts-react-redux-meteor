@@ -1,14 +1,14 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
 import { Provider } from 'react-redux';
-// import store from '../../imports/client/store/store';
-
+import store from '../imports/startup/client/store/store';
+import ContactsApp from '../imports/startup/client/components/ContactsApp';
 
 function ContactsAppRoot() {
   return (
     <div>
-      <Provider>
-        <h1>Hello There!</h1>
+      <Provider store={store}>
+        <ContactsApp />
       </Provider>
     </div>
   );
