@@ -24,8 +24,10 @@ export function addContact(name, phone) {
   return { type: ADD_CONTACT, name, phone }
 }
 
-export function removeContact(_id) {
+export function removeContact(id) {
   // insertContact(name, phone);
-  Meteor.call('contacts.remove', _id);
-  return { type: REMOVE_CONTACT, _id }
+  console.log("REMOVE ACTION CREATOR");
+
+  Meteor.call('contacts.remove', id);
+  return { type: REMOVE_CONTACT, id }
 }

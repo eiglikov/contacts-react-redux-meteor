@@ -5,6 +5,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Contacts } from '../../../api/contacts/contacts';
 import Contact from './Contact';
+import {removeContact} from '../actions/addContact';
 
 class ContactsList extends React.Component {
   render() {
@@ -22,6 +23,7 @@ class ContactsList extends React.Component {
             <Contact
               key={contact._id}
               {...contact}
+              onClick={() => dispatch(removeContact(contact._id))}
             />
           )}
         </ul>

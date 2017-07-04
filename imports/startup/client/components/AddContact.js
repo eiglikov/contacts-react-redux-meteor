@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {addContact} from '../actions/addContact';
+import { addContact } from '../actions/addContact';
 
 
 function AddContact({ dispatch }) {
@@ -9,15 +9,15 @@ function AddContact({ dispatch }) {
   return (
     <div>
       <input ref={function (node)  {
-        name = node.value;
+        name = node;
       }}/>
       <input ref={function (node)  {
-        phone = node.value;
+        phone = node;
       }}/>
       <button onClick={function () {
-        dispatch(addContact(name, phone));
-        name = '';
-        phone = '';
+        dispatch(addContact(name.value, phone.value));
+        name.value = '';
+        phone.value = '';
 
       }}>
         Add Contact

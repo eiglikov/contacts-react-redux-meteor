@@ -1,12 +1,17 @@
 import React from 'react';
 
-export default function Contact({ onClick, completed, name, phone }) {
+function Contact({ onClick, completed, name, phone, key }) {
   return (
     <li
-      onClick={onClick}
       style={{textDecoration: completed ? 'line-through' : 'none'}}
     >
       {name} {phone}
+      <button className="remove-comment"
+        onClick={onClick}>
+        &times;
+      </button>
     </li>
-  );
-}
+    );
+  }
+
+  export default Contact;

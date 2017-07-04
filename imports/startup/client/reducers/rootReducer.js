@@ -19,10 +19,10 @@ function removeContact(state = [], action) {
   switch(action.type) {
     case 'REMOVE_CONTACT':
     console.log("HEY", action.type);
+    Meteor.call('contacts.remove', action.id);
 
       return [...state, {
-        name : action.name,
-        phone : action.phone
+        id : action.id
       }];
     default:
       return state;
