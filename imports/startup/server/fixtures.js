@@ -8,23 +8,23 @@ Meteor.startup(() => {
   if (Contacts.find().count() === 0) {
     const data = [
       {
-        title: 'Do the Tutorial',
-        url: 'https://www.meteor.com/try',
+        name: 'Sam Cooke',
+        phone: 6478889999,
         createdAt: new Date(),
       },
       {
-        title: 'Follow the Guide',
-        url: 'http://guide.meteor.com',
+        name: 'John Sam',
+        phone: 6478889229,
         createdAt: new Date(),
       },
       {
-        title: 'Read the Docs',
-        url: 'https://docs.meteor.com',
+        name: 'Kate Cooke',
+        phone: 1178229999,
         createdAt: new Date(),
       },
       {
-        title: 'Discussions',
-        url: 'https://forums.meteor.com',
+        name: 'Ivan Baran',
+        phone: 6478251999,
         createdAt: new Date(),
       },
     ];

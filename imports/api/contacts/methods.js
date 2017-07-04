@@ -5,14 +5,23 @@ import { check } from 'meteor/check';
 import { Contacts } from './contacts.js';
 
 Meteor.methods({
-  'contacts.insert'(title, url) {
-    check(url, String);
-    check(title, String);
+  'contacts.insert'(name, phone) {
+    check(name, String);
+    check(phone, String);
+    console.log("Insert server!", name, phone);
 
     return Contacts.insert({
-      url,
-      title,
+      name,
+      phone,
       createdAt: new Date(),
     });
   },
+  'contacts.remove'(id) {
+    check(id, String);
+    console.log("Remove server!", id);
+
+    return Contacts.remove({"_id": id});
+  },
+
+
 });
