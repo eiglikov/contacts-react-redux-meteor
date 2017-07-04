@@ -3,14 +3,14 @@
 // https://guide.meteor.com/testing.html
 
 import { assert } from 'meteor/practicalmeteor:chai';
-import { Links } from '../links.js';
+import { Contacts } from '../contacts.js';
 import { PublicationCollector } from 'meteor/johanbrook:publication-collector';
 import './publications.js';
 
 describe('links publications', function () {
   beforeEach(function () {
-    Links.remove({});
-    Links.insert({
+    Contacts.remove({});
+    Contacts.insert({
       title: 'meteor homepage',
       url: 'https://www.meteor.com',
     });

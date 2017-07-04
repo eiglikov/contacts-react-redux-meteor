@@ -1,15 +1,15 @@
-// Methods related to links
+// Methods related to contacts
 
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Links } from './links.js';
+import { Contacts } from './contacts.js';
 
 Meteor.methods({
-  'links.insert'(title, url) {
+  'contacts.insert'(title, url) {
     check(url, String);
     check(title, String);
 
-    return Links.insert({
+    return Contacts.insert({
       url,
       title,
       createdAt: new Date(),
