@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Contact({ onClick, completed, name, phone, key }) {
+function Contact({ onClick, completed, name, phone }) {
   return (
     <li
       style={{textDecoration: completed ? 'line-through' : 'none'}}

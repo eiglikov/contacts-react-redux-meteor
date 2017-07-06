@@ -8,26 +8,27 @@ export const EDIT_CONTACT = 'EDIT_CONTACT';
 
 
 /*
- * action creators
- */
+* action helpers
+*/
  function insertContact(name, phone) {
-   return () => {
      console.log('HEY insertContact !!');
-
      Meteor.call('contacts.insert', name, phone);
-   };
+ };
+ function deleteContact(id) {
+     console.log('HEY removeContact !!');
+     Meteor.call('contacts.remove', id);
  };
 
+
+ /*
+  * action creators
+  */
 export function addContact(name, phone) {
-  // insertContact(name, phone);
-  Meteor.call('contacts.insert', name, phone);
+  insertContact(name, phone);
   return { type: ADD_CONTACT, name, phone }
 }
 
 export function removeContact(id) {
-  // insertContact(name, phone);
-  console.log("REMOVE ACTION CREATOR");
-
-  Meteor.call('contacts.remove', id);
+  deleteContact(id);
   return { type: REMOVE_CONTACT, id }
 }

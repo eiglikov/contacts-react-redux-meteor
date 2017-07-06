@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addContact } from '../actions/addContact';
+import { addContact } from '../actions/actions';
 
 
 function AddContact({ dispatch }) {

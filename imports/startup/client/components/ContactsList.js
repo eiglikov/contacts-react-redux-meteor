@@ -5,7 +5,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Contacts } from '../../../api/contacts/contacts';
 import Contact from './Contact';
-import {removeContact} from '../actions/addContact';
+import {removeContact} from '../actions/actions';
 
 class ContactsList extends React.Component {
   render() {
