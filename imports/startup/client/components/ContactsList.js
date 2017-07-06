@@ -3,7 +3,7 @@ import { connect }  from 'react-redux';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import { Contacts } from '../../../api/contacts/contacts';
+import { Contacts } from '../../../api/collections';
 import Contact from './Contact';
 import {removeContact} from '../actions/actions';
 

@@ -2,7 +2,7 @@
 
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Contacts } from './contacts.js';
+import { Contacts } from './collections.js';
 
 Meteor.methods({
   'contacts.insert'(name, phone) {

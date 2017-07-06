@@ -1,7 +1,7 @@
 // Fill the DB with example data on startup
 
 import { Meteor } from 'meteor/meteor';
-import { Contacts } from '../../api/contacts/contacts.js';
+import { Contacts } from '../../api/collections';
 
 Meteor.startup(() => {
   // if the Contacts collection is empty

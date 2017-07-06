@@ -1,4 +1,4 @@
 // Register your apis here
 
-import '../../api/contacts/methods.js';
-import '../../api/contacts/server/publications.js';
+import '../../api/methods';
+import '../../api/publications';

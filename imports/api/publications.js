@@ -1,7 +1,7 @@
 // All links-related publications
 
 import { Meteor } from 'meteor/meteor';
-import { Contacts } from '../contacts.js';
+import { Contacts } from './collections.js';
 
 // Meteor.publish('contacts.all', function () {
 //   return Contacts.find();
