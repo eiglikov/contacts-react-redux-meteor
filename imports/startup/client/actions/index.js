@@ -32,18 +32,18 @@ export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
   })
 }
 
-export const addTodo = (name, phone, imageUrl) => (dispatch, getState, asteroid) => {
+export const addTodo = (ownerId, name, phone, imageUrl) => (dispatch, getState, asteroid) => {
   // for optimistic UI we immediately dispatch an DDP_ADDED action
   let id = random.id()
-  console.log("ddp_added in addTodo");
+  // console.log("ddp_added in addTodo");
 
   // dispatch({
   //   type: 'DDP_ADDED',
   //   response: { collection: 'contacts', doc: { id, name, phone, completed: false } },
   // })
-  console.log(imageUrl);
+  // console.log(imageUrl);
 
-  asteroid.call('contacts.insert', name, phone, imageUrl).then(() => {
+  asteroid.call('contacts.insert', ownerId, name, phone, imageUrl).then(() => {
     // if this succeeds the Contact has already been added
     // so there is nothing more Contact
   })

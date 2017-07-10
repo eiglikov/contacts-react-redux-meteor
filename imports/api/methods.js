@@ -19,23 +19,27 @@ Contacts.deny({
 
 
 Meteor.methods({
-  'contacts.fetch': function(contactId){
+  'contacts.fetch'(contactId, userId){
     check(contactId, String);
+    check(userId, String);
     // Simulates a slow response by sleeping for 1 second.
-    Meteor._sleepForMs(1000);
+    // Meteor._sleepForMs(1000);
     // Fetch a single contact when contactId is given, else fetch all contacts.
-    var options = contactId || {};
+    var options = contactId || {userId};
     return Contacts.find(options).fetch();
   },
 
-  'contacts.insert'(name, phone, imageUrl) {
+  'contacts.insert'(userId, name, phone, imageUrl) {
     check(name, String);
     check(phone, String);
     check(imageUrl, String);
+    check(userId, String);
 
-    console.log("INSERT->", name, phone, imageUrl);
+
+    console.log("INSERT->", userId, name, phone, imageUrl);
 
     return Contacts.insert({
+      userId,
       name,
       phone,
       imageUrl,
@@ -58,7 +62,7 @@ Meteor.methods({
     const contact = Contacts.findOne(id)
     return Contacts.update(id,
       { $set: {
-        name: name, 
+        name: name,
         phone: phone,
         imageUrl: imageUrl
       }

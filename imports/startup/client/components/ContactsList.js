@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import Contact from './Contact'
 import * as actions from '../actions'
 import { getVisibleTodos, getIsFetching, getErrorMessage } from '../reducers/'
-import FetchError from './fetch-error'
+import FetchError from './FetchError'
 
 class VisibileContactsList extends Component {
   componentDidMount() {
@@ -47,7 +47,7 @@ VisibileContactsList.propTypes = {
 const ContactsList = (props) => {
   const { contacts, onRemove, onEdit } = props
   return (
-    <div className='container'>
+    <div>
       {contacts.map(contact =>
         <Contact key={contact.id} contact={contact} onRemove={onRemove} onEdit={onEdit} />
       )}
