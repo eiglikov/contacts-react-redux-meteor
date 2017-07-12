@@ -1,5 +1,5 @@
 import random from 'meteor-random';
-import { getIsFetching, getTodo } from '../reducers';
+import { getIsFetching, getTodo, contacts } from '../reducers';
 
 export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
   console.log("Fetching...");
@@ -7,18 +7,22 @@ export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
   if (getIsFetching(getState(), filter)) {
     return Promise.resolve()
   }
-
   dispatch({
     type: 'FETCH_TODOS_REQUEST',
-    filter,
+    filter
   })
 
   return new Promise((resolve, reject) => {
-    asteroid.subscribe('contacts', filter)
+    // console.log("2");
+
+    asteroid.subscribe('contacts')
     .on('ready', () => {
+      console.log('Meteor.userId', Meteor.userId());
+      console.log(asteroid);
+
       dispatch({
         type: 'FETCH_TODOS_SUCCESS',
-        filter,
+        filter
       })
     })
     .on('error', error => {
@@ -30,9 +34,10 @@ export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
       })
     })
   })
+
 }
 
-export const addTodo = (ownerId, name, phone, imageUrl) => (dispatch, getState, asteroid) => {
+export const addTodo = (name, phone, imageUrl) => (dispatch, getState, asteroid) => {
   // for optimistic UI we immediately dispatch an DDP_ADDED action
   let id = random.id()
   // console.log("ddp_added in addTodo");
@@ -43,7 +48,7 @@ export const addTodo = (ownerId, name, phone, imageUrl) => (dispatch, getState, 
   // })
   // console.log(imageUrl);
 
-  asteroid.call('contacts.insert', ownerId, name, phone, imageUrl).then(() => {
+  asteroid.call('contacts.insert', name, phone, imageUrl).then(() => {
     // if this succeeds the Contact has already been added
     // so there is nothing more Contact
   })
@@ -112,4 +117,55 @@ export const toggleTodo = (id) => (dispatch, getState, asteroid) => {
       response: { collection: 'contacts', doc },
     })
   })
+}
+
+
+export const signIn = (email, password, history) => (dispatch, getState, asteroid) => {
+  console.log("Sign in");
+  // console.log("fetch userId", filter);
+  asteroid.loginWithPassword({email: email,password: password})
+  .then(() => {
+    console.log("loggedIn");
+    dispatch({
+      type: 'LOG_IN'
+    })
+    history.push('/');
+  })
+  .catch((err) => {
+    console.log("login error",err);
+
+  })
+  // Meteor.loginWithPassword(email, password, (err) => {
+  //     if(err){
+  //       console.log('error', err);
+  //     } else {
+  //       this.props.history.push('/');
+  //     }
+  //   });
+}
+
+
+export const logout = (history) => (dispatch, getState, asteroid) => {
+
+  // console.log('SERVER Asteroid', asteroid);
+
+  // asteroid.unsubscribe('contacts')
+  // .then(() => {
+    console.log("LoggedOut");
+    Meteor.logout(function(){
+      console.log("logged out meteor");
+
+    });
+    history.push('/login');
+    dispatch({
+      type: 'LOG_OUT'
+    })
+  // })
+  // .catch((err) => {
+  //   console.log("logout error", err);
+  //
+  // })
+
+
+
 }

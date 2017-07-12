@@ -9,12 +9,8 @@ const AddContactForm = ({ dispatch }) => {
   let phone;
   let imageUrl;
   const handleAddContactForm = () => {
-    console.log(Meteor.userId(), name.value, phone.value, imageUrl.value);
-
-    console.log(Meteor.userId(), Meteor.user().username);
-
-
-    dispatch(addTodo(Meteor.userId(), name.value, phone.value, imageUrl.value));
+    console.log(name.value, phone.value, imageUrl.value);
+    dispatch(addTodo(name.value, phone.value, imageUrl.value));
     name.value = '';
     phone.value = '';
     imageUrl.value = '';

@@ -12,15 +12,21 @@ class VisibileContactsList extends Component {
   }
   componentDidUpdate(prevProps) {
     if (this.props.filter !== prevProps.filter) {
+      console.log("message", this.props);
+
       this.fetchData()
     }
   }
   fetchData() {
+    console.log("fetch props", this.props.contacts);
+
     const { props: { filter, fetchContacts } } = this
     fetchContacts(filter)
   }
   render() {
     const { props: { isFetching, contacts, removeContact, editContact, errorMessage } } = this
+    console.log("contacts in VisibileContactsList", contacts);
+
     if (isFetching && !contacts.length) {
       return <p>Loading...</p>
     }
@@ -59,7 +65,6 @@ ContactsList.propTypes = {
   contacts: PropTypes.array.isRequired,
   onRemove: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
-
 }
 
 const mapStateToProps = (state, { params }) => {

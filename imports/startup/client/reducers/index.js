@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import byId, * as fromById from './byId'
 import createList, * as fromList from './createList'
+import authReducers from './auth'
 
 const listByFilter = combineReducers({
   all: createList('all'),
@@ -9,8 +10,9 @@ const listByFilter = combineReducers({
 })
 
 const contacts = combineReducers({
+  authReducers,
   byId,
-  listByFilter,
+  listByFilter
 })
 
 export default contacts

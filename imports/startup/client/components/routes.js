@@ -1,15 +1,24 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { HashRouter, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import ContactsApp from './ContactsApp'
-import configureStore from '../configure-store'
+import store from '../configure-store'
+import { Meteor } from 'meteor/meteor';
+
+// pages
+import SignupPage from './SignupPage'
+import LoginPage from './LoginPage'
 
 const routes =
-  <Provider store={configureStore()}>
-    <HashRouter>
-      <Route path="/" component={ContactsApp} />
-    </HashRouter>
-  </Provider>;
+<Provider store={store}>
+  <BrowserRouter>
+    <div>
+      <Route path="/login" component={LoginPage}/>
+      <Route path="/signup" component={SignupPage}/>
+      <Route path="/" exact={true} component={ContactsApp} />
+    </div>
+  </BrowserRouter>
+</Provider>;
 
 
 export default routes;

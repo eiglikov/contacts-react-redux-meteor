@@ -17,7 +17,6 @@ class Contact extends Component {
   }
   handleEdit = (id, name, phone, imageUrl) => {
     this.handleToggleContact();
-
     if (this.state.name !== name ||
       this.state.phone !== phone ||
       this.state.imageUrl !== imageUrl){
@@ -37,6 +36,8 @@ class Contact extends Component {
     })
   }
   render() {
+    console.log('Rendering Contactc');
+
     return (
       <div className='row'>
         <img

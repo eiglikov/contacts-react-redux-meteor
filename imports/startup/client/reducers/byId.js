@@ -1,8 +1,6 @@
 import omit from 'lodash/omit'
 
 const byId = (state = {}, action) => {
-  console.log(action.response);
-
   switch (action.type) {
     case 'DDP_CHANGED':
       return {
