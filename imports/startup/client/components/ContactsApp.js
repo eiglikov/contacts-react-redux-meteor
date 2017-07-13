@@ -52,7 +52,7 @@ class ContactsApp extends Component {
 
   render(){
     let isAuthenticated = this.state.isAuthenticated;
-    console.log('ASTEROID in ContactsApp', asteroid);
+    // console.log('ASTEROID in ContactsApp', asteroid);
 
 
     return(
@@ -75,6 +75,7 @@ class ContactsApp extends Component {
         <div className='container'>
           <DevTools />
           <AccountsUIWrapper />
+
           {
             isAuthenticated ?
               <div>

@@ -33,6 +33,7 @@ class LoginPage extends Component {
     //     this.props.history.push('/');
     //   }
     // });
+
   }
 
   render(){

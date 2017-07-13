@@ -9,13 +9,24 @@ const listByFilter = combineReducers({
   completed: createList('completed'),
 })
 
+
+
 const contacts = combineReducers({
   authReducers,
   byId,
   listByFilter
 })
 
-export default contacts
+const rootReducer = ( state, action ) => {
+  if ( action.type === 'LOG_OUT' ) {
+    state = undefined;
+  }
+
+  return contacts(state, action)
+}
+
+
+export default rootReducer
 
 
 export const getVisibleTodos = (state, filter) => {

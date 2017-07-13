@@ -133,7 +133,6 @@ export const signIn = (email, password, history) => (dispatch, getState, asteroi
   })
   .catch((err) => {
     console.log("login error",err);
-
   })
   // Meteor.loginWithPassword(email, password, (err) => {
   //     if(err){
@@ -152,13 +151,16 @@ export const logout = (history) => (dispatch, getState, asteroid) => {
   // asteroid.unsubscribe('contacts')
   // .then(() => {
     console.log("LoggedOut");
-    Meteor.logout(function(){
+    asteroid.logout()
+    .then(() => {
+      dispatch({
+        type: 'LOG_OUT'
+      })
       console.log("logged out meteor");
-
-    });
-    history.push('/login');
-    dispatch({
-      type: 'LOG_OUT'
+      history.push('/login');
+    })
+    .catch((err) => {
+      console.log("logout error", err);
     })
   // })
   // .catch((err) => {

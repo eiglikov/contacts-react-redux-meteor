@@ -36,8 +36,6 @@ class Contact extends Component {
     })
   }
   render() {
-    console.log('Rendering Contactc');
-
     return (
       <div className='row'>
         <img
