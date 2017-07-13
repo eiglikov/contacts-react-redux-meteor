@@ -10,6 +10,7 @@ class EditContact extends Component {
     this.state = {
       name: props.contact.name,
       phone: props.contact.phone,
+      email: props.contact.email,
       imageUrl: props.contact.imageUrl,
       isEdited: props.isEdited,
     }
@@ -17,18 +18,20 @@ class EditContact extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({isEdited: nextProps.isEdited});
   }
-  handleEditContact = (name, phone, imageUrl) => {
+  handleEditContact = (name, phone, email, imageUrl) => {
     this.setState({
       name: name,
       phone: phone,
+      email: email,
       imageUrl: imageUrl,
     });
-    this.props.handleEdit(this.props.contact.id, name, phone, imageUrl);
+    this.props.handleEdit(this.props.contact.id, name, phone, email, imageUrl);
   }
 
   render(){
     let name = this.state.name;
     let phone = this.state.phone;
+    let email = this.state.email;
     let imageUrl = this.state.imageUrl;
 
     if (this.state.isEdited)
@@ -55,7 +58,16 @@ class EditContact extends Component {
         <input
           className={classnames('form-control')}
           type="text"
-          placeholder='image url'
+          placeholder='example@email.com'
+          defaultValue={email}
+          ref={node => {
+            email = node
+          }}
+        />
+        <input
+          className={classnames('form-control')}
+          type="text"
+          placeholder='https://randomuser.me/api/portraits/women/92.jpg'
           defaultValue={imageUrl}
           ref={node => {
             imageUrl = node
@@ -71,10 +83,12 @@ class EditContact extends Component {
     )
 
     return (
-      <div class="row">
-        <div class="col-xs-8">
+      <div className="row">
+        <div className="col-xs-8">
           <h4>{name}</h4>
           <p>{phone}</p>
+          <p>{email}</p>
+
         </div>
       </div>
     );

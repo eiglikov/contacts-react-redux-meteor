@@ -29,7 +29,7 @@ if(Meteor.isServer){
       return Contacts.find(options).fetch();
     },
 
-    'contacts.insert'(name, phone, imageUrl) {
+    'contacts.insert'(name, phone, email, imageUrl) {
       if (! Meteor.userId()) {
         throw new Meteor.Error('not-authorized');
       }
@@ -44,12 +44,13 @@ if(Meteor.isServer){
       // console.log("server this.userId", this.userId);
 
 
-      console.log("INSERT->", user, name, phone, imageUrl);
+      console.log("INSERT->", userId, name, phone, email, imageUrl);
 
       return Contacts.insert({
         userId,
         name,
         phone,
+        email,
         imageUrl,
         createdAt: new Date(),
       });
@@ -62,22 +63,24 @@ if(Meteor.isServer){
       console.log("REMOVE->", id);
       return Contacts.remove({"_id": id});
     },
-    'contacts.update'(id, name, phone, imageUrl) {
+    'contacts.update'(id, name, phone, email, imageUrl) {
       if (! Meteor.userId()) {
         throw new Meteor.Error('not-authorized');
       }
       check(id, String);
       check(name, String);
       check(phone, String);
+      check(email, String);
       check(imageUrl, String);
 
-      console.log("EDIT->", id, name, phone, imageUrl);
+      console.log("EDIT->", id, name, phone, email, imageUrl);
 
       const contact = Contacts.findOne(id)
       return Contacts.update(id,
         { $set: {
           name: name,
           phone: phone,
+          email: email,
           imageUrl: imageUrl
         }
       });

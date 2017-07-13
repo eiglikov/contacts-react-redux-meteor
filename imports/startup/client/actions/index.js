@@ -37,7 +37,7 @@ export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
 
 }
 
-export const addTodo = (name, phone, imageUrl) => (dispatch, getState, asteroid) => {
+export const addTodo = (name, phone, email, imageUrl) => (dispatch, getState, asteroid) => {
   // for optimistic UI we immediately dispatch an DDP_ADDED action
   let id = random.id()
   // console.log("ddp_added in addTodo");
@@ -48,7 +48,7 @@ export const addTodo = (name, phone, imageUrl) => (dispatch, getState, asteroid)
   // })
   // console.log(imageUrl);
 
-  asteroid.call('contacts.insert', name, phone, imageUrl).then(() => {
+  asteroid.call('contacts.insert', name, phone, email, imageUrl).then(() => {
     // if this succeeds the Contact has already been added
     // so there is nothing more Contact
   })
@@ -65,16 +65,16 @@ export const addTodo = (name, phone, imageUrl) => (dispatch, getState, asteroid)
 }
 
 
-export const editContact = (id, name, phone, imageUrl) =>
+export const editContact = (id, name, phone, email, imageUrl) =>
 (dispatch, getState, asteroid) => {
-  console.log("DDP_CHANGED in editContact", id, name, imageUrl);
+  console.log("DDP_CHANGED in editContact", id, name, email, imageUrl);
 
   // const doc = getTodo(getState(), id)
   // dispatch({
   //   type: 'DDP_CHANGED',
   //   response: { collection: 'contacts', id },
   // })
-  asteroid.call('contacts.update', id, name, phone, imageUrl)
+  asteroid.call('contacts.update', id, name, phone, email, imageUrl)
   .catch(() => {
     // something went wrong when creating the new Contact
     // since we optimistically added the Contact already we need to remove it now
