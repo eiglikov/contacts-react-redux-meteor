@@ -10,6 +10,6 @@ if(Meteor.isServer){
       return this.stop();
     }
     console.log("this.userId", this.userId);
-    return Contacts.find({userId: this.userId});
+    return Contacts.find({userId: this.userId}, {sort: { name: 1 }});
   });
 }

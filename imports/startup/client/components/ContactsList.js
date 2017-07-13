@@ -25,7 +25,7 @@ class VisibileContactsList extends Component {
   }
   render() {
     const { props: { isFetching, contacts, removeContact, editContact, errorMessage } } = this
-    console.log("contacts in VisibileContactsList", contacts);
+    // console.log("contacts in VisibileContactsList", contacts);
 
     if (isFetching && !contacts.length) {
       return <p>Loading...</p>
@@ -52,6 +52,10 @@ VisibileContactsList.propTypes = {
 
 const ContactsList = (props) => {
   const { contacts, onRemove, onEdit } = props
+  // console.log('contacts before sort', contacts);
+  // console.log("sorted", contacts.sort());
+
+
   return (
     <div>
       {contacts.map(contact =>

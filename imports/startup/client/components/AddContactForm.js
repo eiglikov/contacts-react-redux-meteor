@@ -11,41 +11,74 @@ const AddContactForm = ({ dispatch }) => {
   const handleAddContactForm = () => {
     console.log(name.value, phone.value, imageUrl.value);
     dispatch(addTodo(name.value, phone.value, imageUrl.value));
+    handleClearForm();
+  }
+  const handleClearForm = () => {
     name.value = '';
     phone.value = '';
     imageUrl.value = '';
   }
   return (
-    <div className={classnames('form-group', 'col-xs-12')}>
-      <input
-        className={classnames('form-control', 'col-xs-3')}
-        type="text"
-        placeholder='name'
-        ref={node => {
-          name = node;
-        }}
-      />
-      <input
-        className={classnames('form-control', 'col-xs-3')}
-        type="text"
-        placeholder='phone'
-        ref={node => {
-          phone = node;
-        }}
-      />
-      <input
-        className={classnames('form-control', 'col-xs-3')}
-        type="text"
-        placeholder='image url'
-        ref={node => {
-          imageUrl = node;
-        }}
-      />
-      <button
-        className={classnames('btn', 'btn-primary')}
-        onClick={handleAddContactForm}>
-        Add
-      </button>
+    <div className='row'>
+      <div className={classnames('form-group')}>
+
+        <div className="form-group input-group input-group-unstyled">
+          <span className="input-group-addon">
+            <i className="glyphicon glyphicon-phone"></i>
+          </span>
+          <input
+            className={classnames('form-control')}
+            type="text"
+            placeholder='name'
+            ref={node => {
+              name = node;
+            }}
+          />
+        </div>
+
+        <div className="form-group input-group input-group-unstyled">
+          <span className="input-group-addon">
+            <i className="glyphicon glyphicon-envelope"></i>
+          </span>
+          <input
+            className={classnames('form-control')}
+            type="text"
+            placeholder='phone'
+            ref={node => {
+              phone = node;
+            }}
+          />
+        </div>
+
+        <div className="form-group input-group input-group-unstyled">
+          <span className="input-group-addon">
+            <i className="glyphicon glyphicon-picture"></i>
+          </span>
+          <input
+            className={classnames('form-control')}
+            type="text"
+            placeholder='image url'
+            ref={node => {
+              imageUrl = node;
+            }}
+          />
+        </div>
+
+        <div className='btn-toolbar pull-right'>
+
+          <button
+            className={classnames('btn', 'btn-default')}
+            onClick={handleClearForm}>
+            CANCEL
+          </button>
+          <button
+            className={classnames('btn', 'btn-primary')}
+            onClick={handleAddContactForm}>
+            SUBMIT
+          </button>
+        </div>
+
+      </div>
     </div>
   )
 }

@@ -24,9 +24,6 @@ if(Meteor.isServer){
       check(contactId, String);
 
       console.log("fetch", contactId);
-
-      // Simulates a slow response by sleeping for 1 second.
-      // Meteor._sleepForMs(1000);
       // Fetch a single contact when contactId is given, else fetch all contacts.
       var options = contactId || {};
       return Contacts.find(options).fetch();
@@ -42,9 +39,9 @@ if(Meteor.isServer){
       check(imageUrl, String);
 
       let userId = Meteor.userId();
-      let user = this.userId;
-      console.log("server Meteor.userId", Meteor.userId());
-      console.log("server this.userId", this.userId);
+      // let user = this.userId;
+      // console.log("server Meteor.userId", Meteor.userId());
+      // console.log("server this.userId", this.userId);
 
 
       console.log("INSERT->", user, name, phone, imageUrl);

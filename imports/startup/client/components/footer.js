@@ -2,7 +2,7 @@ import React from 'react'
 import FilterLink from './FilterLink'
 
 const Footer = () => (
-  <div>
+  <div className='row'>
     {'Show'}
     <FilterLink
       filter="all"

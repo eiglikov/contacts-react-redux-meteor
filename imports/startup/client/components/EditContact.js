@@ -33,7 +33,7 @@ class EditContact extends Component {
 
     if (this.state.isEdited)
     return(
-      <div className='form-inline'>
+      <form className='form-inline'>
         <input
           className={classnames('form-control')}
           type="text"
@@ -67,12 +67,15 @@ class EditContact extends Component {
           Submit
         </button>
 
-      </div>
+      </form>
     )
 
     return (
-      <div className={classnames('')}>
-        {name} {phone}
+      <div class="row">
+        <div class="col-xs-8">
+          <h4>{name}</h4>
+          <p>{phone}</p>
+        </div>
       </div>
     );
 

@@ -10,10 +10,9 @@ class LoginPage extends Component {
     this.state = {
       error: ''
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(e){
+  handleSubmit = (e) => {
     e.preventDefault();
     let email = document.getElementById('login-email').value;
     let password = document.getElementById('login-password').value;
