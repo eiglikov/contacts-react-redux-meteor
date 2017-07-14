@@ -40,11 +40,6 @@ export const addTodo = (name, phone, email, imageUrl) => (dispatch, getState, as
   // console.log("ddp_added in addTodo");
 
   asteroid.call('contacts.insert', name, phone, email, imageUrl)
-  .then(() => {
-    // if this succeeds the Contact has already been added
-    // so there is nothing more Contact
-    console.log("Contact Added", name, phone, email, imageUrl);
-  })
   .catch((err) => {
     // something went wrong when creating the new Contact
     // since we optimistically added the Contact already we need to remove it now
@@ -55,20 +50,26 @@ export const addTodo = (name, phone, email, imageUrl) => (dispatch, getState, as
       response: { collection: 'contacts', id },
     })
   })
+  .then(() => {
+    // if this succeeds the Contact has already been added
+    // so there is nothing more Contact
+    console.log("Contact Added", name, phone, email, imageUrl);
+  })
+
 }
 
 
 export const editContact = (id, name, phone, email, imageUrl) =>
 (dispatch, getState, asteroid) => {
   asteroid.call('contacts.update', id, name, phone, email, imageUrl)
-  .then(() => {
-    console.log("contact updated", id, name, phone, email, imageUrl);
-  })
   .catch(() => {
     dispatch({
       type: 'DDP_CHANGED',
       response: { collection: 'contacts', id, doc: { name, phone, email, imageUrl } },
     })
+  })
+  .then(() => {
+    console.log("contact updated", id, name, phone, email, imageUrl);
   })
 }
 
@@ -102,16 +103,16 @@ export const signIn = (email, password, history) => (dispatch, getState, asteroi
   console.log('getState', getState());
 
   // console.log("fetch userId", filter);
-  asteroid.loginWithPassword({email: email,password: password})
+  asteroid.loginWithPassword({email: email, password: password})
+  .catch((err) => {
+    console.log("login error",err);
+  })
   .then(() => {
     console.log("loggedIn");
     dispatch({
       type: 'LOG_IN'
     })
-    history.push('/all');
-  })
-  .catch((err) => {
-    console.log("login error",err);
+    history.push('/');
   })
   // Meteor.loginWithPassword(email, password, (err) => {
   //     if(err){
@@ -128,17 +129,21 @@ export const logout = (history) => (dispatch, getState, asteroid) => {
   // console.log('SERVER Asteroid', asteroid);
 
   // asteroid.unsubscribe('contacts')
-  // .then(() => {
-    console.log("LoggedOut");
-    asteroid.logout()
-    Meteor.logout()
+  asteroid.logout()
+    .catch((err) => {
+      console.log("logout error", err);
 
-    // .then(() => {
-      dispatch({
-        type: 'LOG_OUT'
+    })
+    .then(() => {
+      console.log("LoggedOut");
+      Meteor.logout()
+
+      // .then(() => {
+        dispatch({
+          type: 'LOG_OUT'
+        })
+        console.log("logged out meteor");
+        history.push('/login');
       })
-      console.log("logged out meteor");
-      history.push('/login');
-
 
 }

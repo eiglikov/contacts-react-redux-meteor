@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../actions';
-import { getVisibleTodos, getIsFetching, getErrorMessage } from '../reducers/';
+import { getVisibleContacts, getIsFetching, getErrorMessage } from '../reducers/';
 
 import Contact from './Contact';
 import FetchError from './FetchError';
@@ -23,7 +23,7 @@ class VisibileContactsList extends Component {
     console.log("fetch props", this.props);
 
     const { props: { filter, fetchContacts } } = this;
-    fetchContacts(filter)
+    fetchContacts('friends');
   }
   render() {
     const { props: { isFetching, contacts, removeContact, editContact, errorMessage } } = this;
@@ -81,7 +81,7 @@ class VisibileContactsList extends Component {
     // const filter = match.params.filter || 'all'
     const filter = 'all'
     return {
-      contacts: getVisibleTodos(
+      contacts: getVisibleContacts(
         state,
         filter
       ),

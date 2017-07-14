@@ -4,7 +4,6 @@ export default (dispatch, asteroid) => {
     // console.log("DDP added?", collection, fields, id);
 
     if (collection == 'contacts') {
-
       dispatch({
         type: 'DDP_ADDED',
         response: { collection, doc: { id, ...fields } },
@@ -21,6 +20,8 @@ export default (dispatch, asteroid) => {
   })
 
   asteroid.ddp.on('removed', ({ collection, id }) => {
+    console.log(collection, id);
+
     dispatch({
       type: 'DDP_REMOVED',
       response: { collection, id },

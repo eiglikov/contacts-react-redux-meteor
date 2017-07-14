@@ -14,7 +14,7 @@ const routes =
 <Provider store={store}>
   <BrowserRouter>
     <div>
-      <Route exact path="/:filter" component={ContactsApp} />
+      <Route exact={true} path="/:filter" component={ContactsApp} />
       <Route path="/login" component={LoginPage}/>
       <Route path="/signup" component={SignupPage}/>
     </div>

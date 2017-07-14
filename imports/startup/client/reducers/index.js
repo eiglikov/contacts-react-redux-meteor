@@ -14,8 +14,8 @@ const listByFilter = combineReducers({
 
 const contacts = combineReducers({
   authReducers,
+  listByFilter,
   byId,
-  listByFilter
 })
 
 const rootReducer = ( state, action ) => {
@@ -27,13 +27,13 @@ const rootReducer = ( state, action ) => {
 }
 
 
-export default rootReducer
+export default contacts
 
 
-export const getVisibleTodos = (state, filter) => {
+export const getVisibleContacts = (state, filter) => {
+  console.log(state, filter);
+
   const ids = fromList.getIds(state.listByFilter[filter])
-  console.log("ids", ids);
-
   return ids.map(id => fromById.getContact(state.byId, id))
 }
 
