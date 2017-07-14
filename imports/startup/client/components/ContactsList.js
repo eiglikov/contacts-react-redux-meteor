@@ -23,7 +23,7 @@ class VisibileContactsList extends Component {
     console.log("fetch props", this.props);
 
     const { props: { filter, fetchContacts } } = this;
-    fetchContacts('friends');
+    fetchContacts('all');
   }
   render() {
     const { props: { isFetching, contacts, removeContact, editContact, errorMessage } } = this;
@@ -59,6 +59,8 @@ class VisibileContactsList extends Component {
 
   const ContactsList = (props) => {
     const { contacts, onRemove, onEdit } = props;
+    console.log("contacts", contacts);
+
     return (
       <div>
         {contacts.map(contact =>
@@ -81,11 +83,7 @@ class VisibileContactsList extends Component {
     // const filter = match.params.filter || 'all'
     const filter = 'all'
     return {
-      contacts: getVisibleContacts(
-        state,
-        filter
-      ),
-      filter,
+      contacts: getVisibleContacts(state, filter),
       isFetching: getIsFetching(state, filter),
       errorMessage: getErrorMessage(state, filter),
     }

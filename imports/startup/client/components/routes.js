@@ -8,13 +8,13 @@ import ContactsApp from './ContactsApp';
 import SignupPage from './SignupPage';
 import LoginPage from './LoginPage';
 
-const store = configureStore();
+// const store = configureStore();
 
 const routes =
-<Provider store={store}>
+<Provider store={configureStore()}>
   <BrowserRouter>
     <div>
-      <Route exact={true} path="/:filter" component={ContactsApp} />
+      <Route exact={true} path="/" component={ContactsApp} />
       <Route path="/login" component={LoginPage}/>
       <Route path="/signup" component={SignupPage}/>
     </div>

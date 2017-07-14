@@ -3,35 +3,31 @@ import unique from 'lodash/uniq'
 
 const createList = (filter) => {
 
-  // const handleToggle = (state, action) => {
-  //   const { response: { doc } } = action
-  //   const { completed, id: toggleId } = doc
-  //   const shouldRemove = (
-  //     (completed && filter === 'active') ||
-  //     (!completed && filter === 'completed')
-  //   )
-  //   return shouldRemove
-  //     ? state.filter(id => id !== toggleId)
-  //     // otherwise add if not added yet
-  //     : unique([...state, toggleId])
-  // }
+  const handleToggle = (state, action) => {
+    const { response: { doc } } = action
+    const { completed, id: toggleId } = doc
+    const shouldRemove = (
+      (completed && filter === 'active') ||
+      (!completed && filter === 'completed')
+    )
+    return shouldRemove
+      ? state.filter(id => id !== toggleId)
+      // otherwise add if not added yet
+      : unique([...state, toggleId])
+  }
 
-  const ids = (state = {}, action) => {
+  const ids = (state = [], action) => {
     // console.log('in ids', state, action);
 
     switch (action.type) {
-    //   ||
-    //  (filter === 'family' && action.response.doc.group === 'family') ||
-    //  (filter === 'friends' && action.response.doc.group === 'friends')
       case 'DDP_ADDED':
         return (
-          filter === 'all'
+          filter === 'all' ||
+           (filter === 'family' && action.response.doc.group === 'family') ||
+           (filter === 'friends' && action.response.doc.group === 'friends')
         ) ? unique([...state, action.response.doc.id]) : state
-      case 'DDP_REMOVED':{
-        console.log("DDP_REMOVED", state, action);
-
+      case 'DDP_REMOVED':
         return state.filter(id => id !== action.response.id)
-      }
       case 'DDP_CHANGED':
         return handleToggle(state, action)
       default:

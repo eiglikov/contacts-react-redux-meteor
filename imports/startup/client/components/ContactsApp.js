@@ -18,6 +18,7 @@ class ContactsApp extends Component {
   constructor(props){
     super(props);
     this.state = { isAuthenticated: asteroid.loggedIn};
+
   }
   linkToSignIn = () => {
     this.props.history.push('/login');

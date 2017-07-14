@@ -3,6 +3,7 @@ import { getIsFetching, getContact, contacts } from '../reducers';
 
 export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
   console.log("Fetching...");
+  console.log("fetchContacts state", getState());
 
   if (getIsFetching(getState(), filter)) {
     return Promise.resolve()
@@ -103,6 +104,8 @@ export const signIn = (email, password, history) => (dispatch, getState, asteroi
   console.log('getState', getState());
 
   // console.log("fetch userId", filter);
+  // asteroid.loginWithPassword({email: 'erik@gmail.com', password: '123456'})
+
   asteroid.loginWithPassword({email: email, password: password})
   .catch((err) => {
     console.log("login error",err);
