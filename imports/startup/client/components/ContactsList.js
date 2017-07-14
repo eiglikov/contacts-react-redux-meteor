@@ -1,10 +1,11 @@
-import React, { PropTypes, Component } from 'react'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import Contact from './Contact'
-import * as actions from '../actions'
-import { getVisibleTodos, getIsFetching, getErrorMessage } from '../reducers/'
-import FetchError from './FetchError'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import Contact from './Contact';
+import * as actions from '../actions';
+import { getVisibleTodos, getIsFetching, getErrorMessage } from '../reducers/';
+import FetchError from './FetchError';
 
 class VisibileContactsList extends Component {
   componentDidMount() {

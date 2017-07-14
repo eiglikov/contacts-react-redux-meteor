@@ -17,9 +17,6 @@ export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
 
     asteroid.subscribe('contacts')
     .on('ready', () => {
-      console.log('Meteor.userId', Meteor.userId());
-      console.log(asteroid);
-
       dispatch({
         type: 'FETCH_TODOS_SUCCESS',
         filter
@@ -42,15 +39,11 @@ export const addTodo = (name, phone, email, imageUrl) => (dispatch, getState, as
   let id = random.id()
   // console.log("ddp_added in addTodo");
 
-  // dispatch({
-  //   type: 'DDP_ADDED',
-  //   response: { collection: 'contacts', doc: { id, name, phone, completed: false } },
-  // })
-  // console.log(imageUrl);
-
-  asteroid.call('contacts.insert', name, phone, email, imageUrl).then(() => {
+  asteroid.call('contacts.insert', name, phone, email, imageUrl)
+  .then(() => {
     // if this succeeds the Contact has already been added
     // so there is nothing more Contact
+    console.log("Contact Added", name, phone, email, imageUrl);
   })
   .catch((err) => {
     // something went wrong when creating the new Contact
@@ -67,38 +60,22 @@ export const addTodo = (name, phone, email, imageUrl) => (dispatch, getState, as
 
 export const editContact = (id, name, phone, email, imageUrl) =>
 (dispatch, getState, asteroid) => {
-  console.log("DDP_CHANGED in editContact", id, name, email, imageUrl);
-
-  // const doc = getTodo(getState(), id)
-  // dispatch({
-  //   type: 'DDP_CHANGED',
-  //   response: { collection: 'contacts', id },
-  // })
   asteroid.call('contacts.update', id, name, phone, email, imageUrl)
+  .then(() => {
+    console.log("contact updated", id, name, phone, email, imageUrl);
+  })
   .catch(() => {
-    // something went wrong when creating the new Contact
-    // since we optimistically added the Contact already we need to remove it now
     dispatch({
       type: 'DDP_CHANGED',
-      response: { collection: 'contacts', id },
+      response: { collection: 'contacts', id, doc: { name, phone, email, imageUrl } },
     })
   })
 }
 
 export const removeContact = (id) => (dispatch, getState, asteroid) => {
-  // const doc = getTodo(getState(), id)
-  // dispatch({
-  //   type: 'DDP_REMOVED',
-  //   response: { collection: 'contacts', id },
-  // })
   asteroid.call('contacts.remove', id)
-  .catch(() => {
-    // something went wrong when creating the new Contact
-    // since we optimistically added the Contact already we need to remove it now
-    dispatch({
-      type: 'DDP_CHANGED',
-      response: { collection: 'contacts', id },
-    })
+  .catch((err) => {
+    console.log("remove error", err);
   })
 }
 
@@ -122,6 +99,8 @@ export const toggleTodo = (id) => (dispatch, getState, asteroid) => {
 
 export const signIn = (email, password, history) => (dispatch, getState, asteroid) => {
   console.log("Sign in");
+  console.log('getState', getState());
+
   // console.log("fetch userId", filter);
   asteroid.loginWithPassword({email: email,password: password})
   .then(() => {
@@ -152,22 +131,14 @@ export const logout = (history) => (dispatch, getState, asteroid) => {
   // .then(() => {
     console.log("LoggedOut");
     asteroid.logout()
-    .then(() => {
+    Meteor.logout()
+
+    // .then(() => {
       dispatch({
         type: 'LOG_OUT'
       })
       console.log("logged out meteor");
       history.push('/login');
-    })
-    .catch((err) => {
-      console.log("logout error", err);
-    })
-  // })
-  // .catch((err) => {
-  //   console.log("logout error", err);
-  //
-  // })
-
 
 
 }

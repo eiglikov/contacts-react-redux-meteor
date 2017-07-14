@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { addTodo } from '../actions'
-import classnames from 'classnames'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addTodo } from '../actions';
+import classnames from 'classnames';
 import { Meteor } from 'meteor/meteor';
 
 const AddContactForm = ({ dispatch }) => {
@@ -11,9 +12,20 @@ const AddContactForm = ({ dispatch }) => {
   let email;
 
   const handleAddContactForm = () => {
-    console.log(name.value, phone.value, email.value, imageUrl.value);
-    dispatch(addTodo(name.value, phone.value, email.value, imageUrl.value));
-    handleClearForm();
+    if (name.value === '' && phone.value === '' && email.value === ''){
+      console.log("Fields cannot be empty");
+    } else {
+      console.log(name.value, phone.value, email.value, chooseImage(imageUrl));
+      dispatch(addTodo(name.value, phone.value, email.value, chooseImage(imageUrl)));
+      handleClearForm();
+    }
+  }
+  const chooseImage = (imageUrl) => {
+    if (imageUrl.value === '')
+      //default image placeholder
+      return 'https://trendytheme.net/wp-content/themes/trendytheme/img/client.png';
+     else
+      return imageUrl;
   }
   const handleClearForm = () => {
     name.value = '';

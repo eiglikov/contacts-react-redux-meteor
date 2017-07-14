@@ -33,6 +33,7 @@ if(Meteor.isServer){
       if (! Meteor.userId()) {
         throw new Meteor.Error('not-authorized');
       }
+      console.log("Meteor user " +  Meteor.userId());
 
       check(name, String);
       check(phone, String);
@@ -67,13 +68,14 @@ if(Meteor.isServer){
       if (! Meteor.userId()) {
         throw new Meteor.Error('not-authorized');
       }
+      console.log("EDIT->", id, name, phone, email, imageUrl);
+
       check(id, String);
       check(name, String);
       check(phone, String);
       check(email, String);
       check(imageUrl, String);
 
-      console.log("EDIT->", id, name, phone, email, imageUrl);
 
       const contact = Contacts.findOne(id)
       return Contacts.update(id,

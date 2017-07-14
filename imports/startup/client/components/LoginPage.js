@@ -34,6 +34,9 @@ class LoginPage extends Component {
     // });
 
   }
+  linkToSignUp = () => {
+    this.props.history.push('/signup')
+  }
 
   render(){
     const error = this.state.error;
@@ -57,7 +60,7 @@ class LoginPage extends Component {
                   <input type="submit" id="login-button" className="btn btn-primary btn-lg btn-block" value="Login" />
                 </div>
                 <div className="form-group text-center">
-                  <p className="text-center">Don't have an account? Register <Link to="/signup">here</Link></p>
+                  <p className="text-center">Don't have an account? Register <a href="#" onClick={this.linkToSignUp}>here</a></p>
                 </div>
               </form>
             </div>

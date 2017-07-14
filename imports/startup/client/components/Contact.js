@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import EditContact from './EditContact';
 import classnames from 'classnames';
 
@@ -11,23 +12,35 @@ class Contact extends Component {
       isEdited: false,
       contact: props.contact
     }
+
   }
   handleRemove = () => {
-    this.props.onRemove(this.state.contact.id);
+    // let conformation = confirm('Are you sure you want to delete ' + this.state.contact.name + '?');
+    // remove when deploy
+    conformation = true;
+
+    if(conformation){
+      this.props.onRemove(this.state.contact.id);
+    } else {
+      console.log("canceled");
+
+    }
   }
-  handleEdit = (id, name, phone, imageUrl) => {
+  handleEdit = (id, name, phone, email, imageUrl) => {
     this.handleToggleContact();
     if (this.state.name !== name ||
       this.state.phone !== phone ||
+      this.state.email !== email ||
       this.state.imageUrl !== imageUrl){
         this.setState({
           name: name,
           phone: phone,
+          email: email,
           imageUrl: imageUrl,
         })
-        this.props.onEdit(id, name, phone, imageUrl);
+        this.props.onEdit(id, name, phone, email, imageUrl);
       } else {
-        console.log("No changes", name, phone, imageUrl);
+        console.log("No changes", name, phone, email, imageUrl);
       }
     }
     handleToggleContact = () => {
@@ -63,19 +76,16 @@ class Contact extends Component {
       //   </div>
 
         return (
-        <div className='row  top-buffer'>
-          <div className='col-xs-2'>
-            <div className='img'>
-
-              <img
-                className={classnames('img-circle')}
-                src={this.state.contact.imageUrl}
-                alt="Profile picture" height="65" width="65"
-              />
-            </div>
+        <div className='row top-buffer'>
+          <div className='col-xs-3'>
+            <img
+              className='img-circle img-responsive'
+              src={this.state.contact.imageUrl}
+              alt="Profile picture"
+            />
           </div>
 
-          <div className='col-xs-9'>
+          <div className='col-xs-6'>
             <EditContact
               className='form-inline'
               contact={this.state.contact}
@@ -83,16 +93,19 @@ class Contact extends Component {
               handleEdit={this.handleEdit} />
           </div>
 
-          <button
-            className={classnames('btn', 'btn-sm', 'btn-default','edit-comment')}
-            onClick={this.handleToggleContact}>
-            <span className="glyphicon glyphicon-pencil"></span>
-          </button>
-          <button
-            className={classnames('btn', 'btn-sm', 'btn-default','remove-comment')}
-            onClick={this.handleRemove}>
-            <span className="glyphicon glyphicon-remove"></span>
-          </button>
+          <div className='btn-group col-xs-3'>
+
+            <button
+              className={classnames('btn', 'btn-sm', 'btn-default','edit-comment')}
+              onClick={this.handleToggleContact}>
+              <span className="glyphicon glyphicon-pencil"></span>
+            </button>
+            <button
+              className={classnames('btn', 'btn-sm', 'btn-default','remove-comment')}
+              onClick={this.handleRemove}>
+              <span className="glyphicon glyphicon-remove"></span>
+            </button>
+          </div>
 
         </div>
         )

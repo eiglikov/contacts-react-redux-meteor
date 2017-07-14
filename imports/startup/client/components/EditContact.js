@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
@@ -25,6 +26,8 @@ class EditContact extends Component {
       email: email,
       imageUrl: imageUrl,
     });
+    console.log("imageUrl", imageUrl);
+
     this.props.handleEdit(this.props.contact.id, name, phone, email, imageUrl);
   }
 
@@ -38,7 +41,7 @@ class EditContact extends Component {
     return(
       <form className='form-inline'>
         <input
-          className={classnames('form-control')}
+          className='form-control'
           type="text"
           placeholder='name'
           defaultValue={name}
@@ -47,7 +50,7 @@ class EditContact extends Component {
           }}
         />
         <input
-          className={classnames('form-control')}
+          className='form-control'
           type="text"
           placeholder='phone'
           defaultValue={phone}
@@ -56,7 +59,7 @@ class EditContact extends Component {
           }}
         />
         <input
-          className={classnames('form-control')}
+          className='form-control'
           type="text"
           placeholder='example@email.com'
           defaultValue={email}
@@ -65,7 +68,7 @@ class EditContact extends Component {
           }}
         />
         <input
-          className={classnames('form-control')}
+          className='form-control'
           type="text"
           placeholder='https://randomuser.me/api/portraits/women/92.jpg'
           defaultValue={imageUrl}
@@ -74,8 +77,8 @@ class EditContact extends Component {
           }}
         />
         <button
-          className={classnames('btn', 'btn-primary')}
-          onClick={() => this.handleEditContact(name.value, phone.value, imageUrl.value)}>
+          className='btn btn-primary'
+          onClick={() => this.handleEditContact(name.value, phone.value, email.value, imageUrl.value)}>
           Submit
         </button>
 
