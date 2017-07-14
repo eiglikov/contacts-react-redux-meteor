@@ -13,6 +13,7 @@ Meteor.startup(() => {
         phone: 6478889999,
         email: 'sam.cooke@gmail.com',
         imageUrl: 'https://randomuser.me/api/portraits/men/34.jpg',
+        group: 'colleagues',
         createdAt: new Date(),
       },
       {
@@ -21,6 +22,7 @@ Meteor.startup(() => {
         phone: 6478889229,
         email: 'john.sam@gmail.com',
         imageUrl: 'https://randomuser.me/api/portraits/men/84.jpg',
+        group: 'colleagues',
         createdAt: new Date(),
       },
       {
@@ -37,6 +39,7 @@ Meteor.startup(() => {
         phone: 6478251999,
         email: 'ivan@gmail.com',
         imageUrl: 'https://randomuser.me/api/portraits/men/92.jpg',
+        group: 'friends',
         createdAt: new Date(),
       },
       {
@@ -45,6 +48,7 @@ Meteor.startup(() => {
         phone: 6473215152,
         email: 'anton@gmail.com',
         imageUrl: 'https://randomuser.me/api/portraits/men/52.jpg',
+        group: 'friends',
         createdAt: new Date(),
       },
       {
@@ -53,6 +57,7 @@ Meteor.startup(() => {
         phone: 6478251999,
         email: 'kolya@gmail.com',
         imageUrl: 'https://randomuser.me/api/portraits/women/92.jpg',
+        group: 'family',
         createdAt: new Date(),
       },
       {
@@ -61,6 +66,7 @@ Meteor.startup(() => {
         phone: 6478231999,
         email: 'joe@gmail.com',
         imageUrl: 'https://randomuser.me/api/portraits/women/67.jpg',
+        group: 'family',
         createdAt: new Date(),
       },
       {
@@ -69,6 +75,7 @@ Meteor.startup(() => {
         phone: 64782521249,
         email: 'joe@gmail.com',
         imageUrl: 'https://randomuser.me/api/portraits/men/12.jpg',
+        group: 'family',
         createdAt: new Date(),
       },
       {
@@ -77,6 +84,7 @@ Meteor.startup(() => {
         phone: 6478251999,
         email: 'sonya@gmail.com',
         imageUrl: 'https://randomuser.me/api/portraits/men/25.jpg',
+        group: 'family',
         createdAt: new Date(),
       },
     ];

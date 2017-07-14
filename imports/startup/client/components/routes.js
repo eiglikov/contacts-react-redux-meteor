@@ -1,21 +1,22 @@
-import React from 'react'
-import { Provider } from 'react-redux'
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
-import ContactsApp from './ContactsApp'
-import store from '../configure-store'
-import { Meteor } from 'meteor/meteor';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import configureStore from '../configure-store';
 
 // pages
-import SignupPage from './SignupPage'
-import LoginPage from './LoginPage'
+import ContactsApp from './ContactsApp';
+import SignupPage from './SignupPage';
+import LoginPage from './LoginPage';
+
+const store = configureStore();
 
 const routes =
 <Provider store={store}>
   <BrowserRouter>
     <div>
+      <Route exact path="/:filter" component={ContactsApp} />
       <Route path="/login" component={LoginPage}/>
       <Route path="/signup" component={SignupPage}/>
-      <Route path="/" exact={true} component={ContactsApp} />
     </div>
   </BrowserRouter>
 </Provider>;

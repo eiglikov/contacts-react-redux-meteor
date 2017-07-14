@@ -24,10 +24,10 @@ class ContactsApp extends Component {
   }
 
   render(){
-    let isAuthenticated = this.state.isAuthenticated;
-    // let isAuthenticated = true;
+    // let isAuthenticated = this.state.isAuthenticated;
+    let isAuthenticated = true;
     // console.log('ASTEROID in ContactsApp', asteroid);
-    // console.log("store here", this.props);
+    console.log("store here", this.props);
 
 
     return(

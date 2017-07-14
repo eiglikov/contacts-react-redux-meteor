@@ -1,9 +1,9 @@
-import React from 'react'
-import FilterLink from './FilterLink'
+import React from 'react';
+import FilterLink from './FilterLink';
 
 const Footer = () => (
   <div className='row'>
-    {'Show'}
+    {'Groups: '}
     <FilterLink
       filter="all"
     >
@@ -11,17 +11,23 @@ const Footer = () => (
     </FilterLink>
     {' '}
     <FilterLink
-      filter="active"
+      filter="family"
     >
-      {'Active'}
+      {'Family'}
     </FilterLink>
     {' '}
     <FilterLink
-      filter="completed"
+      filter="friends"
     >
-      {'Completed'}
+      {'Friends'}
+    </FilterLink>
+    {' '}
+    <FilterLink
+      filter="colleagues"
+    >
+      {'Colleagues'}
     </FilterLink>
   </div>
 )
 
-export default Footer
+export default Footer;

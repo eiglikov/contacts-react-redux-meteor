@@ -1,5 +1,5 @@
 import random from 'meteor-random';
-import { getIsFetching, getTodo, contacts } from '../reducers';
+import { getIsFetching, getContact, contacts } from '../reducers';
 
 export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
   console.log("Fetching...");
@@ -15,7 +15,7 @@ export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
   return new Promise((resolve, reject) => {
     // console.log("2");
 
-    asteroid.subscribe('contacts')
+    asteroid.subscribe('contacts', filter)
     .on('ready', () => {
       dispatch({
         type: 'FETCH_TODOS_SUCCESS',
@@ -80,7 +80,7 @@ export const removeContact = (id) => (dispatch, getState, asteroid) => {
 }
 
 export const toggleTodo = (id) => (dispatch, getState, asteroid) => {
-  const doc = getTodo(getState(), id)
+  const doc = getContact(getState(), id)
   dispatch({
     type: 'DDP_CHANGED',
     response: { collection: 'contacts', doc: { ...doc, completed: !doc.completed } },
@@ -108,7 +108,7 @@ export const signIn = (email, password, history) => (dispatch, getState, asteroi
     dispatch({
       type: 'LOG_IN'
     })
-    history.push('/');
+    history.push('/all');
   })
   .catch((err) => {
     console.log("login error",err);
