@@ -9,7 +9,7 @@ import HomeWelcome from './HomeWelcome';
 import SignupPage from './SignupPage';
 import LoginPage from './LoginPage';
 import Header from './Header';
-
+import NotFound from './NotFound';
 // const store = configureStore();
 
 const routes =
@@ -17,10 +17,13 @@ const routes =
   <BrowserRouter>
     <div>
       <Header />
-      <Route exact path="/" component={HomeWelcome} />
-      <Route path="/group/:filter" component={ContactsApp} />
-      <Route exact path="/login" component={LoginPage}/>
-      <Route exact path="/signup" component={SignupPage}/>
+      <Switch>
+        <Route exact path="/" component={HomeWelcome} />
+        <Route path="/group/:filter" component={ContactsApp} />
+        <Route exact path="/login" component={LoginPage}/>
+        <Route exact path="/signup" component={SignupPage}/>
+        <Route component={NotFound}/>
+      </Switch>
     </div>
   </BrowserRouter>
 </Provider>;
