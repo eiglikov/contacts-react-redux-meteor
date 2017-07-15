@@ -2,23 +2,23 @@
 //
 // https://guide.meteor.com/testing.html
 
-import { Meteor } from 'meteor/meteor';
-import { assert } from 'meteor/practicalmeteor:chai';
-import { Contacts } from './collections.js';
-import './methods.js';
+import { Meteor } from 'meteor/meteor'
+import { assert } from 'meteor/practicalmeteor:chai'
+import { Contacts } from './collections.js'
+import './methods.js'
 
 if (Meteor.isServer) {
   describe('contacts methods', function () {
     beforeEach(function () {
-      Contacts.remove({});
-    });
+      Contacts.remove({})
+    })
 
     it('can add a new link', function () {
-      const addLink = Meteor.server.method_handlers['contacts.insert'];
+      const addLink = Meteor.server.method_handlers['contacts.insert']
 
-      addLink.apply({}, ['meteor.com', 'https://www.meteor.com']);
+      addLink.apply({}, ['meteor.com', 'https://www.meteor.com'])
 
-      assert.equal(Contacts.find().count(), 1);
-    });
-  });
+      assert.equal(Contacts.find().count(), 1)
+    })
+  })
 }

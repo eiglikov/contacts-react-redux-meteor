@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { withHistory, Link } from 'react-router-dom'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import { createContainer } from 'meteor/react-meteor-data'
 import { signIn } from '../actions'
 
 // const LoginPage = ({ dispatch, history }) => {
-//   let email;
-//   let password;
-//   let error = '';
+//   let email
+//   let password
+//   let error = ''
 class LoginPage extends Component {
   constructor(props){
-    super(props);
-    this.state = { error: '' };
+    super(props)
+    this.state = { error: '' }
   }
   handleError = (err) => {
     this.setState({
@@ -19,17 +19,17 @@ class LoginPage extends Component {
     })
   }
   handleSubmit = (e) => {
-    e.preventDefault();
-    let email = document.getElementById('login-email').value;
-    let password = document.getElementById('login-password').value;
+    e.preventDefault()
+    let email = document.getElementById('login-email').value
+    let password = document.getElementById('login-password').value
 
     if (email && password)
-      this.props.dispatch(signIn(email, password, this.props.history, this.handleError));
+      this.props.dispatch(signIn(email, password, this.props.history, this.handleError))
     else
-      this.handleError('Both email and password must be entered');
+      this.handleError('Both email and password must be entered')
   }
   render(){
-    const error = this.state.error;
+    const error = this.state.error
     return (
       <div className="modal show modal-backdrop">
         <div className="modal-dialog">
@@ -64,4 +64,4 @@ class LoginPage extends Component {
   }
 }
 
-export default connect()(LoginPage);
+export default connect()(LoginPage)

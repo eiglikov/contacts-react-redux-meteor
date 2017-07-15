@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import classnames from 'classnames';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import classnames from 'classnames'
 
 // const EditContact = ({ dispatch, contact, isEdited, handleEdit }) => {
 class EditContact extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       name: props.contact.name,
@@ -17,7 +17,7 @@ class EditContact extends Component {
     }
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({isEdited: nextProps.isEdited});
+    this.setState({isEdited: nextProps.isEdited})
   }
   handleEditContact = (name, phone, email, imageUrl) => {
     this.setState({
@@ -25,17 +25,17 @@ class EditContact extends Component {
       phone: phone,
       email: email,
       imageUrl: imageUrl,
-    });
-    console.log("imageUrl", imageUrl);
+    })
+    console.log("imageUrl", imageUrl)
 
-    this.props.handleEdit(this.props.contact.id, name, phone, email, imageUrl);
+    this.props.handleEdit(this.props.contact.id, name, phone, email, imageUrl)
   }
 
   render(){
-    let name = this.state.name;
-    let phone = this.state.phone;
-    let email = this.state.email;
-    let imageUrl = this.state.imageUrl;
+    let name = this.state.name
+    let phone = this.state.phone
+    let email = this.state.email
+    let imageUrl = this.state.imageUrl
 
     if (this.state.isEdited)
     return(
@@ -94,7 +94,7 @@ class EditContact extends Component {
 
         </div>
       </div>
-    );
+    )
 
   }
 }
@@ -105,4 +105,4 @@ EditContact.propTypes = {
   handleEdit: PropTypes.func.isRequired,
 }
 
-export default connect()(EditContact);
+export default connect()(EditContact)

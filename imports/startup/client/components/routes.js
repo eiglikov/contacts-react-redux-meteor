@@ -1,16 +1,15 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-import configureStore from '../configure-store';
+import React from 'react'
+import { Provider } from 'react-redux'
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
+import configureStore from '../configure-store'
 
 // pages
-import ContactsApp from './ContactsApp';
-import HomeWelcome from './HomeWelcome';
-import SignupPage from './SignupPage';
-import LoginPage from './LoginPage';
-import Header from './Header';
-import NotFound from './NotFound';
-// const store = configureStore();
+import ContactsApp from './ContactsApp'
+import HomeWelcome from './HomeWelcome'
+import SignupPage from './SignupPage'
+import LoginPage from './LoginPage'
+import Header from './Header'
+import NotFound from './NotFound'
 
 const routes =
 <Provider store={configureStore()}>
@@ -26,7 +25,7 @@ const routes =
       </Switch>
     </div>
   </BrowserRouter>
-</Provider>;
+</Provider>
 
 
-export default routes;
+export default routes

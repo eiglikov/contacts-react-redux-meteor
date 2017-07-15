@@ -1,7 +1,7 @@
 // Fill the DB with example data on startup
 
-import { Meteor } from 'meteor/meteor';
-import { Contacts } from '../../api/collections';
+import { Meteor } from 'meteor/meteor'
+import { Contacts } from '../../api/collections'
 
 Meteor.startup(() => {
   // if the Contacts collection is empty
@@ -169,8 +169,8 @@ Meteor.startup(() => {
         group: 'family',
         createdAt: new Date(),
       },
-    ];
+    ]
 
-    data.forEach(link => Contacts.insert(link));
+    data.forEach(link => Contacts.insert(link))
   }
-});
+})

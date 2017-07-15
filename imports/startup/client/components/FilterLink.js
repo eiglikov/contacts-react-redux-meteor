@@ -1,14 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 const FilterLink = ({ filter, children }) => {
   // activeStyle={{
   //   textDecoration: 'none',
   //   color: 'black',
   // }}
-  // console.log("filter in FilterLink", filter, children);
-
   return(
     <Link
       to={filter === 'all' ? 'all' : filter}
@@ -23,4 +21,4 @@ const FilterLink = ({ filter, children }) => {
     children: PropTypes.any,
   }
 
-  export default FilterLink;
+  export default FilterLink

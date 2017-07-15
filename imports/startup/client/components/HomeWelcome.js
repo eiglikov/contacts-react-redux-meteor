@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 const HomeWelcome = ({history}) => (
   <div className='centered-container centered-text'>
@@ -11,4 +11,4 @@ const HomeWelcome = ({history}) => (
   </div>
 )
 
-export default HomeWelcome;
+export default HomeWelcome

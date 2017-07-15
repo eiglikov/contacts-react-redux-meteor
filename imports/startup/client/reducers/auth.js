@@ -5,17 +5,17 @@ export default LoginReducer = (state = {}, action) => {
     case 'LOG_IN':
       return Object.assign({}, state, {
         loggedIn: true,
-      });
+      })
       case 'LOG_OUT':
         return Object.assign({}, state, {
           state: undefined,
           loggedIn: false,
-        });
+        })
     case 'REHYDRATE':
-      var incoming = action.payload.myReducer;
+      var incoming = action.payload.myReducer
       if (incoming) return {...state, ...incoming, specialKey: processSpecial(incoming.specialKey)}
-      return state;
+      return state
     default:
-      return state;
+      return state
   }
-};
+}

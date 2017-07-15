@@ -1,14 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { logout } from '../actions';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { logout } from '../actions'
 
 
 const Header = ({ history, dispatch, loggedIn }) => {
   const handleLogout = () => {
-    console.log("handleLogout", loggedIn);
-    dispatch(logout());
+    dispatch(logout())
   }
   const guestLinks = (
     <ul className="nav navbar-nav navbar-right">
@@ -48,11 +47,11 @@ Header.propTypes = {
   loggedIn: PropTypes.bool
 }
 const mapStateToProps = state => {
-  console.log("state", state);
+  console.log("state", state)
 
   return {
     loggedIn : state.authReducers.loggedIn
   }
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(Header)

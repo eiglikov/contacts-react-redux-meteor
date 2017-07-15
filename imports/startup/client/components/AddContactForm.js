@@ -1,44 +1,44 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Bert } from 'meteor/themeteorchef:bert';
-import { connect } from 'react-redux';
-import { addTodo } from '../actions';
-import GroupSelector from './GroupSelector';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Bert } from 'meteor/themeteorchef:bert'
+import { connect } from 'react-redux'
+import { addTodo } from '../actions'
+import GroupSelector from './GroupSelector'
 
 const AddContactForm = ({ dispatch }) => {
-  let name;
-  let phone;
-  let imageUrl;
-  let email;
-  let group = 'all';
+  let name
+  let phone
+  let imageUrl
+  let email
+  let group = 'all'
 
   const handleAddContactForm = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (!name.value.length && !phone.value.length && !email.value.length){
-      console.log("Fields cannot be empty");
-      Bert.alert("Fields cannot be empty", 'danger');
+      console.log("Fields cannot be empty")
+      Bert.alert("Fields cannot be empty", 'danger')
     } else {
-      dispatch(addTodo(name.value, phone.value, email.value, chooseImage(imageUrl), group));
-      handleClearForm();
+      dispatch(addTodo(name.value, phone.value, email.value, chooseImage(imageUrl), group))
+      handleClearForm()
     }
   }
   const chooseImage = (imageUrl) => {
     if (imageUrl.value === '')
       //default image placeholder
-      return 'https://trendytheme.net/wp-content/themes/trendytheme/img/client.png';
+      return 'https://trendytheme.net/wp-content/themes/trendytheme/img/client.png'
      else
-      return imageUrl.value;
+      return imageUrl.value
   }
   const handleClearForm = () => {
-    name.value = '';
-    phone.value = '';
-    imageUrl.value = '';
-    email.value = '';
-    // group = 'all';
+    name.value = ''
+    phone.value = ''
+    imageUrl.value = ''
+    email.value = ''
+    // group = 'all'
   }
   const handleSelect = (selected) => {
-    // console.log('group', selected);
-    group = selected;
+    // console.log('group', selected)
+    group = selected
   }
 
   return (
@@ -54,7 +54,7 @@ const AddContactForm = ({ dispatch }) => {
             type="text"
             placeholder='name'
             ref={node => {
-              name = node;
+              name = node
             }}
           />
         </div>
@@ -68,7 +68,7 @@ const AddContactForm = ({ dispatch }) => {
             type="text"
             placeholder='phone'
             ref={node => {
-              phone = node;
+              phone = node
             }}
           />
         </div>
@@ -82,7 +82,7 @@ const AddContactForm = ({ dispatch }) => {
             type="text"
             placeholder='email'
             ref={node => {
-              email = node;
+              email = node
             }}
           />
         </div>
@@ -96,7 +96,7 @@ const AddContactForm = ({ dispatch }) => {
             type="text"
             placeholder='image url'
             ref={node => {
-              imageUrl = node;
+              imageUrl = node
             }}
           />
         </div>

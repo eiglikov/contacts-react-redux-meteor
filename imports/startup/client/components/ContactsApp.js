@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import Header from './Header'
 import AddContactForm from './AddContactForm'
@@ -29,11 +29,11 @@ ContactsApp.propTypes = {
   loggedIn: PropTypes.bool
 }
 const mapStateToProps = state => {
-  console.log("state", state);
+  console.log("state", state)
 
   return {
     loggedIn : state.authReducers.loggedIn
   }
 }
 
-export default connect(mapStateToProps)(ContactsApp);
+export default connect(mapStateToProps)(ContactsApp)

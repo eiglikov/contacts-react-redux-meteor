@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 const NotFound = ({history}) => (
   <div className='centered-container centered-text'>
@@ -10,4 +10,4 @@ const NotFound = ({history}) => (
   </div>
 )
 
-export default NotFound;
+export default NotFound

@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import EditContact from './EditContact';
-import classnames from 'classnames';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import EditContact from './EditContact'
+import classnames from 'classnames'
 
 class Contact extends Component {
 
   constructor(props) {
     // contact, onRemove, toggleEditContact
-    super(props);
+    super(props)
     this.state = {
       isEdited: false,
       contact: props.contact
@@ -15,19 +15,19 @@ class Contact extends Component {
 
   }
   handleRemove = () => {
-    // let conformation = confirm('Are you sure you want to delete ' + this.state.contact.name + '?');
+    // let conformation = confirm('Are you sure you want to delete ' + this.state.contact.name + '?')
     // remove when deploy
-    conformation = true;
+    conformation = true
 
     if(conformation){
-      this.props.onRemove(this.state.contact.id);
+      this.props.onRemove(this.state.contact.id)
     } else {
-      console.log("canceled");
+      console.log("canceled")
 
     }
   }
   handleEdit = (id, name, phone, email, imageUrl) => {
-    this.handleToggleContact();
+    this.handleToggleContact()
     if (this.state.name !== name ||
       this.state.phone !== phone ||
       this.state.email !== email ||
@@ -38,9 +38,9 @@ class Contact extends Component {
           email: email,
           imageUrl: imageUrl,
         })
-        this.props.onEdit(id, name, phone, email, imageUrl);
+        this.props.onEdit(id, name, phone, email, imageUrl)
       } else {
-        console.log("No changes", name, phone, email, imageUrl);
+        console.log("No changes", name, phone, email, imageUrl)
       }
     }
     handleToggleContact = () => {
@@ -118,4 +118,4 @@ class Contact extends Component {
       onEdit: PropTypes.func.isRequired
     }
 
-    export default Contact;
+    export default Contact

@@ -20,7 +20,7 @@ const contacts = combineReducers({
 
 const rootReducer = ( state, action ) => {
   if ( action.type === 'LOG_OUT' ) {
-    state = undefined;
+    state = undefined
   }
 
   return contacts(state, action)
@@ -31,8 +31,6 @@ export default rootReducer
 
 
 export const getVisibleContacts = (state, filter) => {
-  console.log(state, filter);
-
   const ids = fromList.getIds(state.listByFilter[filter])
   return ids.map(id => fromById.getContact(state.byId, id))
 }

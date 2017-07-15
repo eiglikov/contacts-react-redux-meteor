@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import * as actions from '../actions';
-import { getVisibleContacts, getIsFetching, getErrorMessage } from '../reducers/';
-import keysrt from '../helpers/keysrt';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import * as actions from '../actions'
+import { getVisibleContacts, getIsFetching, getErrorMessage } from '../reducers/'
+import keysrt from '../helpers/keysrt'
 
-import Contact from './Contact';
-import FetchError from './FetchError';
+import Contact from './Contact'
+import FetchError from './FetchError'
 
 class VisibileContactsList extends Component {
   componentDidMount() {
@@ -15,20 +15,16 @@ class VisibileContactsList extends Component {
   }
   componentDidUpdate(prevProps) {
     if (this.props.filter !== prevProps.filter) {
-      console.log("message", this.props);
-
       this.fetchData()
     }
   }
   fetchData() {
-    console.log("fetch props", this.props);
-
-    const { props: { filter, fetchContacts } } = this;
-    fetchContacts(filter);
+    const { props: { filter, fetchContacts } } = this
+    fetchContacts(filter)
   }
 
   render() {
-    const { props: { isFetching, contacts, removeContact, editContact, errorMessage } } = this;
+    const { props: { isFetching, contacts, removeContact, editContact, errorMessage } } = this
 
     if (isFetching && !contacts.length) {
       return <p>Loading...</p>
@@ -60,9 +56,9 @@ class VisibileContactsList extends Component {
     }
 
     const ContactsList = (props) => {
-      const { contacts, onRemove, onEdit } = props;
+      const { contacts, onRemove, onEdit } = props
       // sort contacts by name
-      contacts.sort(keysrt('name'));
+      contacts.sort(keysrt('name'))
 
       return (
         <div>
@@ -84,8 +80,8 @@ class VisibileContactsList extends Component {
     }
 
     const mapStateToProps = (state, { match }) => {
-      console.log('filter', match.params.filter);
-      // console.log('state', state);
+      console.log('filter', match.params.filter)
+      // console.log('state', state)
 
       const filter = match.params.filter || 'all'
       // const filter = 'all'

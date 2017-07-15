@@ -6,7 +6,7 @@ import asteroid from './configure-asteroid'
 import initializeListeners from './actions/asteroid'
 import {persistStore, autoRehydrate} from 'redux-persist'
 
-let persistor;
+let persistor
 const configureStore = () => {
   const middlewares = [thunk.withExtraArgument(asteroid)]
 
@@ -18,26 +18,26 @@ const configureStore = () => {
     applyMiddleware(...middlewares),
     autoRehydrate(),
     window.devToolsExtension ? window.devToolsExtension() : f => f
-  ];
+  ]
 
   const store = createStore(
     reducers,
     compose(...enhancers)
   )
   persistor = persistStore(store, {}, (a, b) => {
-    console.log('Redux-Persist loaded state');
+    console.log('Redux-Persist loaded state')
   })
   initializeListeners(store.dispatch, asteroid)
 
-  return store;
+  return store
 }
 
 
 
-export default configureStore;
+export default configureStore
 
 export const getPersistor = () => {
-  // console.log(persistor);
+  // console.log(persistor)
 
-  return persistor;
+  return persistor
 }

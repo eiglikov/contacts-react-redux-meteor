@@ -17,12 +17,12 @@ const byId = (state = {}, action) => {
       [action.response.doc.id]: action.response.doc,
     }
     case 'DDP_REMOVED':
-    return omit(state, action.response.id);
+    return omit(state, action.response.id)
     default:
-    return state;
+    return state
   }
 }
 
-export default byId;
+export default byId
 
-export const getContact = (state, id) => state[id];
+export const getContact = (state, id) => state[id]

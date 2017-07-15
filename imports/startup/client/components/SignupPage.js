@@ -1,32 +1,32 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withHistory, Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { withHistory, Link } from 'react-router-dom'
 import { signUp } from '../actions'
 
 class SignupPage extends Component {
   constructor(props){
-    super(props);
-    this.state = { error: '' };
+    super(props)
+    this.state = { error: '' }
   }
   handleError = (err) => {
-    console.log("err", err);
+    console.log("err", err)
 
     this.setState({
       error: err
     })
   }
   handleSubmit = (e) => {
-    e.preventDefault();
-    let name = document.getElementById("signup-name").value;
-    let email = document.getElementById("signup-email").value;
-    let password = document.getElementById("signup-password").value;
+    e.preventDefault()
+    let name = document.getElementById("signup-name").value
+    let email = document.getElementById("signup-email").value
+    let password = document.getElementById("signup-password").value
     if (email && password)
-      this.props.dispatch(signUp(name, email, password, this.props.history, this.handleError));
+      this.props.dispatch(signUp(name, email, password, this.props.history, this.handleError))
     else
-      this.handleError('Both email and password must be entered');
+      this.handleError('Both email and password must be entered')
   }
   render(){
-    const error = this.state.error;
+    const error = this.state.error
     return (
       <div className="modal show modal-backdrop">
         <div className="modal-dialog">
@@ -58,8 +58,8 @@ class SignupPage extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default connect()(SignupPage);
+export default connect()(SignupPage)

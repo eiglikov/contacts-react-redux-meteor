@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 class GroupSelector extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       selectedOption: this.props.selectedOption
     }
   }
 
   handleGroupChange = (group) => {
-    // console.log(group.target);
+    // console.log(group.target)
     this.setState({
       selectedOption: group.target.value
     })
-    this.props.onSelect(this.state.selectedOption);
+    this.props.onSelect(this.state.selectedOption)
   }
 
   render(){
@@ -75,4 +75,4 @@ GroupSelector.propTypes = {
   selectedOption: PropTypes.string.isRequired,
 }
 
-export default GroupSelector;
+export default GroupSelector
