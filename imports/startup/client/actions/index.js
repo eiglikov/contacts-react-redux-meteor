@@ -5,9 +5,9 @@ export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
   console.log("Fetching...");
   console.log("fetchContacts state", getState());
 
-  if (getIsFetching(getState(), filter)) {
-    return Promise.resolve()
-  }
+  // if (getIsFetching(getState(), filter)) {
+  //   return Promise.resolve()
+  // }
   dispatch({
     type: 'FETCH_TODOS_REQUEST',
     filter
@@ -35,12 +35,12 @@ export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
 
 }
 
-export const addTodo = (name, phone, email, imageUrl) => (dispatch, getState, asteroid) => {
+export const addTodo = (name, phone, email, imageUrl, group) => (dispatch, getState, asteroid) => {
   // for optimistic UI we immediately dispatch an DDP_ADDED action
   let id = random.id()
   // console.log("ddp_added in addTodo");
 
-  asteroid.call('contacts.insert', name, phone, email, imageUrl)
+  asteroid.call('contacts.insert', name, phone, email, imageUrl, group)
   .catch((err) => {
     // something went wrong when creating the new Contact
     // since we optimistically added the Contact already we need to remove it now
@@ -54,7 +54,7 @@ export const addTodo = (name, phone, email, imageUrl) => (dispatch, getState, as
   .then(() => {
     // if this succeeds the Contact has already been added
     // so there is nothing more Contact
-    console.log("Contact Added", name, phone, email, imageUrl);
+    console.log("Contact Added", name, phone, email, imageUrl, group);
   })
 
 }
@@ -108,14 +108,13 @@ export const signIn = (email, password, history) => (dispatch, getState, asteroi
 
   asteroid.loginWithPassword({email: email, password: password})
   .catch((err) => {
-    console.log("login error",err);
+    console.log("login error", err);
   })
   .then(() => {
-    console.log("loggedIn");
     dispatch({
       type: 'LOG_IN'
     })
-    history.push('/');
+    history.push('/group/all');
   })
   // Meteor.loginWithPassword(email, password, (err) => {
   //     if(err){

@@ -14,9 +14,9 @@ const routes =
 <Provider store={configureStore()}>
   <BrowserRouter>
     <div>
-      <Route exact={true} path="/" component={ContactsApp} />
-      <Route path="/login" component={LoginPage}/>
-      <Route path="/signup" component={SignupPage}/>
+      <Route path="/group/:filter" component={ContactsApp} />
+      <Route exact path="/login" component={LoginPage}/>
+      <Route exact  path="/signup" component={SignupPage}/>
     </div>
   </BrowserRouter>
 </Provider>;

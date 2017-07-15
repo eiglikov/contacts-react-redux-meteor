@@ -7,9 +7,11 @@ const FilterLink = ({ filter, children }) => {
   //   textDecoration: 'none',
   //   color: 'black',
   // }}
+  console.log("filter in FilterLink", filter, children);
+
   return(
     <Link
-      to={filter === 'all' ? '' : filter}
+      to={filter === 'all' ? 'all' : filter}
     >
       {children}
     </Link>

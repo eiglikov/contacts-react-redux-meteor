@@ -3,20 +3,22 @@ import PropTypes from 'prop-types';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { connect } from 'react-redux';
 import { addTodo } from '../actions';
+import GroupSelector from './GroupSelector';
 
 const AddContactForm = ({ dispatch }) => {
   let name;
   let phone;
   let imageUrl;
   let email;
+  let group = 'all';
 
   const handleAddContactForm = () => {
     if (!name.value.length && !phone.value.length && !email.value.length){
       console.log("Fields cannot be empty");
       Bert.alert("Fields cannot be empty", 'danger');
     } else {
-      console.log(name.value, phone.value, email.value, chooseImage(imageUrl));
-      dispatch(addTodo(name.value, phone.value, email.value, chooseImage(imageUrl)));
+      console.log(name.value, phone.value, email.value, chooseImage(imageUrl), group);
+      dispatch(addTodo(name.value, phone.value, email.value, chooseImage(imageUrl), group));
       handleClearForm();
     }
   }
@@ -25,7 +27,7 @@ const AddContactForm = ({ dispatch }) => {
       //default image placeholder
       return 'https://trendytheme.net/wp-content/themes/trendytheme/img/client.png';
      else
-      return imageUrl;
+      return imageUrl.value;
   }
   const handleClearForm = () => {
     name.value = '';
@@ -34,6 +36,11 @@ const AddContactForm = ({ dispatch }) => {
     email.value = '';
 
   }
+  const handleSelect = (selected) => {
+    console.log('group', selected);
+    group = selected;
+  }
+
   return (
     <div className='row'>
       <div className='form-group'>
@@ -82,7 +89,7 @@ const AddContactForm = ({ dispatch }) => {
 
         <div className="form-group input-group input-group-unstyled">
           <span className="input-group-addon">
-            <i className="glyphicon glyphicon-picture"></i>
+            <i className="glyphicon glyphicon-envelope"></i>
           </span>
           <input
             className='form-control'
@@ -93,6 +100,9 @@ const AddContactForm = ({ dispatch }) => {
             }}
           />
         </div>
+
+        <GroupSelector onSelect={handleSelect}/>
+
 
         <div className='btn-toolbar pull-right'>
           <button
