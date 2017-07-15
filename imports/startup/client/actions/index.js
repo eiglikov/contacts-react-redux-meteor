@@ -100,13 +100,11 @@ export const toggleTodo = (id) => (dispatch, getState, asteroid) => {
 }
 
 
-export const signIn = (email, password, history) => (dispatch, getState, asteroid) => {
-  console.log("Sign in");
-  console.log('getState', getState());
-
+export const signIn = (email, password, history, handleError) => (dispatch, getState, asteroid) => {
   asteroid.loginWithPassword({email: email, password: password})
   .catch((err) => {
     console.log("login error", err);
+    handleError(err.reason)
   })
   .then(() => {
     dispatch({

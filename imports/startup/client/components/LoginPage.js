@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { createContainer } from 'meteor/react-meteor-data'
 import { signIn } from '../actions'
 
+// const LoginPage = ({ dispatch, history }) => {
+//   let email;
+//   let password;
+//   let error = '';
 class LoginPage extends Component {
   constructor(props){
     super(props);
@@ -12,44 +16,63 @@ class LoginPage extends Component {
     };
   }
 
+  handleError = (err) => {
+    console.log("new err", err);
+
+    this.setState({
+      error: err
+    })
+  }
   handleSubmit = (e) => {
     e.preventDefault();
     let email = document.getElementById('login-email').value;
     let password = document.getElementById('login-password').value;
-    this.props.dispatch(signIn(email, password, this.props.history));
+    // email = email.value
+    // password = password.value
+    console.log("signin", email, password);
+    if (email && password)
+    this.props.dispatch(signIn(email, password, this.props.history, this.handleError));
+    else
+    this.handleError('All fields must be filled');
+  }
+  clearFields = () => {
+    name = ''
+    password = ''
   }
   render(){
     const error = this.state.error;
-    return (
-      <div className="modal show modal-backdrop">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="text-center">Login</h1>
-            </div>
-            <div className="modal-body">
-              { error.length > 0 ? <div className="alert alert-danger fade in">{error}</div> :''}
-              <form id="login-form" className="form col-md-12 center-block" onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                  <input type="email" id="login-email" className="form-control input-lg" placeholder="email"/>
-                </div>
-                <div className="form-group">
-                  <input type="password" id="login-password" className="form-control input-lg" placeholder="password"/>
-                </div>
-                <div className="form-group text-center">
-                  <input type="submit" id="login-button" className="btn btn-primary btn-lg btn-block" value="Login" />
-                </div>
-                <div className="form-group text-center">
-                  <p className="text-center">Don't have an account? Register <Link to="/signup">here</Link></p>
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer" style={{borderTop: 0}}></div>
+  return (
+    <div className="modal show modal-backdrop">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h1 className="text-center">Login</h1>
           </div>
+          <div className="modal-body">
+            { error.length > 0 ? <div className="alert alert-danger fade in">{error}</div> :''}
+            <form id="login-form" className="form col-md-12 center-block" onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <input type="email" id="login-email" className="form-control input-lg" placeholder="email"
+                />
+              </div>
+              <div className="form-group">
+                <input type="password" id="login-password" className="form-control input-lg" placeholder="password"
+                />
+              </div>
+              <div className="form-group text-center">
+                <input type='submit' id="login-button" className="btn btn-primary btn-lg btn-block" value="Login"  />
+              </div>
+              <div className="form-group text-center">
+                <p className="text-center">Don't have an account? Register <Link to="/signup">here</Link></p>
+              </div>
+            </form>
+          </div>
+          <div className="modal-footer" style={{borderTop: 0}}></div>
         </div>
       </div>
-    );
-  }
+    </div>
+  )
+}
 }
 
 export default connect()(LoginPage);

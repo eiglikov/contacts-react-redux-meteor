@@ -30,7 +30,7 @@ if(Meteor.isServer){
     },
 
     'contacts.insert'(name, phone, email, imageUrl, group) {
-      if (! Meteor.userId()) {
+      if (!Meteor.userId()) {
         throw new Meteor.Error('not-authorized');
       }
       console.log("Meteor user " +  Meteor.userId());
