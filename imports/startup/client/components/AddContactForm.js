@@ -1,22 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Bert } from 'meteor/themeteorchef:bert';
 import { connect } from 'react-redux';
 import { addTodo } from '../actions';
-import classnames from 'classnames';
-import { Meteor } from 'meteor/meteor';
+import GroupSelector from './GroupSelector';
 
 const AddContactForm = ({ dispatch }) => {
   let name;
   let phone;
   let imageUrl;
   let email;
+  let group = 'all';
 
   const handleAddContactForm = () => {
-    if (name.value === '' && phone.value === '' && email.value === ''){
+    if (!name.value.length && !phone.value.length && !email.value.length){
       console.log("Fields cannot be empty");
+      Bert.alert("Fields cannot be empty", 'danger');
     } else {
-      console.log(name.value, phone.value, email.value, chooseImage(imageUrl));
-      dispatch(addTodo(name.value, phone.value, email.value, chooseImage(imageUrl)));
+      console.log(name.value, phone.value, email.value, chooseImage(imageUrl), group);
+      dispatch(addTodo(name.value, phone.value, email.value, chooseImage(imageUrl), group));
       handleClearForm();
     }
   }
@@ -25,7 +27,7 @@ const AddContactForm = ({ dispatch }) => {
       //default image placeholder
       return 'https://trendytheme.net/wp-content/themes/trendytheme/img/client.png';
      else
-      return imageUrl;
+      return imageUrl.value;
   }
   const handleClearForm = () => {
     name.value = '';
@@ -34,16 +36,21 @@ const AddContactForm = ({ dispatch }) => {
     email.value = '';
 
   }
+  const handleSelect = (selected) => {
+    console.log('group', selected);
+    group = selected;
+  }
+
   return (
     <div className='row'>
-      <div className={classnames('form-group')}>
+      <div className='form-group'>
 
         <div className="form-group input-group input-group-unstyled">
           <span className="input-group-addon">
             <i className="glyphicon glyphicon-user"></i>
           </span>
           <input
-            className={classnames('form-control')}
+            className='form-control'
             type="text"
             placeholder='name'
             ref={node => {
@@ -57,7 +64,7 @@ const AddContactForm = ({ dispatch }) => {
             <i className="glyphicon glyphicon-phone"></i>
           </span>
           <input
-            className={classnames('form-control')}
+            className='form-control'
             type="text"
             placeholder='phone'
             ref={node => {
@@ -71,7 +78,7 @@ const AddContactForm = ({ dispatch }) => {
             <i className="glyphicon glyphicon-envelope"></i>
           </span>
           <input
-            className={classnames('form-control')}
+            className='form-control'
             type="text"
             placeholder='email'
             ref={node => {
@@ -82,10 +89,10 @@ const AddContactForm = ({ dispatch }) => {
 
         <div className="form-group input-group input-group-unstyled">
           <span className="input-group-addon">
-            <i className="glyphicon glyphicon-picture"></i>
+            <i className="glyphicon glyphicon-envelope"></i>
           </span>
           <input
-            className={classnames('form-control')}
+            className='form-control'
             type="text"
             placeholder='image url'
             ref={node => {
@@ -94,20 +101,21 @@ const AddContactForm = ({ dispatch }) => {
           />
         </div>
 
-        <div className='btn-toolbar pull-right'>
+        <GroupSelector onSelect={handleSelect}/>
 
+
+        <div className='btn-toolbar pull-right'>
           <button
-            className={classnames('btn', 'btn-default')}
+            className='btn btn-default'
             onClick={handleClearForm}>
             CANCEL
           </button>
           <button
-            className={classnames('btn', 'btn-primary')}
+            className='btn btn-primary'
             onClick={handleAddContactForm}>
             SUBMIT
           </button>
         </div>
-
       </div>
     </div>
   )

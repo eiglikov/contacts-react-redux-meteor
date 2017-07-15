@@ -29,7 +29,7 @@ if(Meteor.isServer){
       return Contacts.find(options).fetch();
     },
 
-    'contacts.insert'(name, phone, email, imageUrl) {
+    'contacts.insert'(name, phone, email, imageUrl, group) {
       if (! Meteor.userId()) {
         throw new Meteor.Error('not-authorized');
       }
@@ -38,6 +38,7 @@ if(Meteor.isServer){
       check(name, String);
       check(phone, String);
       check(imageUrl, String);
+      check(group, String);
 
       let userId = Meteor.userId();
       // let user = this.userId;
@@ -45,7 +46,7 @@ if(Meteor.isServer){
       // console.log("server this.userId", this.userId);
 
 
-      console.log("INSERT->", userId, name, phone, email, imageUrl);
+      console.log("INSERT->", userId, name, phone, email, imageUrl, group);
 
       return Contacts.insert({
         userId,
@@ -53,6 +54,7 @@ if(Meteor.isServer){
         phone,
         email,
         imageUrl,
+        group,
         createdAt: new Date(),
       });
     },

@@ -5,16 +5,17 @@ import authReducers from './auth'
 
 const listByFilter = combineReducers({
   all: createList('all'),
-  active: createList('active'),
-  completed: createList('completed'),
+  family: createList('family'),
+  friends: createList('friends'),
+  colleagues: createList('colleagues'),
 })
 
 
 
 const contacts = combineReducers({
   authReducers,
+  listByFilter,
   byId,
-  listByFilter
 })
 
 const rootReducer = ( state, action ) => {
@@ -26,16 +27,18 @@ const rootReducer = ( state, action ) => {
 }
 
 
-export default rootReducer
+export default contacts
 
 
-export const getVisibleTodos = (state, filter) => {
+export const getVisibleContacts = (state, filter) => {
+  console.log(state, filter);
+
   const ids = fromList.getIds(state.listByFilter[filter])
-  return ids.map(id => fromById.getTodo(state.byId, id))
+  return ids.map(id => fromById.getContact(state.byId, id))
 }
 
-export const getTodo = (state, id) =>
-  fromById.getTodo(state.byId, id)
+export const getContact = (state, id) =>
+  fromById.getContact(state.byId, id)
 
 export const getIsFetching = (state, filter) =>
   fromList.getIsFetching(state.listByFilter[filter])

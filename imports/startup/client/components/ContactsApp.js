@@ -18,14 +18,15 @@ class ContactsApp extends Component {
   constructor(props){
     super(props);
     this.state = { isAuthenticated: asteroid.loggedIn};
+
   }
   linkToSignIn = () => {
     this.props.history.push('/login');
   }
 
   render(){
-    let isAuthenticated = this.state.isAuthenticated;
-    // let isAuthenticated = true;
+    // let isAuthenticated = this.state.isAuthenticated;
+    let isAuthenticated = true;
     // console.log('ASTEROID in ContactsApp', asteroid);
     // console.log("store here", this.props);
 
@@ -38,11 +39,9 @@ class ContactsApp extends Component {
               <div className='container'>
 
                 <div className='col-xs-offset-0 col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-3 col-md-6'>
-
                   <AddContactForm />
                   <Footer />
                   <ContactsList />
-
                 </div>
               </div>
           : <div className='centered-container centered-text'>
@@ -51,7 +50,7 @@ class ContactsApp extends Component {
             <h4>
               Web application to manage your contacts
             </h4>
-            <a href="#" onClick={this.linkToSignIn}>
+            <a onClick={this.linkToSignIn}>
               <button className='btn btn-lg btn-primary'>Sign In</button>
             </a>
           </div>
@@ -65,4 +64,4 @@ class ContactsApp extends Component {
 
 }
 
-export default connect()(ContactsApp);
+export default ContactsApp;

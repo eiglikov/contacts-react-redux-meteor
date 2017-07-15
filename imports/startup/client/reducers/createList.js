@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import unique from 'lodash/uniq'
 
 const createList = (filter) => {
+
   const handleToggle = (state, action) => {
     const { response: { doc } } = action
     const { completed, id: toggleId } = doc
@@ -16,12 +17,15 @@ const createList = (filter) => {
   }
 
   const ids = (state = [], action) => {
+    console.log('response ids', action.response);
+
     switch (action.type) {
       case 'DDP_ADDED':
         return (
           filter === 'all' ||
-          (filter === 'active' && action.response.doc.completed === false) ||
-          (filter === 'completed' && action.response.doc.completed === true)
+           (filter === 'family' && action.response.doc.group === 'family') ||
+           (filter === 'friends' && action.response.doc.group === 'friends') ||
+           (filter === 'colleagues' && action.response.doc.group === 'colleagues')
         ) ? unique([...state, action.response.doc.id]) : state
       case 'DDP_REMOVED':
         return state.filter(id => id !== action.response.id)
@@ -33,6 +37,8 @@ const createList = (filter) => {
   }
 
   const isFetching = (state = false, action) => {
+    console.log("isFetching", state, action);
+
     if (action.filter !== filter) {
       return state
     }
