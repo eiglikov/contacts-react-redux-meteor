@@ -59,6 +59,8 @@ class VisibileContactsList extends Component {
       const { contacts, onRemove, onEdit } = props
       // sort contacts by name
       contacts.sort(keysrt('name'))
+      console.log("sorted contacts", contacts);
+
 
       return (
         <div>

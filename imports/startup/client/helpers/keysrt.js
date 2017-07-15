@@ -1,7 +1,10 @@
 export default function keysrt(key) {
   return function(a,b){
-    if (a[key] > b[key]) return 1
-    if (a[key] < b[key]) return -1
+    let lowA = a[key].toLowerCase()
+    let lowB = b[key].toLowerCase()
+
+    if (lowA > lowB) return 1
+    if (lowA < lowB) return -1
     return 0
   }
 }

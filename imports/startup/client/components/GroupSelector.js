@@ -11,11 +11,11 @@ class GroupSelector extends Component {
   }
 
   handleGroupChange = (group) => {
-    // console.log(group.target)
+    console.log(group.target)
+    this.props.onSelect(group.target.value)
     this.setState({
       selectedOption: group.target.value
     })
-    this.props.onSelect(this.state.selectedOption)
   }
 
   render(){
