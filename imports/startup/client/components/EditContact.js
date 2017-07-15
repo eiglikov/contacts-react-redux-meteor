@@ -102,6 +102,7 @@ class EditContact extends Component {
 
 EditContact.propTypes = {
   contact: PropTypes.object.isRequired,
+  isEdited: PropTypes.bool.isRequired,
   handleEdit: PropTypes.func.isRequired,
 }
 

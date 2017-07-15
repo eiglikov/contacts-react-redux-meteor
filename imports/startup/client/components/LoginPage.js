@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import { withHistory, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { createContainer } from 'meteor/react-meteor-data'
 import { signIn } from '../actions'
 
-// const LoginPage = ({ dispatch, history }) => {
-//   let email
-//   let password
-//   let error = ''
 class LoginPage extends Component {
   constructor(props){
     super(props)
@@ -62,6 +59,10 @@ class LoginPage extends Component {
       </div>
     )
   }
+}
+
+LoginPage.PropTypes = {
+  dispatch: PropTypes.func.isRequired
 }
 
 export default connect()(LoginPage)

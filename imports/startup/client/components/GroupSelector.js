@@ -71,8 +71,7 @@ class GroupSelector extends Component {
 }
 
 GroupSelector.propTypes = {
-  onSelect: PropTypes.func.isRequired,
-  selectedOption: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired
 }
 
 export default GroupSelector

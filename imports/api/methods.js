@@ -29,25 +29,38 @@ if(Meteor.isServer){
       return Contacts.find(options).fetch()
     },
 
-    'contacts.insert'(name, phone, email, imageUrl, group) {
+    'contacts.insert'(contactId, name, phone, email, imageUrl, group) {
       if (!Meteor.userId()) {
         throw new Meteor.Error('not-authorized')
       }
+      console.log("INSERT->", contactId, name, phone, email, imageUrl, group)
+
+      check(contactId, String)
       check(name, String)
       check(phone, String)
+      check(email, String)
       check(imageUrl, String)
       check(group, String)
 
+      // "_id" : "NenTGD3Rhyh3ThuKw",
+      //  "name" : "Anet",
+      //  "userId" : "XXAPQyHo2wZTRomoj",
+      //  "phone" : 6473215152,
+      //  "email" : "anton@gmail.com",
+      //  "imageUrl" : "https://randomuser.me/api/portraits/men/12.jpg",
+      //  "group" : "friends",
+      //  "createdAt" : ISODate("2017-07-15T23:16:49.253Z")
       let userId = Meteor.userId()
       console.log("INSERT->", userId, name, phone, email, imageUrl, group)
 
       return Contacts.insert({
-        userId,
-        name,
-        phone,
-        email,
-        imageUrl,
-        group,
+        _id: contactId,
+        userId: userId,
+        name: name,
+        phone: phone,
+        email: email,
+        imageUrl: imageUrl,
+        group: group,
         createdAt: new Date(),
       })
     },

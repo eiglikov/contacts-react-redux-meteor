@@ -1,7 +1,7 @@
-// import random from 'meteor-random'
 import { getIsFetching, getContact, contacts } from '../reducers'
 import { getPersistor } from '../configure-store'
 import { Accounts } from 'meteor/accounts-base'
+import { Random } from 'meteor/random'
 
 export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
   console.log("Fetching...")
@@ -33,9 +33,12 @@ export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
 
 }
 
-export const addTodo = (name, phone, email, imageUrl, group) =>
+export const addTodo = (name, phone, email, imageUrl, group = 'all') =>
 (dispatch, getState, asteroid) => {
-  asteroid.call('contacts.insert', name, phone, email, imageUrl, group)
+  // for optimistic UI we immediately dispatch an DDP_ADDED action
+  let id = Random.id()
+
+  asteroid.call('contacts.insert', id, name, phone, email, imageUrl, group)
   .then(() => {
     // if this succeeds the Contact has already been added
     // so there is nothing more Contact

@@ -96,12 +96,12 @@ class Contact extends Component {
           <div className='btn-group col-xs-3'>
 
             <button
-              className={classnames('btn', 'btn-sm', 'btn-default','edit-comment')}
+              className='btn btn-sm btn-default edit-comment'
               onClick={this.handleToggleContact}>
               <span className="glyphicon glyphicon-pencil"></span>
             </button>
             <button
-              className={classnames('btn', 'btn-sm', 'btn-default','remove-comment')}
+              className='btn btn-sm btn-default remove-comment'
               onClick={this.handleRemove}>
               <span className="glyphicon glyphicon-remove"></span>
             </button>
