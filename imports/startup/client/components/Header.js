@@ -35,7 +35,7 @@ const Header = ({ history, dispatch, loggedIn }) => {
       <nav className="navbar navbar-default navbar-static-top">
         <div className="container">
           <div className="navbar-header">
-            <Link to='/' className="navbar-brand">
+            <Link to={loggedIn ? '/group/all' : '/'} className="navbar-brand">
               <strong className='brand-text-color'>Contacts</strong> Manager
             </Link>
           </div>
