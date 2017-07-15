@@ -1,4 +1,4 @@
-// Tests for the links publications
+// Tests for the Contacts publications
 //
 // https://guide.meteor.com/testing.html
 
@@ -11,16 +11,20 @@ describe('links publications', function () {
   beforeEach(function () {
     Contacts.remove({})
     Contacts.insert({
-      title: 'meteor homepage',
-      url: 'https://www.meteor.com',
+      name: 'John Doe',
+      userId: "uHoDFnJwYooYtihzE",
+      phone: +6478229999,
+      email: 'kate.cooke@gmail.com',
+      imageUrl: 'https://randomuser.me/api/portraits/men/37.jpg',
+      createdAt: new Date(),
     })
   })
 
-  describe('links.all', function () {
-    it('sends all links', function (done) {
+  describe('contacts.all', function () {
+    it('sends all contacts', function (done) {
       const collector = new PublicationCollector()
-      collector.collect('links.all', (collections) => {
-        assert.equal(collections.links.length, 1)
+      collector.collect('contacts.all', (collections) => {
+        assert.equal(collections.conacts.length, 1)
         done()
       })
     })
