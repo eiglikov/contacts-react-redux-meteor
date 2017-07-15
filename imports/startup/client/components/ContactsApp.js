@@ -1,54 +1,39 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-
-import { Meteor } from 'meteor/meteor';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import ContactsList from './ContactsList'
-import Footer from './Footer'
 import Header from './Header'
 import AddContactForm from './AddContactForm'
-// import AccountsUIWrapper from './AccountsUIWrapper';
-import DevTools from './DevTools';
-import asteroid from '../configure-asteroid'
-import { logout } from '../actions';
+import Filters from './Filters'
+import ContactsList from './ContactsList'
 
 
-class ContactsApp extends Component {
-  constructor(props){
-    super(props);
-    this.state = { isAuthenticated: asteroid.loggedIn};
+const ContactsApp = ({ loggedIn }) => (
+  <div>
+    {
+      loggedIn ?
+        <div className='container'>
+          <div className='col-xs-offset-0 col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-3 col-md-6'>
+            <AddContactForm />
+            <Filters />
+            <ContactsList />
+          </div>
+        </div>
+      : <p>Loading...</p>
+    }
+  </div>
+)
 
+ContactsApp.propTypes = {
+  loggedIn: PropTypes.bool
+}
+const mapStateToProps = state => {
+  console.log("state", state);
+
+  return {
+    loggedIn : state.authReducers.loggedIn
   }
-
-  render(){
-    // let isAuthenticated = this.state.isAuthenticated;
-    let isAuthenticated = true;
-    // console.log('ASTEROID in ContactsApp', asteroid);
-    // console.log("store here", this.props);
-
-
-    return(
-      <div>
-        {
-            isAuthenticated ?
-              <div className='container'>
-
-                <div className='col-xs-offset-0 col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-3 col-md-6'>
-                  <AddContactForm />
-                  <Footer />
-                  <ContactsList />
-                </div>
-              </div>
-          : <h1> :( </h1>
-
-        }
-
-      </div>
-
-    )
-  }
-
 }
 
-export default ContactsApp;
+export default connect(mapStateToProps)(ContactsApp);

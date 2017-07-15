@@ -5,7 +5,6 @@ import thunk from 'redux-thunk'
 import asteroid from './configure-asteroid'
 import initializeListeners from './actions/asteroid'
 import {persistStore, autoRehydrate} from 'redux-persist'
-import DevTools from './components/DevTools';
 
 let persistor;
 const configureStore = () => {
