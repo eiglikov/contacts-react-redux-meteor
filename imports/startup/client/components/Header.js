@@ -3,66 +3,77 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../actions';
-import asteroid from '../configure-asteroid'
 
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isAuthenticated: asteroid.loggedIn};
-    console.log("props", props);
+const Header = ({ history, dispatch, loggedIn }) => {
 
-  }
-
-  handleSignIn = () => {
+  const handleSignIn = () => {
     console.log("handleSignIn");
-    this.props.history.push('/login');
+    history.push('/login');
   }
-  handleSignUp = () => {
+  const handleSignUp = () => {
     console.log("handleSignUp");
-    this.props.history.push('/signup');
+    history.push('/signup');
   }
-  handleLogout = () => {
-    console.log("handleLogout", this.props);
-    this.props.dispatch(logout(this.props.history));
+  const handleLogout = () => {
+    console.log("handleLogout", loggedIn);
+    dispatch(logout(history));
   }
-  linkToHome = () => {
-    this.props.history.push('/');
+  const linkToHome = () => {
+    history.push('/');
   }
 
-  render() {
-    let isAuthenticated = this.state.isAuthenticated;
-    // console.log("store here", this.props);
+    // const isAuthenticated = loggedIn;
+    // console.log("store here", props);
+    // const {isAuthenticated} = props;
+    // console.log(isAuthenticated);
+
+    console.log("loggedIn", loggedIn);
+
+
+    const guestLinks = (
+      <ul className="nav navbar-nav navbar-right">
+        <li><a onClick={handleSignUp}>
+          <span className="glyphicon glyphicon-user"></span> Sign up
+        </a></li>
+        <li><a onClick={handleSignIn}>
+          <span className="glyphicon glyphicon-log-in"></span> Log in
+        </a></li>
+      </ul>
+    )
+    const userLinks = (
+      <ul className="nav navbar-nav navbar-right">
+        <li><a onClick={handleLogout}>
+          <span className="glyphicon glyphicon-log-out"></span> Log out
+        </a></li>
+      </ul>
+  )
 
     return(
       <nav className="navbar navbar-default navbar-static-top">
         <div className="container">
           <div className="navbar-header">
-            <a href='#' className="navbar-brand" onClick={this.linkToHome}>
+            <a href='#' className="navbar-brand" onClick={linkToHome}>
               <strong className='brand-text-color'>Contacts</strong> Manager
             </a>
           </div>
-
           {
-            isAuthenticated ?
-              <ul className="nav navbar-nav navbar-right">
-                <li><a onClick={this.handleLogout}>
-                  <span className="glyphicon glyphicon-log-out"></span> Log out
-                </a></li>
-              </ul>
-            :
-            <ul className="nav navbar-nav navbar-right">
-              <li><a onClick={this.handleSignUp}>
-                <span className="glyphicon glyphicon-user"></span> Sign up
-              </a></li>
-              <li><a onClick={this.handleSignIn}>
-                <span className="glyphicon glyphicon-log-in"></span> Log in
-              </a></li>
-            </ul>
+            loggedIn ? userLinks : guestLinks
           }
         </div>
       </nav>
   )
 }
+
+Header.propTypes = {
+  loggedIn: PropTypes.bool.isRequired
 }
-export default connect()(Header);
+const mapStateToProps = state => {
+  console.log("state", state);
+
+  return {
+    loggedIn : state.authReducers.loggedIn
+  }
+}
+
+export default connect(mapStateToProps)(Header);

@@ -27,7 +27,7 @@ const rootReducer = ( state, action ) => {
 }
 
 
-export default contacts
+export default rootReducer
 
 
 export const getVisibleContacts = (state, filter) => {

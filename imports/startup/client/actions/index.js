@@ -1,15 +1,16 @@
 // import random from 'meteor-random';
 import { getIsFetching, getContact, contacts } from '../reducers';
+import { getPersistor } from '../configure-store';
 
 export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
   console.log("Fetching...");
   console.log("fetchContacts state", getState());
 
-  // if (getIsFetching(getState(), filter)) {
-  //   return Promise.resolve()
-  // }
+  if (getIsFetching(getState(), filter)) {
+    return Promise.resolve()
+  }
   dispatch({
-    type: 'FETCH_TODOS_REQUEST',
+    type: 'FETCH_CONTACTS_REQUEST',
     filter
   })
 
@@ -19,14 +20,14 @@ export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
     asteroid.subscribe('contacts', filter)
     .on('ready', () => {
       dispatch({
-        type: 'FETCH_TODOS_SUCCESS',
+        type: 'FETCH_CONTACTS_SUCCESS',
         filter
       })
     })
     .on('error', error => {
       reject(error)
       dispatch({
-        type: 'FETCH_TODOS_FAILURE',
+        type: 'FETCH_CONTACTS_FAILURE',
         filter,
         message: error.message || 'Something went wrong',
       })
@@ -132,22 +133,32 @@ export const logout = (history) => (dispatch, getState, asteroid) => {
   // console.log('SERVER Asteroid', asteroid);
 
   // asteroid.unsubscribe('contacts')
+  dispatch({
+    type: 'LOG_OUT',
+    loggedIn: false
+  })
+  
   asteroid.logout()
-    .catch((err) => {
-      console.log("logout error", err);
+  .catch((err) => {
+    console.log("logout error", err);
 
-    })
-    .then(() => {
-      console.log("LoggedOut");
-      Meteor.logout()
+  })
+  .then(() => {
+    console.log("LoggedOut");
+    Meteor.logout()
 
-      // .then(() => {
-        dispatch({
-          type: 'LOG_OUT',
-          loggedIn: false
-        })
-        console.log("logged out meteor");
-        history.push('/login');
-      })
+    console.log("Persistor", getPersistor());
+
+    getPersistor().pause();
+    console.log("Persistor purged");
+
+
+    // purgeStoredState({storage: AsyncStorage}, ['someReducer']).then(() => {
+    //   console.log('purge of someReducer completed')
+    // }).catch(() => {
+    //   console.log('purge of someReducer failed')
+    // })
+    history.push('/login');
+  })
 
 }
