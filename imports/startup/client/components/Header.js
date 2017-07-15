@@ -6,46 +6,28 @@ import { logout } from '../actions';
 
 
 const Header = ({ history, dispatch, loggedIn }) => {
-
-  const handleSignIn = () => {
-    console.log("handleSignIn");
-    history.push('/login');
-  }
-  const handleSignUp = () => {
-    console.log("handleSignUp");
-    history.push('/signup');
-  }
-  const handleLogout = () => {
-    console.log("handleLogout", loggedIn);
-    dispatch(logout(history));
-  }
-  const linkToHome = () => {
-    history.push('/');
-  }
-
-    // const isAuthenticated = loggedIn;
-    // console.log("store here", props);
-    // const {isAuthenticated} = props;
-    // console.log(isAuthenticated);
+    const handleLogout = () => {
+      console.log("handleLogout", loggedIn);
+      dispatch(logout());
+    }
 
     console.log("loggedIn", loggedIn);
 
-
     const guestLinks = (
       <ul className="nav navbar-nav navbar-right">
-        <li><a onClick={handleSignUp}>
+        <li><Link to='/signup'>
           <span className="glyphicon glyphicon-user"></span> Sign up
-        </a></li>
-        <li><a onClick={handleSignIn}>
+        </Link></li>
+        <li><Link to='/login'>
           <span className="glyphicon glyphicon-log-in"></span> Log in
-        </a></li>
+        </Link></li>
       </ul>
     )
     const userLinks = (
       <ul className="nav navbar-nav navbar-right">
-        <li><a onClick={handleLogout}>
+        <li><Link to='/' onClick={handleLogout}>
           <span className="glyphicon glyphicon-log-out"></span> Log out
-        </a></li>
+        </Link></li>
       </ul>
   )
 
@@ -53,9 +35,9 @@ const Header = ({ history, dispatch, loggedIn }) => {
       <nav className="navbar navbar-default navbar-static-top">
         <div className="container">
           <div className="navbar-header">
-            <a href='#' className="navbar-brand" onClick={linkToHome}>
+            <Link to='/' className="navbar-brand">
               <strong className='brand-text-color'>Contacts</strong> Manager
-            </a>
+            </Link>
           </div>
           {
             loggedIn ? userLinks : guestLinks
@@ -66,7 +48,7 @@ const Header = ({ history, dispatch, loggedIn }) => {
 }
 
 Header.propTypes = {
-  loggedIn: PropTypes.bool.isRequired
+  loggedIn: PropTypes.bool
 }
 const mapStateToProps = state => {
   console.log("state", state);

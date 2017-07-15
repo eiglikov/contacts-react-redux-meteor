@@ -104,9 +104,6 @@ export const signIn = (email, password, history) => (dispatch, getState, asteroi
   console.log("Sign in");
   console.log('getState', getState());
 
-  // console.log("fetch userId", filter);
-  // asteroid.loginWithPassword({email: 'erik@gmail.com', password: '123456'})
-
   asteroid.loginWithPassword({email: email, password: password})
   .catch((err) => {
     console.log("login error", err);
@@ -118,26 +115,15 @@ export const signIn = (email, password, history) => (dispatch, getState, asteroi
     })
     history.push('/group/all');
   })
-  // Meteor.loginWithPassword(email, password, (err) => {
-  //     if(err){
-  //       console.log('error', err);
-  //     } else {
-  //       this.props.history.push('/');
-  //     }
-  //   });
 }
 
 
-export const logout = (history) => (dispatch, getState, asteroid) => {
-
-  // console.log('SERVER Asteroid', asteroid);
-
-  // asteroid.unsubscribe('contacts')
+export const logout = () => (dispatch, getState, asteroid) => {
   dispatch({
     type: 'LOG_OUT',
     loggedIn: false
   })
-  
+
   asteroid.logout()
   .catch((err) => {
     console.log("logout error", err);
@@ -147,18 +133,10 @@ export const logout = (history) => (dispatch, getState, asteroid) => {
     console.log("LoggedOut");
     Meteor.logout()
 
-    console.log("Persistor", getPersistor());
+    // console.log("Persistor", getPersistor());
 
     getPersistor().pause();
     console.log("Persistor purged");
-
-
-    // purgeStoredState({storage: AsyncStorage}, ['someReducer']).then(() => {
-    //   console.log('purge of someReducer completed')
-    // }).catch(() => {
-    //   console.log('purge of someReducer failed')
-    // })
-    history.push('/login');
   })
 
 }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withHistory, Link } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
 
-export default class SignupPage extends Component {
+class SignupPage extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -26,14 +27,10 @@ export default class SignupPage extends Component {
         }
       });
     }
-    linkTologin = () => {
-      this.props.history.push('/login');
-    }
-
     render(){
       const error = this.state.error;
       return (
-        <div className="modal show">
+        <div className="modal show modal-backdrop">
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
@@ -55,7 +52,7 @@ export default class SignupPage extends Component {
                     <input type="submit" id="login-button" className="btn btn-lg btn-primary btn-block" value="Sign Up" />
                   </div>
                   <div className="form-group">
-                    <p className="text-center">Already have an account? Login <a href="#" onClick={this.linkTologin}>here</a></p>
+                    <p className="text-center">Already have an account? Login <Link to="/login">here</Link></p>
                   </div>
                 </form>
               </div>
@@ -66,3 +63,5 @@ export default class SignupPage extends Component {
       );
     }
   }
+
+  export default connect()(SignupPage);

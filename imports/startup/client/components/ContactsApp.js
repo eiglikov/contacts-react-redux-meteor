@@ -30,7 +30,6 @@ class ContactsApp extends Component {
 
     return(
       <div>
-        <Header history={this.props.history}/>
         {
             isAuthenticated ?
               <div className='container'>
