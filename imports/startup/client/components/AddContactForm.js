@@ -10,7 +10,7 @@ const AddContactForm = ({ dispatch }) => {
   let phone
   let imageUrl
   let email
-  let group = 'all'
+  let group
 
   const handleAddContactForm = (e) => {
     e.preventDefault()
@@ -44,7 +44,6 @@ const AddContactForm = ({ dispatch }) => {
   return (
     <div className='row'>
       <form className='form-group' onSubmit={handleAddContactForm}>
-
         <div className="form-group input-group input-group-unstyled">
           <span className="input-group-addon">
             <i className="glyphicon glyphicon-user"></i>

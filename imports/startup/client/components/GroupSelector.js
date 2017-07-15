@@ -6,7 +6,7 @@ class GroupSelector extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedOption: this.props.selectedOption
+      selectedOption: 'all'
     }
   }
 
