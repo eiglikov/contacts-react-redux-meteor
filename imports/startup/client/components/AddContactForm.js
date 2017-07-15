@@ -12,12 +12,12 @@ const AddContactForm = ({ dispatch }) => {
   let email;
   let group = 'all';
 
-  const handleAddContactForm = () => {
+  const handleAddContactForm = (e) => {
+    e.preventDefault();
     if (!name.value.length && !phone.value.length && !email.value.length){
       console.log("Fields cannot be empty");
       Bert.alert("Fields cannot be empty", 'danger');
     } else {
-      console.log(name.value, phone.value, email.value, chooseImage(imageUrl), group);
       dispatch(addTodo(name.value, phone.value, email.value, chooseImage(imageUrl), group));
       handleClearForm();
     }
@@ -43,7 +43,7 @@ const AddContactForm = ({ dispatch }) => {
 
   return (
     <div className='row'>
-      <div className='form-group'>
+      <form className='form-group' onSubmit={handleAddContactForm}>
 
         <div className="form-group input-group input-group-unstyled">
           <span className="input-group-addon">
@@ -105,18 +105,19 @@ const AddContactForm = ({ dispatch }) => {
 
 
         <div className='btn-toolbar pull-right'>
-          <button
+          <input
+            type='button'
             className='btn btn-default'
-            onClick={handleClearForm}>
-            CANCEL
-          </button>
-          <button
-            className='btn btn-primary'
-            onClick={handleAddContactForm}>
-            SUBMIT
-          </button>
+            onClick={handleClearForm}
+            value='CANCEL'
+          />
+          <input
+            type='submit'
+            className="btn btn-primary"
+            value="SUBMIT"
+          />
         </div>
-      </div>
+      </form>
     </div>
   )
 }

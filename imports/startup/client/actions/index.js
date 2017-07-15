@@ -1,6 +1,7 @@
 // import random from 'meteor-random';
 import { getIsFetching, getContact, contacts } from '../reducers';
 import { getPersistor } from '../configure-store';
+import { Accounts } from 'meteor/accounts-base';
 
 export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
   console.log("Fetching...");
@@ -42,6 +43,11 @@ export const addTodo = (name, phone, email, imageUrl, group) => (dispatch, getSt
   // console.log("ddp_added in addTodo");
 
   asteroid.call('contacts.insert', name, phone, email, imageUrl, group)
+  .then(() => {
+    // if this succeeds the Contact has already been added
+    // so there is nothing more Contact
+    console.log("Contact Added", name, phone, email, imageUrl, group);
+  })
   .catch((err) => {
     // something went wrong when creating the new Contact
     // since we optimistically added the Contact already we need to remove it now
@@ -52,11 +58,7 @@ export const addTodo = (name, phone, email, imageUrl, group) => (dispatch, getSt
       response: { collection: 'contacts', id },
     })
   })
-  .then(() => {
-    // if this succeeds the Contact has already been added
-    // so there is nothing more Contact
-    console.log("Contact Added", name, phone, email, imageUrl, group);
-  })
+
 
 }
 
@@ -64,14 +66,14 @@ export const addTodo = (name, phone, email, imageUrl, group) => (dispatch, getSt
 export const editContact = (id, name, phone, email, imageUrl) =>
 (dispatch, getState, asteroid) => {
   asteroid.call('contacts.update', id, name, phone, email, imageUrl)
+  .then(() => {
+    console.log("contact updated", id, name, phone, email, imageUrl);
+  })
   .catch(() => {
     dispatch({
       type: 'DDP_CHANGED',
       response: { collection: 'contacts', id, doc: { name, phone, email, imageUrl } },
     })
-  })
-  .then(() => {
-    console.log("contact updated", id, name, phone, email, imageUrl);
   })
 }
 
@@ -82,39 +84,41 @@ export const removeContact = (id) => (dispatch, getState, asteroid) => {
   })
 }
 
-export const toggleTodo = (id) => (dispatch, getState, asteroid) => {
-  const doc = getContact(getState(), id)
-  dispatch({
-    type: 'DDP_CHANGED',
-    response: { collection: 'contacts', doc: { ...doc, completed: !doc.completed } },
-  })
-  asteroid.call('toggleTodo', id)
-  .catch(() => {
-    // something went wrong when creating the new Contact
-    // since we optimistically added the Contact already we need to remove it now
-    dispatch({
-      type: 'DDP_CHANGED',
-      response: { collection: 'contacts', doc },
-    })
-  })
-}
 
-
-export const signIn = (email, password, history, handleError) => (dispatch, getState, asteroid) => {
+export const signIn = (email, password, history, handleError) =>
+(dispatch, getState, asteroid) => {
   asteroid.loginWithPassword({email: email, password: password})
-  .catch((err) => {
-    console.log("login error", err);
-    handleError(err.reason)
-  })
   .then(() => {
+    console.log("privet Promise");
     dispatch({
       type: 'LOG_IN',
       loggedIn: true
     })
     history.push('/group/all');
   })
+  .catch((err) => {
+    console.log("login error", err);
+    handleError(err.reason)
+  })
 }
 
+export const signUp = (name, email, password, history, handleError) =>
+(dispatch, getState, asteroid) => {
+
+  Accounts.createUser({ username: name, email: email, password: password},
+    (err) => {
+      if(err){
+        console.log("signup error", err);
+        handleError(err.reason)
+      } else {
+        dispatch({
+          type: 'LOG_IN',
+          loggedIn: true
+        })
+        history.push('/login');
+      }
+    });
+}
 
 export const logout = () => (dispatch, getState, asteroid) => {
   dispatch({
@@ -123,10 +127,6 @@ export const logout = () => (dispatch, getState, asteroid) => {
   })
 
   asteroid.logout()
-  .catch((err) => {
-    console.log("logout error", err);
-
-  })
   .then(() => {
     console.log("LoggedOut");
     Meteor.logout()
@@ -135,6 +135,10 @@ export const logout = () => (dispatch, getState, asteroid) => {
 
     getPersistor().pause();
     console.log("Persistor purged");
+  })
+  .catch((err) => {
+    console.log("logout error", err);
+
   })
 
 }
