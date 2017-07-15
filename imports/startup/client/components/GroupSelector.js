@@ -1,79 +1,70 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Bert } from 'meteor/themeteorchef:bert';
-import { connect } from 'react-redux';
-import { addTodo } from '../actions';
+import classnames from 'classnames';
 
 class GroupSelector extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      selectedOption: 'all'
+      selectedOption: this.props.selectedOption
     }
   }
 
   handleGroupChange = (group) => {
-    console.log(group.target);
-    // let val = group.target.value;
+    // console.log(group.target);
     this.setState({
       selectedOption: group.target.value
     })
-    this.props.onSelect(group.target.value);
+    this.props.onSelect(this.state.selectedOption);
   }
+
   render(){
     return (
-      <div className="btn-group input-group input-group-unstyled" data-toggle="buttons"
-
-      >
+      <div className="input-group input-group-unstyled">
         <span className="input-group-addon">
           <i className="glyphicon glyphicon-bookmark"></i>
         </span>
-        <label className="">
-          All
-          <input
-            type="radio"
-            value='all'
-            name="options"
-            checked={this.state.selectedOption === 'all'}
-            onChange={(node) => this.handleGroupChange(node)}
+        <div className="btn-toolbar" data-toggle="buttons">
 
-          />
-        </label>
-        <label className="">
-          Family
-          <input
-            type="radio"
-            value='family'
-            name="options"
-            onChange={(node) => this.handleGroupChange(node)}
 
-            checked={this.state.selectedOption === 'family'}
-
-          />
-        </label>
-        <label className="">
-          Friends
-          <input
-            type="radio"
-            value='friends'
-            name="options"
-            checked={this.state.selectedOption === 'friends'}
-            onChange={(node) => this.handleGroupChange(node)}
-
-          />
-        </label>
-        <label className="">
-          Colleagues
-          <input
-            type="radio"
-            value='colleagues'
-            name="options"
-            checked={this.state.selectedOption === 'colleagues'}
-            onChange={(node) => this.handleGroupChange(node)}
-
-          />
-        </label>
+          <label className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'all'})}>
+            All
+            <input
+              type="radio"
+              name='options'
+              value='all'
+              onClick={(node) => this.handleGroupChange(node)}
+            />
+          </label>
+          <label className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'family'})}>
+            Family
+            <input
+              type="radio"
+              name='options'
+              value='family'
+              onClick={(node) => this.handleGroupChange(node)}
+            />
+          </label>
+          <label className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'friends'})}>
+            Friends
+            <input
+              type="radio"
+              name='options'
+              value='friends'
+              onClick={(node) => this.handleGroupChange(node)}
+            />
+          </label>
+          <label
+            className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'colleagues'})}>
+            Colleagues
+            <input
+              type="radio"
+              name='options'
+              value='colleagues'
+              onClick={(node) => this.handleGroupChange(node)}
+            />
+          </label>
+        </div>
       </div>
     )
   }
@@ -81,6 +72,7 @@ class GroupSelector extends Component {
 
 GroupSelector.propTypes = {
   onSelect: PropTypes.func.isRequired,
+  selectedOption: PropTypes.string.isRequired,
 }
 
 export default GroupSelector;

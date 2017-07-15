@@ -7,7 +7,7 @@ const FilterLink = ({ filter, children }) => {
   //   textDecoration: 'none',
   //   color: 'black',
   // }}
-  console.log("filter in FilterLink", filter, children);
+  // console.log("filter in FilterLink", filter, children);
 
   return(
     <Link

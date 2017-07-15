@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const FetchError = ({ message, onRetry }) => (
   <div>
@@ -7,4 +7,4 @@ const FetchError = ({ message, onRetry }) => (
   </div>
 )
 
-export default FetchError
+export default FetchError;

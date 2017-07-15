@@ -3,7 +3,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Contacts } from './collections.js';
-import random from 'meteor-random';
+// import random from 'meteor-random';
 
 Contacts.deny({
   insert: function(){

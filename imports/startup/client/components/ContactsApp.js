@@ -20,9 +20,6 @@ class ContactsApp extends Component {
     this.state = { isAuthenticated: asteroid.loggedIn};
 
   }
-  linkToSignIn = () => {
-    this.props.history.push('/login');
-  }
 
   render(){
     // let isAuthenticated = this.state.isAuthenticated;
@@ -44,16 +41,7 @@ class ContactsApp extends Component {
                   <ContactsList />
                 </div>
               </div>
-          : <div className='centered-container centered-text'>
-            <h1 >Welcome to <strong className='brand-text-color'>Contacts</strong> Manager</h1>
-
-            <h4>
-              Web application to manage your contacts
-            </h4>
-            <a onClick={this.linkToSignIn}>
-              <button className='btn btn-lg btn-primary'>Sign In</button>
-            </a>
-          </div>
+          : <h1> :( </h1>
 
         }
 

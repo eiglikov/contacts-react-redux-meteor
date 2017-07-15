@@ -4,6 +4,7 @@ import reducers from './reducers/'
 import thunk from 'redux-thunk'
 import asteroid from './configure-asteroid'
 import initializeListeners from './actions/asteroid'
+import {persistStore, autoRehydrate} from 'redux-persist'
 import DevTools from './components/DevTools';
 
 const configureStore = () => {
@@ -15,6 +16,7 @@ const configureStore = () => {
 
   const enhancers = [
     applyMiddleware(...middlewares),
+    autoRehydrate(),
     DevTools.instrument()
   ];
 
@@ -22,6 +24,7 @@ const configureStore = () => {
     reducers,
     compose(...enhancers)
   )
+  persistStore(store)
 
   initializeListeners(store.dispatch, asteroid)
 

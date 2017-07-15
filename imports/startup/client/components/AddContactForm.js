@@ -34,10 +34,10 @@ const AddContactForm = ({ dispatch }) => {
     phone.value = '';
     imageUrl.value = '';
     email.value = '';
-
+    // group = 'all';
   }
   const handleSelect = (selected) => {
-    console.log('group', selected);
+    // console.log('group', selected);
     group = selected;
   }
 
@@ -89,7 +89,7 @@ const AddContactForm = ({ dispatch }) => {
 
         <div className="form-group input-group input-group-unstyled">
           <span className="input-group-addon">
-            <i className="glyphicon glyphicon-envelope"></i>
+            <i className="glyphicon glyphicon-picture"></i>
           </span>
           <input
             className='form-control'
@@ -101,7 +101,7 @@ const AddContactForm = ({ dispatch }) => {
           />
         </div>
 
-        <GroupSelector onSelect={handleSelect}/>
+        <GroupSelector onSelect={handleSelect} selectedOption={group}/>
 
 
         <div className='btn-toolbar pull-right'>

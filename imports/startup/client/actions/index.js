@@ -1,4 +1,4 @@
-import random from 'meteor-random';
+// import random from 'meteor-random';
 import { getIsFetching, getContact, contacts } from '../reducers';
 
 export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
@@ -37,7 +37,7 @@ export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
 
 export const addTodo = (name, phone, email, imageUrl, group) => (dispatch, getState, asteroid) => {
   // for optimistic UI we immediately dispatch an DDP_ADDED action
-  let id = random.id()
+  // let id = random.id()
   // console.log("ddp_added in addTodo");
 
   asteroid.call('contacts.insert', name, phone, email, imageUrl, group)
@@ -112,7 +112,8 @@ export const signIn = (email, password, history) => (dispatch, getState, asteroi
   })
   .then(() => {
     dispatch({
-      type: 'LOG_IN'
+      type: 'LOG_IN',
+      loggedIn: true
     })
     history.push('/group/all');
   })
@@ -142,7 +143,8 @@ export const logout = (history) => (dispatch, getState, asteroid) => {
 
       // .then(() => {
         dispatch({
-          type: 'LOG_OUT'
+          type: 'LOG_OUT',
+          loggedIn: false
         })
         console.log("logged out meteor");
         history.push('/login');

@@ -10,6 +10,8 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = { isAuthenticated: asteroid.loggedIn};
+    console.log("props", props);
+
   }
 
   handleSignIn = () => {

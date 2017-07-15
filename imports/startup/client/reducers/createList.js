@@ -17,7 +17,7 @@ const createList = (filter) => {
   }
 
   const ids = (state = [], action) => {
-    console.log('response ids', action.response);
+    // console.log('response ids', action.response);
 
     switch (action.type) {
       case 'DDP_ADDED':
@@ -37,7 +37,7 @@ const createList = (filter) => {
   }
 
   const isFetching = (state = false, action) => {
-    console.log("isFetching", state, action);
+    // console.log("isFetching", state, action);
 
     if (action.filter !== filter) {
       return state
