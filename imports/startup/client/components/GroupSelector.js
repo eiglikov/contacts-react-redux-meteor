@@ -11,7 +11,7 @@ class GroupSelector extends Component {
   }
 
   handleGroupChange = (group) => {
-    // console.log(group.target)
+    console.log(group.target)
     this.setState({
       selectedOption: group.target.value
     })
