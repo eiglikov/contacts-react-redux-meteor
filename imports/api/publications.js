@@ -9,6 +9,9 @@ if(Meteor.isServer){
       this.ready()
       return this.stop()
     }
+    Meteor._sleepForMs(1000)
+  // simulate error when publishing
+  // throw new Meteor.Error('Something went wrong!')
     const query = {}
 
     if (filter === 'family') {
@@ -25,6 +28,6 @@ if(Meteor.isServer){
     console.log("this.userId", this.userId)
     console.log("------------");
 
-    return Contacts.find(query)
+    return Contacts.find(query, {sort: { name: 1 }})
   })
 }
