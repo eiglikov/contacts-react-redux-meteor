@@ -1,4 +1,4 @@
-# <a href='https://contacts-meteor.herokuapp.com'><img src='https://pp.userapi.com/c841132/v841132262/9a1e/VWh5OruIJuU.jpg' alt='Contacts Manager' height='75'></a>
+# <a href='https://contacts-meteor.herokuapp.com'><img src='https://pp.userapi.com/c841132/v841132262/9a1e/VWh5OruIJuU.jpg' alt='Contacts Manager' height='65'></a>
 
 ## Description
 Contacts application for managing a list of people and their contact information.<br />
