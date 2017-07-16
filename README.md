@@ -1,6 +1,5 @@
 # <a href='https://contacts-meteor.herokuapp.com'><img src='https://pp.userapi.com/c841132/v841132262/9a1e/VWh5OruIJuU.jpg' alt='Contacts Manager' height='65'></a>
 
-## Description
 Contacts application for managing a list of people and their contact information.<br />
 
 * Real-time updates across all clients with ```WebSockets``` ```Asteroid DDP```
@@ -9,15 +8,6 @@ Contacts application for managing a list of people and their contact information
 * Auto sorting on addition
 * Source an image for each contact(full uploading comming)
 * Not Found and Unauthorized pages
-
-### Libraries used
-
-<a href="https://www.meteor.com/">Meteor</a><br />
-<a href="https://www.redux.js.org/">Redux</a><br />
-<a href="https://facebook.github.io/react">React</a><br />
-<a href="https://www.mongodb.com/">MongoDB</a><br />
-<a href="https://github.com/mondora/asteroid">Asteroid</a><br />
-<a href="http://getbootstrap.com/">Bootstrap</a><br />
 
 
 ### Installation
@@ -35,5 +25,14 @@ Contacts application for managing a list of people and their contact information
 4. Setup project structure.
 5. Develop features one by one in iterative manner.
 6. Code cleanup and minor improvements.
+
+### Libraries used
+
+<a href="https://www.meteor.com/">Meteor</a><br />
+<a href="https://www.redux.js.org/">Redux</a><br />
+<a href="https://facebook.github.io/react">React</a><br />
+<a href="https://www.mongodb.com/">MongoDB</a><br />
+<a href="https://github.com/mondora/asteroid">Asteroid</a><br />
+<a href="http://getbootstrap.com/">Bootstrap</a><br />
 
 #### Project Structure
