@@ -1,14 +1,13 @@
-# <a href='https://contacts-meteor.herokuapp.com'><img src='https://pp.userapi.com/c841132/v841132262/9a1e/VWh5OruIJuU.jpg' alt='Contacts Manager' height='100'></a>
+# <a href='https://contacts-meteor.herokuapp.com'><img src='https://pp.userapi.com/c841132/v841132262/9a1e/VWh5OruIJuU.jpg' alt='Contacts Manager' height='85'></a>
 
-## contacts-react-redux-meteor
+## Description
 Contacts application for managing a list of people and their contact information.<br />
 
-* Real-time updates across all clients with ```WebSockets```
-* ```Asteroid DDP```
+* Real-time updates across all clients with ```WebSockets``` ```Asteroid DDP```
 * User authentication(OAuth coming) with ```accounts-password```
+* Grouping
 * Auto sorting on addition
 * Source an image for each contact(full uploading comming)
-* Grouping
 * Not Found and Unauthorized pages
 
 ### Libraries used
@@ -17,13 +16,13 @@ Contacts application for managing a list of people and their contact information
 <a href="https://www.redux.js.org/">Redux</a><br />
 <a href="https://facebook.github.io/react">React</a><br />
 <a href="https://www.mongodb.com/">MongoDB</a><br />
-<a href="http://getbootstrap.com/">Bootstrap</a><br />
 <a href="https://github.com/mondora/asteroid">Asteroid</a><br />
+<a href="http://getbootstrap.com/">Bootstrap</a><br />
+
 
 ### Installation
 
-<strong>This project requires Meteor!<br />
-For info please see <a href='https://www.meteor.com/install'>instructions</a> </strong>
+<strong>This project requires Meteor! For info please see <a href='https://www.meteor.com/install'>instructions</a> </strong>
 * clone this repo from github: git clone git@github.com:eiglikov/contacts-react-redux-meteor.git
 * in cloned repo run ```meteor```
 * wait for packages to be downloaded and installed(might take a couple of minutes)
