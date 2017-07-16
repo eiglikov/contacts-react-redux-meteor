@@ -4,8 +4,6 @@ import unique from 'lodash/uniq'
 const createList = (filter) => {
 
   const handleChange = (state, action) => {
-    console.log("HANDLE TOGGLE", state, action);
-
     const { response: { doc } } = action
     const { id: contactId, group: group } = doc
 

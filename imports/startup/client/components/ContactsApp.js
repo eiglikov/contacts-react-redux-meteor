@@ -29,15 +29,11 @@ const ContactsApp = ({ loggedIn, history }) => (
     }
   </div>
 )
-//<p>Redirecting to Home</p>
-// {setTimeout(() => history.push('/'), 2000)}
 
 ContactsApp.propTypes = {
   loggedIn: PropTypes.bool
 }
 const mapStateToProps = state => {
-  console.log("state", state)
-
   return {
     loggedIn : state.authReducers.loggedIn
   }

@@ -9,16 +9,13 @@ class GroupSelector extends Component {
       selectedOption: this.props.selectedOption || 'all'
     }
   }
-
   handleGroupChange = (group) => {
-    console.log(group.target)
     let groupValue = group.target.value
     this.setState({
       selectedOption: groupValue
     })
     this.props.onSelect(groupValue)
   }
-
   render(){
     const hideIcon = this.props.hideIcon
     const smallButtons = this.props.smallButtons

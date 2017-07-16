@@ -23,7 +23,6 @@ class EditContact extends Component {
   }
   handleSubmit = (e, name, phone, email, imageUrl, group) => {
     e.preventDefault()
-    console.log("handleEdit Submit", name, phone, email, imageUrl, group);
     this.setState({
       name: name,
       phone: phone,
@@ -34,11 +33,9 @@ class EditContact extends Component {
     this.handleEditContact(name, phone, email, imageUrl, group)
   }
   handleEditContact = (name, phone, email, imageUrl, group) => {
-    console.log("contact ->", name, phone, email, imageUrl, group);
     this.props.handleEdit(this.props.contact.id, name, phone, email, imageUrl, group)
   }
   handleSelectOptions = (selected) => {
-    console.log('group handleSelect', selected)
     this.setState({group: selected});
     this.props.handleSelect(selected)
   }
@@ -46,9 +43,6 @@ class EditContact extends Component {
   render(){
     const {state: {name, phone, email, imageUrl, group, isEdited}} = this
     const contact = this.state
-    console.log("contact", contact);
-
-
     return(
       isEdited ?
       <ContactForm
@@ -63,7 +57,7 @@ class EditContact extends Component {
         <div className="col-xs-8">
           <h4>{name}</h4>
           <p>{phone}</p>
-          <p>{email}</p>
+          <p><a href={`mailto:${email}`}>{email}</a></p>
         </div>
       </div>
     )

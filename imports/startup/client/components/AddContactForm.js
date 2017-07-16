@@ -11,8 +11,6 @@ import ContactForm from './ContactForm'
 const AddContactForm = ({ dispatch }) => {
 
   const handleAddContactForm = (name, phone, email, imageUrl, group) => {
-    console.log('AddContactForm container', name, phone, email, chooseImage(imageUrl), group)
-
     if (!name.length && !phone.length && !email.length){
       console.log("Fields cannot be empty")
       Bert.alert("Fields cannot be empty", 'danger')
@@ -25,7 +23,7 @@ const AddContactForm = ({ dispatch }) => {
       //default image placeholder
       return 'https://trendytheme.net/wp-content/themes/trendytheme/img/client.png'
      else
-      return imageUrl.value
+      return imageUrl
   }
 
   return (

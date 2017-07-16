@@ -4,7 +4,6 @@ import { Accounts } from 'meteor/accounts-base'
 import { Random } from 'meteor/random'
 
 export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
-  console.log("Fetching...")
   if (getIsFetching(getState(), filter)) {
     return Promise.resolve()
   }
@@ -42,7 +41,7 @@ export const addTodo = (name, phone, email, imageUrl, group = 'all') =>
   .then(() => {
     // if this succeeds the Contact has already been added
     // so there is nothing more Contact
-    console.log("Contact Added", contactId, name, phone, email, imageUrl, group)
+    console.log("Contact Added")
   })
   .catch((err) => {
     // something went wrong when creating the new Contact
@@ -60,12 +59,9 @@ export const addTodo = (name, phone, email, imageUrl, group = 'all') =>
 
 export const editContact = (id, name, phone, email, imageUrl, group) =>
 (dispatch, getState, asteroid) => {
-  console.log("edit method", id, name, phone, email, imageUrl, group);
-
-
   asteroid.call('contacts.update', id, name, phone, email, imageUrl, group)
   .then(() => {
-    console.log("contact updated", id, name, phone, email, imageUrl, group)
+    console.log("contact updated")
   })
   .catch((err) => {
     console.log("ERROR edit", err);
@@ -110,8 +106,7 @@ export const signUp = (name, email, password, history, handleError) =>
         handleError(err.reason)
       } else {
         dispatch({
-          type: 'LOG_IN',
-          loggedIn: true
+          type: 'SIGN_UP'
         })
         history.push('/login')
       }

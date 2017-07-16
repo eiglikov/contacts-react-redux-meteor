@@ -6,11 +6,15 @@ export default LoginReducer = (state = {}, action) => {
       return Object.assign({}, state, {
         loggedIn: true,
       })
-      case 'LOG_OUT':
-        return Object.assign({}, state, {
-          state: undefined,
-          loggedIn: false,
-        })
+    case 'LOG_OUT':
+      return Object.assign({}, state, {
+        state: undefined,
+        loggedIn: false,
+      })
+    case 'SIGN_UP':
+      return Object.assign({}, state, {
+        loggedIn: false,
+      })
     case 'REHYDRATE':
       var incoming = action.payload.myReducer
       if (incoming) return {...state, ...incoming, specialKey: processSpecial(incoming.specialKey)}

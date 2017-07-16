@@ -8,8 +8,6 @@ export default (dispatch, asteroid) => {
     }
   })
   asteroid.ddp.on('changed', ({ collection, fields, id }) => {
-    console.log("CHANGED asteroid.ddp.on", fields, id);
-
     dispatch({
       type: 'DDP_CHANGED',
       response: { collection, doc: { id, ...fields } },

@@ -17,7 +17,6 @@ const configureStore = () => {
   const enhancers = [
     applyMiddleware(...middlewares),
     autoRehydrate(),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
   ]
 
   const store = createStore(
@@ -37,7 +36,5 @@ const configureStore = () => {
 export default configureStore
 
 export const getPersistor = () => {
-  console.log(persistor)
-
   return persistor
 }

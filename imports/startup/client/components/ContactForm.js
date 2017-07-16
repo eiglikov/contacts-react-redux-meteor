@@ -17,8 +17,8 @@ const ContactForm = ({ onSubmit, onClear = null, showIcons, small, contact = {} 
 
   const handleSubmitForm = (e) => {
     e.preventDefault()
-    console.log(name.value, phone.value, email.value, imageUrl.value, group)
     onSubmit(name.value, phone.value, email.value, imageUrl.value, group)
+    defaultClearForm()
   }
   const defaultClearForm = () => {
     name.value = ''
