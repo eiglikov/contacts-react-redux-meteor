@@ -29,9 +29,13 @@
 
 ### Libraries used
 
-<a href="https://www.meteor.com/">Meteor</a><br />
-<a href="https://www.redux.js.org/">Redux</a><br />
-<a href="https://facebook.github.io/react">React</a><br />
-<a href="https://www.mongodb.com/">MongoDB</a><br />
-<a href="https://github.com/mondora/asteroid">Asteroid</a><br />
-<a href="http://getbootstrap.com/">Bootstrap</a><br />
+* <a href="https://www.meteor.com/">Meteor</a><br />
+* <a href="https://www.redux.js.org/">Redux</a><br />
+* <a href="https://facebook.github.io/react">React</a><br />
+* <a href="https://www.mongodb.com/">MongoDB</a><br />
+* <a href="https://github.com/mondora/asteroid">Asteroid</a><br />
+* <a href="http://getbootstrap.com/">Bootstrap</a><br />
+
+### License
+
+MIT
