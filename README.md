@@ -2,7 +2,7 @@
 
 <a href='https://contacts-meteor.herokuapp.com/'>Contacts Manager</a> is a web application for managing a list of people and their contact information. 
 
-### Features
+#### Features
 * Real-time data updates across all clients with ```WebSockets``` ```Asteroid DDP```.<br/>
 * User authentication(OAuth coming) with ```accounts-password```.<br/>
 * Contacts grouping.<br/> 
@@ -11,7 +11,7 @@
 * Not Found and Unauthorized pages.<br/>
 
 
-### Installation
+#### Installation
 
 <strong>This project requires Meteor! For info please see <a href='https://www.meteor.com/install'>instructions</a> </strong>
 * clone this repo from github: git clone git@github.com:eiglikov/contacts-react-redux-meteor.git
@@ -19,7 +19,7 @@
 * wait for packages to be downloaded and installed(might take a couple of minutes)
 * open localhost:3000
 
-### Development process
+#### Development process
 1. Research on existing contacts appliactions and UX.
 2. Create basic mockups for pages and overall design of application.
 3. Research on project structure.
@@ -27,7 +27,7 @@
 5. Develop features one by one in iterative manner.
 6. Code cleanup and minor improvements.
 
-### Libraries used
+#### Libraries used
 
 * <a href="https://www.meteor.com/">Meteor</a><br />
 * <a href="https://www.redux.js.org/">Redux</a><br />
