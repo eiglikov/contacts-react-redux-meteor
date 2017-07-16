@@ -21,8 +21,7 @@ class EditContact extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({isEdited: nextProps.isEdited})
   }
-  handleSubmit = (e, name, phone, email, imageUrl, group) => {
-    e.preventDefault()
+  handleSubmit = (name, phone, email, imageUrl, group) => {
     this.setState({
       name: name,
       phone: phone,
@@ -30,14 +29,12 @@ class EditContact extends Component {
       imageUrl: imageUrl,
       group: group
     })
-    this.handleEditContact(name, phone, email, imageUrl, group)
-  }
-  handleEditContact = (name, phone, email, imageUrl, group) => {
     this.props.handleEdit(this.props.contact.id, name, phone, email, imageUrl, group)
   }
+
   handleSelectOptions = (selected) => {
-    this.setState({group: selected});
     this.props.handleSelect(selected)
+    this.setState({group: selected});
   }
 
   render(){
@@ -46,7 +43,7 @@ class EditContact extends Component {
     return(
       isEdited ?
       <ContactForm
-        onSubmit={this.handleEditContact}
+        onSubmit={this.handleSubmit}
         onClear={this.props.handleToggleContact}
         contact={contact}
         showIcons={false}

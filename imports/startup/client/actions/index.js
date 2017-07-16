@@ -65,16 +65,14 @@ export const editContact = (id, name, phone, email, imageUrl, group) =>
   })
   .catch((err) => {
     console.log("ERROR edit", err);
-
-    dispatch({
-      type: 'DDP_CHANGED',
-      response: { collection: 'contacts', id, doc: { name, phone, email, imageUrl, group } },
-    })
   })
 }
 
 export const removeContact = (id) => (dispatch, getState, asteroid) => {
   asteroid.call('contacts.remove', id)
+  .then(() => {
+    console.log("contact removed");
+  })
   .catch((err) => {
     console.log("remove ERROR", err)
   })

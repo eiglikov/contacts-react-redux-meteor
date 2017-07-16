@@ -8,16 +8,18 @@ const Header = ({ dispatch, loggedIn }) => {
   const handleLogout = () => {
     dispatch(logout())
   }
+  // in case loggedIn undefined
+  const isAuthorized = (typeof loggedIn != 'undefined');
   return(
     <nav className="navbar navbar-default navbar-static-top">
       <div className="container">
         <div className="navbar-header">
-          <Link to={loggedIn ? '/group/all' : '/'} className="navbar-brand">
+          <Link to={isAuthorized ? '/group/all' : '/'} className="navbar-brand">
             <strong className='brand-text-color'>Contacts</strong> Manager
           </Link>
         </div>
         {
-          loggedIn ?
+          isAuthorized ?
             <ul className="nav navbar-nav navbar-right">
               <li><Link to='/' onClick={handleLogout}>
                 <span className="glyphicon glyphicon-log-out"></span> Log out

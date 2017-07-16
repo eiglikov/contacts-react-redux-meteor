@@ -4,9 +4,7 @@ import EditContact from './EditContact'
 import classnames from 'classnames'
 
 class Contact extends Component {
-
   constructor(props) {
-    // contact, onRemove, toggleEditContact
     super(props)
     this.state = {
       isEdited: false,
@@ -17,12 +15,11 @@ class Contact extends Component {
       imageUrl: props.contact.imageUrl,
       group: props.contact.group
     }
-
   }
   handleRemove = () => {
-    // let conformation = confirm('Are you sure you want to delete ' + this.state.contact.name + '?')
+    let conformation = confirm('Are you sure you want to delete ' + this.state.contact.name + '?')
     // remove when deploy
-    conformation = true
+    // conformation = true
 
     if(conformation){
       this.props.onRemove(this.state.contact.id)

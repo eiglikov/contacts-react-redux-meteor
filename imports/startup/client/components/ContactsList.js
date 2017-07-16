@@ -26,14 +26,9 @@ class VisibileContactsList extends Component {
   render() {
     const { props: { isFetching, contacts, removeContact, editContact, errorMessage } } = this
 
-
     if (!contacts.length) {
       return <h3>No contacts</h3>
     }
-
-    // if (isFetching) {
-    //   return <p>Loading...</p>
-    // }
 
     if (errorMessage && !contacts.length) {
       return (
@@ -42,6 +37,7 @@ class VisibileContactsList extends Component {
           onRetry={() => this.fetchData()}
         />)
       }
+
       return (
         <ContactsList
           contacts={contacts}
