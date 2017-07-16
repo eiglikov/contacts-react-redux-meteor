@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Bert } from 'meteor/themeteorchef:bert'
 import { connect } from 'react-redux'
 import { addTodo } from '../actions'
+
 import GroupSelector from './GroupSelector'
 import ContactForm from './ContactForm'
 
@@ -31,7 +32,7 @@ const AddContactForm = ({ dispatch }) => {
     <ContactForm
       onSubmit={handleAddContactForm}
       showIcons={true}
-      smallButtons={false}
+      small={false}
     />
   )
 }

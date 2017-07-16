@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { withHistory, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { createContainer } from 'meteor/react-meteor-data'
 import { signIn } from '../actions'
 
 class LoginPage extends Component {

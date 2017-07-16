@@ -30,7 +30,7 @@ class GroupSelector extends Component {
         <span className={classnames('input-group-addon', {'hidden' : hideIcon})}>
           <i className="glyphicon glyphicon-bookmark"></i>
         </span>
-        <div className="btn-toolbar" data-toggle="buttons">
+        <div className="btn-group" data-toggle="buttons">
           <label className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'all'}, {'btn-sm' : smallButtons})}>
             All
             <input

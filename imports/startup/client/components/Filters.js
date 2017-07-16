@@ -1,32 +1,21 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import FilterLink from './FilterLink'
 import GroupSelector from './GroupSelector'
 
 const Filters = ({ history }) => {
+  // the path where user currently is
+  let defaultSelectedOption = history.location.pathname.split('/')[2];
 
-  let filter = 'all'
   const handleSelect = (selected) => {
-    console.log('filter handleSelect', selected)
-    filter = selected
-    history.push('/group/' + filter)
+    history.push('/group/' + selected)
   }
-
   return(
       <GroupSelector
         onSelect={handleSelect}
         hideIcon={true}
-        selectedOption={'all'}
+        selectedOption={defaultSelectedOption}
       />
   )
 }
-//
-// const mapStateToProps = state => {
-//   console.log("state", state)
-//
-//   return {
-//     history : history
-//   }
-// }
+
 export default withRouter(Filters)

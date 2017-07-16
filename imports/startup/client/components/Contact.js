@@ -79,6 +79,7 @@ class Contact extends Component {
               isEdited={this.state.isEdited}
               handleEdit={this.handleEdit}
               handleSelect={this.onSelectChange}
+              handleToggleContact={this.handleToggleContact}
             />
           </div>
 
