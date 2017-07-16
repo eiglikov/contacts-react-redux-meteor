@@ -20,9 +20,11 @@ const ContactsApp = ({ loggedIn, history }) => (
             <ContactsList />
           </div>
         </div>
-      : <div>
-        <h2>Unauthorized</h2>
-
+      : <div className='centered-container centered-text'>
+        <h1><strong className='brand-text-color'>401</strong> Unauthorized</h1>
+        <Link to='/login'>
+          <button className='btn btn-lg btn-primary'>Sign In</button>
+        </Link>
       </div>
     }
   </div>

@@ -2,7 +2,6 @@ import { combineReducers } from 'redux'
 import byId, * as fromById from './byId'
 import createList, * as fromList from './createList'
 import authReducers from './auth'
-import { logout } from '../actions'
 
 const listByFilter = combineReducers({
   all: createList('all'),
@@ -21,7 +20,7 @@ const contacts = combineReducers({
 
 const rootReducer = ( state, action ) => {
   if ( action.type === 'LOG_OUT' ) {
-    logout()
+    state = undefined
   }
 
   return contacts(state, action)
