@@ -33,8 +33,6 @@ if(Meteor.isServer){
       if (!Meteor.userId()) {
         throw new Meteor.Error('not-authorized')
       }
-      console.log("INSERT->", contactId, name, phone, email, imageUrl, group)
-
       check(contactId, String)
       check(name, String)
       check(phone, String)
@@ -42,14 +40,6 @@ if(Meteor.isServer){
       check(imageUrl, String)
       check(group, String)
 
-      // "_id" : "NenTGD3Rhyh3ThuKw",
-      //  "name" : "Anet",
-      //  "userId" : "XXAPQyHo2wZTRomoj",
-      //  "phone" : 6473215152,
-      //  "email" : "anton@gmail.com",
-      //  "imageUrl" : "https://randomuser.me/api/portraits/men/12.jpg",
-      //  "group" : "friends",
-      //  "createdAt" : ISODate("2017-07-15T23:16:49.253Z")
       let userId = Meteor.userId()
       console.log("INSERT->", userId, name, phone, email, imageUrl, group)
 
@@ -87,6 +77,7 @@ if(Meteor.isServer){
 
 
       const contact = Contacts.findOne(id)
+
       return Contacts.update(id,
         { $set: {
           name: name,

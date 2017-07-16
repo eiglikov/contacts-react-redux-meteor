@@ -3,6 +3,8 @@ import omit from 'lodash/omit'
 const byId = (state = {}, action) => {
   switch (action.type) {
     case 'DDP_CHANGED':
+    console.log("DDP_CHANGED", action.response.doc);
+
     return {
       ...state,
       [action.response.doc.id]: {

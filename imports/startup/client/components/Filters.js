@@ -1,33 +1,32 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import FilterLink from './FilterLink'
+import GroupSelector from './GroupSelector'
 
-const Filters = () => (
-  <div className='row'>
-    {'Groups: '}
-    <FilterLink
-      filter="all"
-    >
-      {'All'}
-    </FilterLink>
-    {' '}
-    <FilterLink
-      filter="family"
-    >
-      {'Family'}
-    </FilterLink>
-    {' '}
-    <FilterLink
-      filter="friends"
-    >
-      {'Friends'}
-    </FilterLink>
-    {' '}
-    <FilterLink
-      filter="colleagues"
-    >
-      {'Colleagues'}
-    </FilterLink>
-  </div>
-        )
+const Filters = ({ history }) => {
 
-        export default Filters
+  let filter = 'all'
+  const handleSelect = (selected) => {
+    console.log('filter handleSelect', selected)
+    filter = selected
+    history.push('/group/' + filter)
+  }
+
+  return(
+      <GroupSelector
+        onSelect={handleSelect}
+        hideIcon={true}
+        selectedOption={'all'}
+      />
+  )
+}
+//
+// const mapStateToProps = state => {
+//   console.log("state", state)
+//
+//   return {
+//     history : history
+//   }
+// }
+export default withRouter(Filters)

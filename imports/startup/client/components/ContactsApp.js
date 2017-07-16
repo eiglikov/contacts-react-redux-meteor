@@ -9,7 +9,7 @@ import Filters from './Filters'
 import ContactsList from './ContactsList'
 
 
-const ContactsApp = ({ loggedIn }) => (
+const ContactsApp = ({ loggedIn, history }) => (
   <div>
     {
       loggedIn ?
@@ -20,10 +20,15 @@ const ContactsApp = ({ loggedIn }) => (
             <ContactsList />
           </div>
         </div>
-      : <p>Loading...</p>
+      : <div>
+        <h2>Unauthorized</h2>
+
+      </div>
     }
   </div>
 )
+//<p>Redirecting to Home</p>
+// {setTimeout(() => history.push('/'), 2000)}
 
 ContactsApp.propTypes = {
   loggedIn: PropTypes.bool

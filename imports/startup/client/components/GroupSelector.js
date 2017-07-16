@@ -23,15 +23,15 @@ class GroupSelector extends Component {
 
   render(){
     const hideIcon = this.props.hideIcon
+    const smallButtons = this.props.smallButtons
+
     return (
       <div className="input-group input-group-unstyled">
         <span className={classnames('input-group-addon', {'hidden' : hideIcon})}>
           <i className="glyphicon glyphicon-bookmark"></i>
         </span>
         <div className="btn-toolbar" data-toggle="buttons">
-
-
-          <label className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'all'})}>
+          <label className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'all'}, {'btn-sm' : smallButtons})}>
             All
             <input
               type="radio"
@@ -40,7 +40,7 @@ class GroupSelector extends Component {
               onClick={(node) => this.handleGroupChange(node)}
             />
           </label>
-          <label className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'family'})}>
+          <label className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'family'}, {'btn-sm' : smallButtons})}>
             Family
             <input
               type="radio"
@@ -49,7 +49,7 @@ class GroupSelector extends Component {
               onClick={(node) => this.handleGroupChange(node)}
             />
           </label>
-          <label className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'friends'})}>
+          <label className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'friends'}, {'btn-sm' : smallButtons})}>
             Friends
             <input
               type="radio"
@@ -59,7 +59,7 @@ class GroupSelector extends Component {
             />
           </label>
           <label
-            className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'colleagues'})}>
+            className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'colleagues'}, {'btn-sm' : smallButtons})}>
             Colleagues
             <input
               type="radio"
@@ -75,7 +75,10 @@ class GroupSelector extends Component {
 }
 
 GroupSelector.propTypes = {
-  onSelect: PropTypes.func.isRequired
+  onSelect: PropTypes.func.isRequired,
+  selectedOption: PropTypes.string.isRequired,
+  smallButtons: PropTypes.bool,
+  hideIcon: PropTypes.bool,
 }
 
 export default GroupSelector

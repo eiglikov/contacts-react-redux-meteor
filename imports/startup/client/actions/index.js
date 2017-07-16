@@ -36,22 +36,21 @@ export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
 export const addTodo = (name, phone, email, imageUrl, group = 'all') =>
 (dispatch, getState, asteroid) => {
   // for optimistic UI we immediately dispatch an DDP_ADDED action
-  let id = Random.id()
+  let contactId = Random.id()
 
-  asteroid.call('contacts.insert', id, name, phone, email, imageUrl, group)
+  asteroid.call('contacts.insert', contactId, name, phone, email, imageUrl, group)
   .then(() => {
     // if this succeeds the Contact has already been added
     // so there is nothing more Contact
-    console.log("Contact Added", name, phone, email, imageUrl, group)
+    console.log("Contact Added", contactId, name, phone, email, imageUrl, group)
   })
   .catch((err) => {
     // something went wrong when creating the new Contact
     // since we optimistically added the Contact already we need to remove it now
-    console.log('error:', err)
-
+    console.log('ERROR:', err)
     dispatch({
       type: 'DDP_REMOVED',
-      response: { collection: 'contacts', id },
+      response: { collection: 'contacts', contactId },
     })
   })
 
@@ -69,7 +68,7 @@ export const editContact = (id, name, phone, email, imageUrl, group) =>
     console.log("contact updated", id, name, phone, email, imageUrl, group)
   })
   .catch((err) => {
-    console.log("edit error", err);
+    console.log("ERROR edit", err);
 
     dispatch({
       type: 'DDP_CHANGED',
@@ -81,7 +80,7 @@ export const editContact = (id, name, phone, email, imageUrl, group) =>
 export const removeContact = (id) => (dispatch, getState, asteroid) => {
   asteroid.call('contacts.remove', id)
   .catch((err) => {
-    console.log("remove error", err)
+    console.log("remove ERROR", err)
   })
 }
 
@@ -97,7 +96,7 @@ export const signIn = (email, password, history, handleError) =>
     history.push('/group/all')
   })
   .catch((err) => {
-    console.log("login error", err)
+    console.log("login ERROR", err)
     handleError(err.reason)
   })
 }
@@ -107,7 +106,7 @@ export const signUp = (name, email, password, history, handleError) =>
   Accounts.createUser({ username: name, email: email, password: password},
     (err) => {
       if(err){
-        console.log("signup error", err)
+        console.log("signup ERROR", err)
         handleError(err.reason)
       } else {
         dispatch({
@@ -132,7 +131,7 @@ export const logout = () => (dispatch, getState, asteroid) => {
     console.log("Persistor purged")
   })
   .catch((err) => {
-    console.log("logout error", err)
+    console.log("logout ERROR", err)
 
   })
 

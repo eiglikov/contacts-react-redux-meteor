@@ -9,11 +9,28 @@ class EditContact extends Component {
     super(props)
 
     this.state = {
+      name: this.props.contact.name,
+      phone: this.props.contact.phone,
+      email: this.props.contact.email,
+      imageUrl: this.props.contact.imageUrl,
+      group: this.props.contact.group,
       isEdited: props.isEdited,
     }
   }
   componentWillReceiveProps(nextProps) {
     this.setState({isEdited: nextProps.isEdited})
+  }
+  handleSubmit = (e, name, phone, email, imageUrl, group) => {
+    e.preventDefault()
+    console.log("handleEdit Submit", name, phone, email, imageUrl, group);
+    this.setState({
+      name: name,
+      phone: phone,
+      email: email,
+      imageUrl: imageUrl,
+      group: group
+    })
+    this.handleEditContact(name, phone, email, imageUrl, group)
   }
   handleEditContact = (name, phone, email, imageUrl, group) => {
     console.log("contact ->", name, phone, email, imageUrl, group);
@@ -21,16 +38,17 @@ class EditContact extends Component {
   }
   handleSelectOptions = (selected) => {
     console.log('group handleSelect', selected)
+    this.setState({group: selected});
     this.props.handleSelect(selected)
   }
 
   render(){
-    let name = this.props.contact.name
-    let phone = this.props.contact.phone
-    let email = this.props.contact.email
-    let imageUrl = this.props.contact.imageUrl
-    let group = this.props.contact.group;
-    console.log("group in render", group);
+    let name = this.state.name
+    let phone = this.state.phone
+    let email = this.state.email
+    let imageUrl = this.state.imageUrl
+    let group = this.state.group
+    console.log("group in render", group)
 
 
     if (this.state.isEdited)
@@ -75,14 +93,16 @@ class EditContact extends Component {
         <GroupSelector
           onSelect={this.handleSelectOptions}
           hideIcon={true}
+          smallButtons={true}
           selectedOption={group}
         />
 
-        <button
+        <input
+          type='submit'
           className='btn btn-primary'
-          onClick={() => this.handleEditContact(name.value, phone.value, email.value, imageUrl.value, group)}>
-          Submit
-        </button>
+          value='Submit'
+          onClick={(event) => this.handleSubmit(event, name.value, phone.value, email.value, imageUrl.value, group)}
+        />
 
       </form>
     )
