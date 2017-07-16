@@ -1,12 +1,12 @@
-# <a href='https://contacts-meteor.herokuapp.com'><img src='https://pp.userapi.com/c841132/v841132262/9a1e/VWh5OruIJuU.jpg' alt='Contacts Manager' height='55'></a>
+# <a href='https://contacts-meteor.herokuapp.com'><img src='https://image.ibb.co/d28uFF/Untitled_1.png' alt='Contacts Manager' height='55'></a>
 
-<a href='https://contacts-meteor.herokuapp.com/'>Contacts Manager</a> is a web application for managing a list of people and their contact information. 
+<a href='https://contacts-meteor.herokuapp.com/'>Contacts Manager</a> is a web application for managing a list of people and their contact information.
 
 ## Features
 * Real-time data updates across all clients with ```WebSockets``` ```Asteroid DDP```.<br/>
 * User authentication(OAuth coming) with ```accounts-password```.<br/>
-* Contacts grouping.<br/> 
-* Auto sorting on addition.<br/> 
+* Contacts grouping.<br/>
+* Auto sorting on addition.<br/>
 * Sourcing an images for each contact(full uploading comming)..<br/>
 * Not Found and Unauthorized pages.<br/>
 

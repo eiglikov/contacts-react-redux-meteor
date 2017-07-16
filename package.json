@@ -8,7 +8,12 @@
     "asteroid": "^2.0.3",
     "babel-runtime": "^6.20.0",
     "bcrypt": "^1.0.2",
+<<<<<<< HEAD
     "classnames": "^2.2.1",
+=======
+    "classnames": "^2.2.5",
+    "lodash": "^4.17.4",
+>>>>>>> d512488... fixed WS changing issue
     "meteor-node-stubs": "~0.2.4",
     "prop-types": "^15.5.10",
     "react": "^15.2.1",
