@@ -9,11 +9,8 @@ const createList = (filter) => {
     const { response: { doc } } = action
     const { id: contactId, group: group } = doc
 
-    const shouldRemove = (
-      (filter !== 'all') &&
-      (filter !== group)
-    )
-    console.log("shouldRemove", shouldRemove);
+    // remove if current filter isn't all or the group of contact
+    const shouldRemove = ((filter !== 'all') && (filter !== group))
 
     return shouldRemove
     ? state.filter(id => id !== contactId)

@@ -126,13 +126,11 @@ export const logout = () => (dispatch, getState, asteroid) => {
 
   asteroid.logout()
   .then(() => {
-    console.log("LoggedOut")
     getPersistor().pause()
-    console.log("Persistor purged")
+    console.log("Logged Out")
   })
   .catch((err) => {
     console.log("logout ERROR", err)
-
   })
 
 }

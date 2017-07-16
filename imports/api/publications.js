@@ -4,11 +4,11 @@ import { Meteor } from 'meteor/meteor'
 import { Contacts } from './collections.js'
 
 if(Meteor.isServer){
-  Meteor.publish('contacts', function(filter = 'all') {
-    if (!this.userId) {
-      this.ready()
-      return this.stop()
-    }
+  Meteor.publish('contacts', (filter = 'all') => {
+    // if (!this.userId) {
+    //   this.ready()
+    //   return this.stop()
+    // }
     const query = {}
     console.log("filter", filter)
 

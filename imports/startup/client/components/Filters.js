@@ -5,6 +5,7 @@ import GroupSelector from './GroupSelector'
 const Filters = ({ history }) => {
   // the path where user currently is
   let defaultSelectedOption = history.location.pathname.split('/')[2];
+  console.log("defaultSelectedOption", defaultSelectedOption);
 
   const handleSelect = (selected) => {
     history.push('/group/' + selected)

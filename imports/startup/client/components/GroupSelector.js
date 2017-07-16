@@ -8,8 +8,6 @@ class GroupSelector extends Component {
     this.state = {
       selectedOption: this.props.selectedOption || 'all'
     }
-    console.log("selectedOption in GS", this.props.selectedOption);
-
   }
 
   handleGroupChange = (group) => {
