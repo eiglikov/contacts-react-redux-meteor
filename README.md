@@ -35,5 +35,3 @@
 <a href="https://www.mongodb.com/">MongoDB</a><br />
 <a href="https://github.com/mondora/asteroid">Asteroid</a><br />
 <a href="http://getbootstrap.com/">Bootstrap</a><br />
-
-#### Project Structure
