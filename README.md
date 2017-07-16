@@ -1,4 +1,4 @@
-# <a href='https://contacts-meteor.herokuapp.com'><img src='https://pp.userapi.com/c841132/v841132984/15081/YgX-GHF3HIM.jpg' alt='Contacts Manager' height='60'></a>
+# <a href='https://contacts-meteor.herokuapp.com'><img src='https://pp.userapi.com/c841132/v841132262/9a1e/VWh5OruIJuU.jpg' alt='Contacts Manager' height='100'></a>
 
 ## contacts-react-redux-meteor
 Contacts application for managing a list of people and their contact information.<br />
