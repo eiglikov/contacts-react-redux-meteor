@@ -17,9 +17,9 @@ class Contact extends Component {
     }
   }
   handleRemove = () => {
-    let conformation = confirm('Are you sure you want to delete ' + this.state.contact.name + '?')
+    // let conformation = confirm('Are you sure you want to delete ' + this.state.contact.name + '?')
     // remove when deploy
-    // conformation = true
+    conformation = true
 
     if(conformation){
       this.props.onRemove(this.state.contact.id)
