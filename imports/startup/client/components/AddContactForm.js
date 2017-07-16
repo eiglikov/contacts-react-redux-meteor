@@ -15,7 +15,7 @@ const AddContactForm = ({ dispatch }) => {
   const handleAddContactForm = (e) => {
     e.preventDefault()
     console.log(name.value, phone.value, email.value, chooseImage(imageUrl), group)
-    
+
 
     if (!name.value.length && !phone.value.length && !email.value.length){
       console.log("Fields cannot be empty")
@@ -103,7 +103,11 @@ const AddContactForm = ({ dispatch }) => {
           />
         </div>
 
-        <GroupSelector onSelect={handleSelect}/>
+        <GroupSelector
+          onSelect={handleSelect}
+          hideIcon={false}
+          selectedOption={group}
+        />
 
 
         <div className='btn-toolbar pull-right'>

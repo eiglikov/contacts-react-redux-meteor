@@ -72,17 +72,18 @@ if(Meteor.isServer){
       console.log("REMOVE->", id)
       return Contacts.remove({"_id": id})
     },
-    'contacts.update'(id, name, phone, email, imageUrl) {
+    'contacts.update'(id, name, phone, email, imageUrl, group) {
       if (! Meteor.userId()) {
         throw new Meteor.Error('not-authorized')
       }
-      console.log("EDIT->", id, name, phone, email, imageUrl)
+      console.log("EDIT->", id, name, phone, email, imageUrl, group)
 
       check(id, String)
       check(name, String)
       check(phone, String)
       check(email, String)
       check(imageUrl, String)
+      check(group, String)
 
 
       const contact = Contacts.findOne(id)
@@ -91,7 +92,8 @@ if(Meteor.isServer){
           name: name,
           phone: phone,
           email: email,
-          imageUrl: imageUrl
+          imageUrl: imageUrl,
+          group: group
         }
       })
 

@@ -6,22 +6,26 @@ class GroupSelector extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedOption: 'all'
+      selectedOption: this.props.selectedOption || 'all'
     }
+    console.log("selectedOption in GS", this.props.selectedOption);
+
   }
 
   handleGroupChange = (group) => {
     console.log(group.target)
-    this.props.onSelect(group.target.value)
+    let groupValue = group.target.value
     this.setState({
-      selectedOption: group.target.value
+      selectedOption: groupValue
     })
+    this.props.onSelect(groupValue)
   }
 
   render(){
+    const hideIcon = this.props.hideIcon
     return (
       <div className="input-group input-group-unstyled">
-        <span className="input-group-addon">
+        <span className={classnames('input-group-addon', {'hidden' : hideIcon})}>
           <i className="glyphicon glyphicon-bookmark"></i>
         </span>
         <div className="btn-toolbar" data-toggle="buttons">

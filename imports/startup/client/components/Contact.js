@@ -10,7 +10,12 @@ class Contact extends Component {
     super(props)
     this.state = {
       isEdited: false,
-      contact: props.contact
+      contact: props.contact,
+      name: props.contact.name,
+      phone: props.contact.phone,
+      email: props.contact.email,
+      imageUrl: props.contact.imageUrl,
+      group: props.contact.group
     }
 
   }
@@ -26,61 +31,43 @@ class Contact extends Component {
 
     }
   }
-  handleEdit = (id, name, phone, email, imageUrl) => {
+  handleEdit = (id, name, phone, email, imageUrl, group) => {
     this.handleToggleContact()
-    if (this.state.name !== name ||
-      this.state.phone !== phone ||
-      this.state.email !== email ||
-      this.state.imageUrl !== imageUrl){
+    // if (this.state.name !== name ||
+    //   this.state.phone !== phone ||
+    //   this.state.email !== email ||
+    //   this.state.imageUrl !== imageUrl){
+        // CONTACT.name .... changed ??
+        console.log("Contact state edit", id, name, phone, email, imageUrl, group);
+
         this.setState({
           name: name,
           phone: phone,
           email: email,
           imageUrl: imageUrl,
+          group: group
         })
-        this.props.onEdit(id, name, phone, email, imageUrl)
-      } else {
-        console.log("No changes", name, phone, email, imageUrl)
-      }
+        this.props.onEdit(id, name, phone, email, imageUrl, group)
+      // } else {
+      //   console.log("No changes", name, phone, email, imageUrl, group)
+      // }
     }
     handleToggleContact = () => {
       this.setState({
         isEdited: !this.state.isEdited
       })
     }
+    onSelectChange = (selected) => {
+      console.log('group handleSelect', selected)
+      this.setState({ group: selected})
+    }
     render() {
-      // <div class="col-md-3">
-      //   <div class="img">
-      //     <img src="">
-      //     </div>
-      //   </div>
-      //
-      //   <div class="col-md-9">
-      //     <div class="row">
-      //       <div class="col-md-8">
-      //         This is the product name
-      //       </div>
-      //       <div class="col-md-4">
-      //         1 230.99
-      //       </div>
-      //     </div>
-      //
-      //     <div class="row">
-      //       <div class="col-md-6">
-      //         Property 1
-      //       </div>
-      //       <div class="col-md-6">
-      //         Property 2
-      //       </div>
-      //     </div>
-      //   </div>
-
         return (
         <div className='row top-buffer'>
           <div className='col-xs-3'>
             <img
               className='img-circle img-responsive'
-              src={this.state.contact.imageUrl}
+              src={this.state.imageUrl}
               alt="Profile picture"
             />
           </div>
@@ -90,7 +77,9 @@ class Contact extends Component {
               className='form-inline'
               contact={this.state.contact}
               isEdited={this.state.isEdited}
-              handleEdit={this.handleEdit} />
+              handleEdit={this.handleEdit}
+              handleSelect={this.onSelectChange}
+            />
           </div>
 
           <div className='btn-group col-xs-3'>
@@ -109,6 +98,31 @@ class Contact extends Component {
 
         </div>
         )
+        // <div class="col-md-3">
+        //   <div class="img">
+        //     <img src="">
+        //     </div>
+        //   </div>
+        //
+        //   <div class="col-md-9">
+        //     <div class="row">
+        //       <div class="col-md-8">
+        //         This is the product name
+        //       </div>
+        //       <div class="col-md-4">
+        //         1 230.99
+        //       </div>
+        //     </div>
+        //
+        //     <div class="row">
+        //       <div class="col-md-6">
+        //         Property 1
+        //       </div>
+        //       <div class="col-md-6">
+        //         Property 2
+        //       </div>
+        //     </div>
+        //   </div>
       }
     }
 

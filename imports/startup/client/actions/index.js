@@ -59,16 +59,21 @@ export const addTodo = (name, phone, email, imageUrl, group = 'all') =>
 }
 
 
-export const editContact = (id, name, phone, email, imageUrl) =>
+export const editContact = (id, name, phone, email, imageUrl, group) =>
 (dispatch, getState, asteroid) => {
-  asteroid.call('contacts.update', id, name, phone, email, imageUrl)
+  console.log("edit method", id, name, phone, email, imageUrl, group);
+
+
+  asteroid.call('contacts.update', id, name, phone, email, imageUrl, group)
   .then(() => {
-    console.log("contact updated", id, name, phone, email, imageUrl)
+    console.log("contact updated", id, name, phone, email, imageUrl, group)
   })
-  .catch(() => {
+  .catch((err) => {
+    console.log("edit error", err);
+
     dispatch({
       type: 'DDP_CHANGED',
-      response: { collection: 'contacts', id, doc: { name, phone, email, imageUrl } },
+      response: { collection: 'contacts', id, doc: { name, phone, email, imageUrl, group } },
     })
   })
 }
