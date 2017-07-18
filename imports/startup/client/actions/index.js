@@ -81,6 +81,8 @@ export const removeContact = (id) => (dispatch, getState, asteroid) => {
 
 export const signIn = (email, password, history, handleError) =>
 (dispatch, getState, asteroid) => {
+  console.log("login aciton", email, password, history, handleError);
+
   asteroid.loginWithPassword({email: email, password: password})
   .then(() => {
     dispatch({
