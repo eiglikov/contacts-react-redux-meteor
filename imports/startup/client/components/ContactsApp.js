@@ -8,7 +8,6 @@ import AddContactForm from './AddContactForm'
 import Filters from './Filters'
 import ContactsList from './ContactsList'
 
-
 const ContactsApp = ({ loggedIn, history }) => (
   <div>
     {
