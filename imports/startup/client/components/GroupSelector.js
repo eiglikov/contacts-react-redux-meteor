@@ -6,7 +6,12 @@ class GroupSelector extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedOption: this.props.selectedOption || 'all'
+      selectedOption: this.props.selectedOption
+    }
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.selectedOption !== prevProps.selectedOption) {
+      this.setState({selectedOption: this.props.selectedOption})
     }
   }
   handleGroupChange = (group) => {
@@ -32,7 +37,7 @@ class GroupSelector extends Component {
               type="radio"
               name='options'
               value='all'
-              defaultChecked 
+              defaultChecked
               onClick={(node) => this.handleGroupChange(node)}
             />
           </label>

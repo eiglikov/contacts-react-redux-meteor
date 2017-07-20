@@ -30,9 +30,8 @@ class Contact extends Component {
 
     }
   }
-  handleEdit = (name, phone, email, imageUrl, group) => {
+  handleEdit = (name, phone, email, imageUrl, group, handleError) => {
     console.log("message", name, phone, email, imageUrl, group);
-
     this.handleToggleContact()
     this.setState({
       name: name,
@@ -55,32 +54,39 @@ class Contact extends Component {
     const {state: {name, phone, email, imageUrl, isEdited}} = this
     const contact = this.state
     return (
-      <div className='row contact top-buffer'>
-        <div className='col-xs-3' onClick={this.handleToggleContact}>
-          <img
-            className='img-circle img-responsive'
-            src={imageUrl}
-            alt="Profile picture"
-          />
-        </div>
-        <div className='col-xs-6'>
-          <div className="row">
-            <div className="col-xs-8">
-              <h4>{name}</h4>
-              <p>{phone}</p>
-              <p><a href={`mailto:${email}`}>{email}</a></p>
+      <div>
+        <div className='contact row top-buffer' onClick={this.handleToggleContact}>
+
+          <div className='col-xs-3'>
+            <img
+              className='img-circle img-responsive'
+              src={imageUrl}
+              alt="Profile picture"
+            />
+          </div>
+          <div className='col-xs-6'>
+            <div className="row">
+              <div className="col-xs-8">
+                <h4>{name}</h4>
+                <p>{phone}</p>
+                <p><a href={`mailto:${email}`}>{email}</a></p>
+              </div>
             </div>
           </div>
         </div>
-        <ContactForm
-          onSubmit={this.handleEdit}
-          onClear={this.handleToggleContact}
-          onRemove={this.handleRemove}
-          handleSelect={this.onSelectChange}
-          contact={contact}
-          visibile={isEdited}
-          detailView={true}
-        />
+
+        { isEdited ?
+          <ContactForm
+            onSubmit={this.handleEdit}
+            onClear={this.handleToggleContact}
+            onRemove={this.handleRemove}
+            handleSelect={this.onSelectChange}
+            contact={contact}
+            visibile={isEdited}
+            detailView={true}
+          />
+          : ''
+        }
       </div>
     )
   }

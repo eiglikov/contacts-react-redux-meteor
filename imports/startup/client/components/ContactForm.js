@@ -17,12 +17,18 @@ class ContactForm extends Component {
       email: contact.email,
       imageUrl: contact.imageUrl,
       group: contact.group || 'all',
-      visibile: false,
-      detailView: props.detailView
+      visibile: props.visibile,
+      detailView: props.detailView,
+      error: ''
     }
   }
   componentWillReceiveProps(nextProps) {
     this.setState({visibile: nextProps.visibile})
+  }
+  handleError = (err) => {
+    this.setState({
+      error: err
+    })
   }
   handleSubmitForm = (e) => {
     e.preventDefault()
@@ -37,7 +43,7 @@ class ContactForm extends Component {
       email: email,
       imageUrl: imageUrl,
     })
-    this.props.onSubmit(name, phone, email, imageUrl, this.state.group)
+    this.props.onSubmit(name, phone, email, imageUrl, this.state.group, this.handleError)
     this.props.onClear()
   }
   handleSelect = (selected) => {
@@ -50,9 +56,12 @@ class ContactForm extends Component {
       detailView: !this.state.detailView
     })
   }
+  liveChangeName = (e) => {
+    this.setState({name: e.target.value})
+  }
 
   render(){
-    const {state: {contact, name, phone, email, group, detailView, isEdited, visibile}} = this
+    const {state: {contact, name, phone, email, group, detailView, isEdited, visibile, error}} = this
     let imageUrl = contact.imageUrl ||
     'https://trendytheme.net/wp-content/themes/trendytheme/img/client.png'
 
@@ -88,7 +97,7 @@ class ContactForm extends Component {
                       </button>
                     </div>
                     { Object.getOwnPropertyNames(contact).length ?
-                      <GroupButton group={group} /> : ''}
+                      <GroupButton group={contact.group} toggleModal={this.props.onClear}/> : ''}
                   </div>
                 </div>
               }
@@ -97,6 +106,7 @@ class ContactForm extends Component {
 
 
             <div className="modal-body">
+              { error.length > 0 ? <div className="alert alert-danger fade in">{error}</div> :''}
               <form className="form col-md-12 center-block" onSubmit={this.handleSubmitForm}>
                 <div className='input-group input-group-unstyled form-group form-group'>
                   <span className="input-group-addon">
@@ -110,6 +120,7 @@ class ContactForm extends Component {
                       type="text"
                       placeholder='name'
                       defaultValue={name}
+                      onChange={this.liveChangeName}
                       ref={node => this.name = node}
                     />
                   }
@@ -136,7 +147,7 @@ class ContactForm extends Component {
                   <span className="input-group-addon">
                     <i className="glyphicon glyphicon-envelope"></i>
                   </span>
-                  { detailView ? <p>{email}</p>
+                  { detailView ?  <p><a href={`mailto:${email}`}>{email}</a></p>
                     :
                     <input
                       className='form-control'
