@@ -31,7 +31,6 @@ class Contact extends Component {
     }
   }
   handleEdit = (name, phone, email, imageUrl, group, handleError) => {
-    console.log("message", name, phone, email, imageUrl, group);
     this.handleToggleContact()
     this.setState({
       name: name,

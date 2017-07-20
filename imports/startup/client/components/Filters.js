@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import GroupSelector from './GroupSelector'
 
-// const Filters = ({ history, listen }) => {
 class Filters extends Component {
   constructor(props) {
     super(props)
@@ -11,19 +10,16 @@ class Filters extends Component {
       location: initialPath
     }
   }
-  // the path where user currently is
   handleSelect = (selected) => {
-    console.log("route changed", selected)
-
     this.setState({
       location: selected
     })
     this.props.history.push('/group/' + selected)
   }
   splitPath = (location) => {
+    // split /group/(pathname) into (pathname)
     return location.split('/')[2]
   }
-
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       this.handleSelect(this.splitPath(this.props.location.pathname))

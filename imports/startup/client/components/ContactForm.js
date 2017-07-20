@@ -44,7 +44,6 @@ class ContactForm extends Component {
       imageUrl: imageUrl,
     })
     this.props.onSubmit(name, phone, email, imageUrl, this.state.group, this.handleError)
-    this.props.onClear()
   }
   handleSelect = (selected) => {
     this.setState({
@@ -203,6 +202,7 @@ class ContactForm extends Component {
 
 ContactForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  onClear: PropTypes.func,
   showIcons: PropTypes.bool,
   contact: PropTypes.object,
   detailView: PropTypes.bool.isRequired,

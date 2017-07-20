@@ -17,11 +17,10 @@ class AuthForm extends Component {
     e.preventDefault()
     let name = ''
     if (this.props.isSignUp){
-      name = document.getElementById('auth-name').value
+      let email = this.name.value
     }
-    let email = document.getElementById('auth-email').value
-    let password = document.getElementById('auth-password').value
-    console.log("AuthForm", name, email, password);
+    let email = this.email.value
+    let password = this.password.value
 
     if (email && password){
       this.props.onSubmit(name, email, password, this.handleError)
@@ -44,16 +43,34 @@ class AuthForm extends Component {
               <form className="form col-md-12 center-block" onSubmit={this.handleSubmit}>
                 { isSignUp ?
                   <div className="form-group">
-                    <input type="text" id="auth-name" className="form-control input-lg" placeholder="name"/>
+                    <input
+                      type="text"
+                      id="auth-name"
+                      className="form-control input-lg"
+                      placeholder="name"
+                      ref={node => this.name = node}
+                    />
                   </div>
                   :
                   ''
                 }
                 <div className="form-group">
-                  <input type="email" id="auth-email" className="form-control input-lg" placeholder="email"/>
+                  <input
+                    type="email"
+                    id="auth-email"
+                    className="form-control input-lg"
+                    placeholder="email"
+                    ref={node => this.email = node}
+                  />
                 </div>
                 <div className="form-group">
-                  <input type="password" id="auth-password" className="form-control input-lg" placeholder="password"/>
+                  <input
+                    type="password"
+                    id="auth-password"
+                    className="form-control input-lg"
+                    placeholder="password"
+                    ref={node => this.password = node}
+                  />
                 </div>
                 <div className="form-group">
                   <input type="submit" id="auth-button" className="btn btn-lg btn-primary btn-block" value={ isSignUp ? 'Sign up' : 'Login' } />

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Bert } from 'meteor/themeteorchef:bert'
 import { connect } from 'react-redux'
 import { addTodo } from '../actions'
 
@@ -16,11 +15,11 @@ class AddContactForm extends Component {
       visibile: false
     }
   }
-  handleAddContactForm = (name, phone, email, imageUrl, group) => {
+  handleAddContactForm = (name, phone, email, imageUrl, group, handleError) => {
     if (!name.length && !phone.length && !email.length){
-      console.log("Fields cannot be empty")
-      Bert.alert("Fields cannot be empty", 'danger')
+      handleError('Fields cannot be empty')
     } else {
+      this.toggleModal()
       this.props.dispatch(addTodo(name, phone, email, this.chooseImage(imageUrl), group))
     }
   }
@@ -32,7 +31,6 @@ class AddContactForm extends Component {
     return imageUrl
   }
   toggleModal = () => {
-    console.log("toggle", this.state.visibile);
     this.setState({
       visibile: !this.state.visibile
     })
