@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import EditContact from './EditContact'
 import classnames from 'classnames'
+
+import GroupButton from './GroupButton'
+import ContactForm from './ContactForm'
 
 class Contact extends Component {
   constructor(props) {
@@ -28,7 +30,7 @@ class Contact extends Component {
 
     }
   }
-  handleEdit = (id, name, phone, email, imageUrl, group) => {
+  handleEdit = (name, phone, email, imageUrl, group, handleError) => {
     this.handleToggleContact()
     this.setState({
       name: name,
@@ -37,7 +39,7 @@ class Contact extends Component {
       imageUrl: imageUrl,
       group: group
     })
-    this.props.onEdit(id, name, phone, email, imageUrl, group)
+    this.props.onEdit(this.props.contact.id, name, phone, email, imageUrl, group)
   }
   handleToggleContact = () => {
     this.setState({
@@ -48,41 +50,42 @@ class Contact extends Component {
     this.setState({ group: selected})
   }
   render() {
+    const {state: {name, phone, email, imageUrl, isEdited}} = this
+    const contact = this.state
     return (
-      <div className='row top-buffer'>
-        <div className='col-xs-3'>
-          <img
-            className='img-circle img-responsive'
-            src={this.state.imageUrl}
-            alt="Profile picture"
-          />
+      <div>
+        <div className='contact row top-buffer' onClick={this.handleToggleContact}>
+
+          <div className='col-xs-3'>
+            <img
+              className='img-circle img-responsive'
+              src={imageUrl}
+              alt="Profile picture"
+            />
+          </div>
+          <div className='col-xs-6'>
+            <div className="row">
+              <div className="col-xs-8">
+                <h4>{name}</h4>
+                <p>{phone}</p>
+                <p><a href={`mailto:${email}`}>{email}</a></p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className='col-xs-6'>
-          <EditContact
-            className='form-inline'
-            contact={this.state.contact}
-            isEdited={this.state.isEdited}
-            handleEdit={this.handleEdit}
+        { isEdited ?
+          <ContactForm
+            onSubmit={this.handleEdit}
+            onClear={this.handleToggleContact}
+            onRemove={this.handleRemove}
             handleSelect={this.onSelectChange}
-            handleToggleContact={this.handleToggleContact}
+            contact={contact}
+            visibile={isEdited}
+            detailView={true}
           />
-        </div>
-
-        <div className='btn-group col-xs-3'>
-
-          <button
-            className='btn btn-sm btn-default edit-comment'
-            onClick={this.handleToggleContact}>
-            <span className="glyphicon glyphicon-pencil"></span>
-          </button>
-          <button
-            className='btn btn-sm btn-default remove-comment'
-            onClick={this.handleRemove}>
-            <span className="glyphicon glyphicon-remove"></span>
-          </button>
-        </div>
-
+          : ''
+        }
       </div>
     )
   }
