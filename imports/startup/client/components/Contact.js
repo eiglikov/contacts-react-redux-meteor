@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-// import GroupSelector from './GroupSelector'
+import GroupButton from './GroupButton'
 import ContactForm from './ContactForm'
 
 class Contact extends Component {
@@ -31,6 +31,8 @@ class Contact extends Component {
     }
   }
   handleEdit = (name, phone, email, imageUrl, group) => {
+    console.log("message", name, phone, email, imageUrl, group);
+
     this.handleToggleContact()
     this.setState({
       name: name,
@@ -50,20 +52,18 @@ class Contact extends Component {
     this.setState({ group: selected})
   }
   render() {
-    const {state: {name, phone, email, imageUrl, group, isEdited, visibile}} = this
+    const {state: {name, phone, email, imageUrl, isEdited}} = this
     const contact = this.state
     return (
-      <div className='row contact top-buffer' onClick={this.handleToggleContact}>
-        <div className='col-xs-3'>
+      <div className='row contact top-buffer'>
+        <div className='col-xs-3' onClick={this.handleToggleContact}>
           <img
             className='img-circle img-responsive'
             src={imageUrl}
             alt="Profile picture"
           />
         </div>
-
         <div className='col-xs-6'>
-
           <div className="row">
             <div className="col-xs-8">
               <h4>{name}</h4>
@@ -72,30 +72,15 @@ class Contact extends Component {
             </div>
           </div>
         </div>
-
         <ContactForm
           onSubmit={this.handleEdit}
           onClear={this.handleToggleContact}
+          onRemove={this.handleRemove}
           handleSelect={this.onSelectChange}
           contact={contact}
           visibile={isEdited}
-          showIcons={false}
+          detailView={true}
         />
-
-        <div className='btn-group col-xs-3'>
-
-          <button
-            className='btn btn-sm btn-default edit-comment'
-            onClick={this.handleToggleContact}>
-            <span className="glyphicon glyphicon-pencil"></span>
-          </button>
-          <button
-            className='btn btn-sm btn-default remove-comment'
-            onClick={this.handleRemove}>
-            <span className="glyphicon glyphicon-remove"></span>
-          </button>
-        </div>
-
       </div>
     )
   }

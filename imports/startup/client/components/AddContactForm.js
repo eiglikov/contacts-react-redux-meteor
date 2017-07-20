@@ -43,9 +43,9 @@ class AddContactForm extends Component {
         <ContactForm
           onSubmit={this.handleAddContactForm}
           onClear={this.toggleModal}
-          showIcons={true}
-          small={false}
           visibile={this.state.visibile}
+          detailView={false}
+          createView={true}
         />
         <Button toggleModal={this.toggleModal}/>
       </div>

@@ -32,6 +32,7 @@ class GroupSelector extends Component {
               type="radio"
               name='options'
               value='all'
+              defaultChecked 
               onClick={(node) => this.handleGroupChange(node)}
             />
           </label>

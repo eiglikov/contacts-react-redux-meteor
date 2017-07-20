@@ -9,11 +9,11 @@ const Filters = ({ history }) => {
     history.push('/group/' + selected)
   }
   return(
-      <GroupSelector
-        onSelect={handleSelect}
-        hideIcon={true}
-        selectedOption={defaultSelectedOption}
-      />
+    <GroupSelector
+      onSelect={handleSelect}
+      hideIcon={true}
+      selectedOption={defaultSelectedOption}
+    />
   )
 }
 

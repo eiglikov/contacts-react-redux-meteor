@@ -16,7 +16,6 @@ class AuthForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     let name = ''
-
     if (this.props.isSignUp){
       name = document.getElementById('auth-name').value
     }

@@ -1,29 +1,30 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-const ContactFormButtons = ({ onClear, small }) => (
+const ContactFormButtons = ({ onClear, hideSubmit }) => (
   <div className='btn-toolbar pull-right'>
     <input
       type='button'
-      className={classnames('btn', 'btn-default', {'btn-sm' : small})}
+      className='btn btn-default'
       onClick={onClear}
       value='CANCEL'
       readOnly
     />
-    <input
-      type='submit'
-      className={classnames('btn', 'btn-primary', {'btn-sm' : small})}
-      value="SUBMIT"
-      readOnly
-    />
-
+    { hideSubmit ? ''
+      :
+      <input
+        type='submit'
+        className='btn btn-primary'
+        value="SUBMIT"
+        readOnly
+      />
+    }
   </div>
 )
 
 ContactFormButtons.propTypes = {
-  small: PropTypes.bool,
-  onClear: PropTypes.func.isRequired
+  onClear: PropTypes.func.isRequired,
+  hideSubmit: PropTypes.bool,
 }
 
 export default ContactFormButtons
