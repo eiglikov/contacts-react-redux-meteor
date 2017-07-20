@@ -1,123 +1,211 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { Bert } from 'meteor/themeteorchef:bert'
-import { connect } from 'react-redux'
 
 import GroupSelector from './GroupSelector'
+import GroupButton from './GroupButton'
 import ContactFormButtons from './ContactFormButtons'
 
-
-const ContactForm = ({ onSubmit, onClear = null, showIcons, small, contact = {} }) => {
-  let name
-  let phone
-  let imageUrl
-  let email
-  let group = contact.group || ''
-
-  const handleSubmitForm = (e) => {
+class ContactForm extends Component {
+  constructor(props) {
+    super(props)
+    let contact = props.contact || {}
+    this.state = {
+      contact: contact,
+      name: contact.name,
+      phone: contact.phone,
+      email: contact.email,
+      imageUrl: contact.imageUrl,
+      group: contact.group || 'all',
+      visibile: props.visibile,
+      detailView: props.detailView,
+      error: ''
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState({visibile: nextProps.visibile})
+  }
+  handleError = (err) => {
+    this.setState({
+      error: err
+    })
+  }
+  handleSubmitForm = (e) => {
     e.preventDefault()
-    onSubmit(name.value, phone.value, email.value, imageUrl.value, group)
-    defaultClearForm()
+    let name = this.name.value
+    let phone = this.phone.value
+    let email = this.email.value
+    let imageUrl = this.imageUrl.value
+    // Optimistic UI update
+    this.setState({
+      name: name,
+      phone: phone,
+      email: email,
+      imageUrl: imageUrl,
+    })
+    this.props.onSubmit(name, phone, email, imageUrl, this.state.group, this.handleError)
   }
-  const defaultClearForm = () => {
-    name.value = ''
-    phone.value = ''
-    imageUrl.value = ''
-    email.value = ''
-    // group = 'all'
+  handleSelect = (selected) => {
+    this.setState({
+      group: selected
+    })
   }
-  const handleClear = onClear || defaultClearForm
-
-  const handleSelect = (selected) => {
-    group = selected
+  toggleView = () => {
+    this.setState({
+      detailView: !this.state.detailView
+    })
+  }
+  liveChangeName = (e) => {
+    this.setState({name: e.target.value})
   }
 
-  return (
-    <div className='row'>
-      <form className='form-group' onSubmit={handleSubmitForm}>
-        <div className={classnames('input-group', 'input-group-unstyled', {'form-group' : !small})}>
-          <span className="input-group-addon">
-            <i className="glyphicon glyphicon-user"></i>
-          </span>
-          <input
-            className={classnames('form-control', {'input-sm' : small})}
-            type="text"
-            placeholder='name'
-            defaultValue={contact.name}
-            ref={node => {
-              name = node
-            }}
-          />
+  render(){
+    const {state: {contact, name, phone, email, group, detailView, isEdited, visibile, error}} = this
+    let imageUrl = contact.imageUrl ||
+    'https://trendytheme.net/wp-content/themes/trendytheme/img/client.png'
+
+    return (
+      <div className={classnames('modal', 'modal-backdrop', {'show' : visibile})}>
+        <div className="modal-dialog">
+          <div className='modal-content'>
+            <div className="modal-header">
+              { this.props.createView ?
+                <h2> Create Contact</h2>
+                :
+                <div>
+                  <div className='col-xs-3'>
+                    <img
+                      className='img-circle img-responsive'
+                      src={imageUrl}
+                      alt="Profile picture"
+                    />
+                  </div>
+
+                  <div className='col-xs-9'>
+                    <h1>{name}</h1>
+                    <div className='btn-group control-btn-group'>
+                      <button
+                        className='btn btn-default edit-comment'
+                        onClick={this.toggleView}>
+                        <span className="glyphicon glyphicon-pencil"></span>
+                      </button>
+                      <button
+                        className='btn btn-default remove-comment'
+                        onClick={this.props.onRemove}>
+                        <span className="glyphicon glyphicon-remove"></span>
+                      </button>
+                    </div>
+                    { Object.getOwnPropertyNames(contact).length ?
+                      <GroupButton group={contact.group} toggleModal={this.props.onClear}/> : ''}
+                  </div>
+                </div>
+              }
+            </div>
+
+
+
+            <div className="modal-body">
+              { error.length > 0 ? <div className="alert alert-danger fade in">{error}</div> :''}
+              <form className="form col-md-12 center-block" onSubmit={this.handleSubmitForm}>
+                <div className='input-group input-group-unstyled form-group form-group'>
+                  <span className="input-group-addon">
+                    <i className="glyphicon glyphicon-user"></i>
+                  </span>
+                  { detailView ? <p>{name}</p>
+                    :
+                    <input
+                      className='form-control'
+                      id='contact-name'
+                      type="text"
+                      placeholder='name'
+                      defaultValue={name}
+                      onChange={this.liveChangeName}
+                      ref={node => this.name = node}
+                    />
+                  }
+                </div>
+
+                <div className='input-group input-group-unstyled form-group'>
+                  <span className="input-group-addon">
+                    <i className="glyphicon glyphicon-earphone"></i>
+                  </span>
+                  { detailView ? <p>{phone}</p>
+                    :
+                    <input
+                      className='form-control'
+                      id='contact-phone'
+                      type="text"
+                      placeholder='phone'
+                      defaultValue={phone}
+                      ref={node => this.phone = node}
+                    />
+                  }
+                </div>
+
+                <div className='input-group input-group-unstyled form-group'>
+                  <span className="input-group-addon">
+                    <i className="glyphicon glyphicon-envelope"></i>
+                  </span>
+                  { detailView ?  <p><a href={`mailto:${email}`}>{email}</a></p>
+                    :
+                    <input
+                      className='form-control'
+                      type="text"
+                      id='contact-email'
+                      placeholder='email'
+                      defaultValue={email}
+                      ref={node => this.email = node}
+                    />
+                  }
+                </div>
+
+                <div className='input-group input-group-unstyled form-group'>
+                  <span className="input-group-addon">
+                    <i className="glyphicon glyphicon-picture"></i>
+                  </span>
+                  { detailView ? <p>{imageUrl}</p>
+                    :
+                    <input
+                      className='form-control'
+                      id='contact-imageUrl'
+                      type="text"
+                      placeholder='image url'
+                      defaultValue={imageUrl}
+                      ref={node => this.imageUrl = node}
+                    />
+                  }
+                </div>
+                { detailView ? ''
+                  :
+                    <GroupSelector
+                      onSelect={this.handleSelect}
+                      hideIcon={false}
+                      selectedOption={group}
+                      smallButtons={false}
+                    />
+                }
+                <div className="form-group top-buffer">
+                  <ContactFormButtons
+                    onClear={this.props.onClear}
+                    hideSubmit={detailView}
+                  />
+                </div>
+              </form>
+            </div>
+            <div className="modal-footer" style={{borderTop: 0}}></div>
+          </div>
         </div>
-
-        <div className={classnames('input-group', 'input-group-unstyled', {'form-group' : !small})}>
-          <span className="input-group-addon">
-            <i className="glyphicon glyphicon-phone"></i>
-          </span>
-          <input
-            className={classnames('form-control', {'input-sm' : small})}
-            type="text"
-            placeholder='phone'
-            defaultValue={contact.phone}
-            ref={node => {
-              phone = node
-            }}
-          />
-        </div>
-
-        <div className={classnames('input-group', 'input-group-unstyled', {'form-group' : !small})}>
-          <span className="input-group-addon">
-            <i className="glyphicon glyphicon-envelope"></i>
-          </span>
-          <input
-            className={classnames('form-control', {'input-sm' : small})}
-            type="text"
-            placeholder='email'
-            defaultValue={contact.email}
-            ref={node => {
-              email = node
-            }}
-          />
-        </div>
-
-        <div className={classnames('input-group', 'input-group-unstyled', {'form-group' : !small})}>
-          <span className="input-group-addon">
-            <i className="glyphicon glyphicon-picture"></i>
-          </span>
-          <input
-            className={classnames('form-control', {'input-sm' : small})}
-            type="text"
-            placeholder='image url'
-            defaultValue={contact.imageUrl}
-            ref={node => {
-              imageUrl = node
-            }}
-          />
-        </div>
-
-        <GroupSelector
-          onSelect={handleSelect}
-          hideIcon={false}
-          selectedOption={group}
-          smallButtons={small}
-        />
-
-        <ContactFormButtons
-          onClear={handleClear}
-          small={small}
-        />
-
-      </form>
-    </div>
-  )
+      </div>
+    )
+  }
 }
 
 ContactForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  onClear: PropTypes.func,
   showIcons: PropTypes.bool,
-  small: PropTypes.bool,
   contact: PropTypes.object,
+  detailView: PropTypes.bool.isRequired,
 }
 
 export default ContactForm
