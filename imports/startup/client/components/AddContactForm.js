@@ -1,125 +1,54 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Bert } from 'meteor/themeteorchef:bert'
 import { connect } from 'react-redux'
 import { addTodo } from '../actions'
+
 import GroupSelector from './GroupSelector'
+import ContactForm from './ContactForm'
+import Button from './Button'
 
-const AddContactForm = ({ dispatch }) => {
-  let name
-  let phone
-  let imageUrl
-  let email
-  let group = 'all'
 
-  const handleAddContactForm = (e) => {
-    e.preventDefault()
-    if (!name.value.length && !phone.value.length && !email.value.length){
-      console.log("Fields cannot be empty")
-      Bert.alert("Fields cannot be empty", 'danger')
-    } else {
-      dispatch(addTodo(name.value, phone.value, email.value, chooseImage(imageUrl), group))
-      handleClearForm()
+class AddContactForm extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      visibile: false
     }
   }
-  const chooseImage = (imageUrl) => {
-    if (imageUrl.value === '')
-      //default image placeholder
-      return 'https://trendytheme.net/wp-content/themes/trendytheme/img/client.png'
-     else
-      return imageUrl.value
+  handleAddContactForm = (name, phone, email, imageUrl, group, handleError) => {
+    if (!name.length && !phone.length && !email.length){
+      handleError('Fields cannot be empty')
+    } else {
+      this.toggleModal()
+      this.props.dispatch(addTodo(name, phone, email, this.chooseImage(imageUrl), group))
+    }
   }
-  const handleClearForm = () => {
-    name.value = ''
-    phone.value = ''
-    imageUrl.value = ''
-    email.value = ''
-    // group = 'all'
+  chooseImage = (imageUrl) => {
+    if (!imageUrl.length)
+    //default image placeholder
+    return 'https://trendytheme.net/wp-content/themes/trendytheme/img/client.png'
+    else
+    return imageUrl
   }
-  const handleSelect = (selected) => {
-    // console.log('group', selected)
-    group = selected
+  toggleModal = () => {
+    this.setState({
+      visibile: !this.state.visibile
+    })
   }
-
-  return (
-    <div className='row'>
-      <form className='form-group' onSubmit={handleAddContactForm}>
-
-        <div className="form-group input-group input-group-unstyled">
-          <span className="input-group-addon">
-            <i className="glyphicon glyphicon-user"></i>
-          </span>
-          <input
-            className='form-control'
-            type="text"
-            placeholder='name'
-            ref={node => {
-              name = node
-            }}
-          />
-        </div>
-
-        <div className="form-group input-group input-group-unstyled">
-          <span className="input-group-addon">
-            <i className="glyphicon glyphicon-phone"></i>
-          </span>
-          <input
-            className='form-control'
-            type="text"
-            placeholder='phone'
-            ref={node => {
-              phone = node
-            }}
-          />
-        </div>
-
-        <div className="form-group input-group input-group-unstyled">
-          <span className="input-group-addon">
-            <i className="glyphicon glyphicon-envelope"></i>
-          </span>
-          <input
-            className='form-control'
-            type="text"
-            placeholder='email'
-            ref={node => {
-              email = node
-            }}
-          />
-        </div>
-
-        <div className="form-group input-group input-group-unstyled">
-          <span className="input-group-addon">
-            <i className="glyphicon glyphicon-picture"></i>
-          </span>
-          <input
-            className='form-control'
-            type="text"
-            placeholder='image url'
-            ref={node => {
-              imageUrl = node
-            }}
-          />
-        </div>
-
-        <GroupSelector onSelect={handleSelect} selectedOption={group}/>
-
-
-        <div className='btn-toolbar pull-right'>
-          <input
-            type='button'
-            className='btn btn-default'
-            onClick={handleClearForm}
-            value='CANCEL'
-          />
-          <input
-            type='submit'
-            className="btn btn-primary"
-            value="SUBMIT"
-          />
-        </div>
-      </form>
-    </div>
-  )
+  render() {
+    return (
+      <div>
+        <ContactForm
+          onSubmit={this.handleAddContactForm}
+          onClear={this.toggleModal}
+          visibile={this.state.visibile}
+          detailView={false}
+          createView={true}
+        />
+        <Button toggleModal={this.toggleModal}/>
+      </div>
+    )
+  }
 }
 
 AddContactForm.propTypes = {

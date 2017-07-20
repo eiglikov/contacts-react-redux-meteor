@@ -29,12 +29,14 @@ if(Meteor.isServer){
       return Contacts.find(options).fetch()
     },
 
-    'contacts.insert'(name, phone, email, imageUrl, group) {
+    'contacts.insert'(contactId, name, phone, email, imageUrl, group) {
       if (!Meteor.userId()) {
         throw new Meteor.Error('not-authorized')
       }
+      check(contactId, String)
       check(name, String)
       check(phone, String)
+      check(email, String)
       check(imageUrl, String)
       check(group, String)
 
@@ -42,12 +44,13 @@ if(Meteor.isServer){
       console.log("INSERT->", userId, name, phone, email, imageUrl, group)
 
       return Contacts.insert({
-        userId,
-        name,
-        phone,
-        email,
-        imageUrl,
-        group,
+        _id: contactId,
+        userId: userId,
+        name: name,
+        phone: phone,
+        email: email,
+        imageUrl: imageUrl,
+        group: group,
         createdAt: new Date(),
       })
     },
@@ -59,26 +62,29 @@ if(Meteor.isServer){
       console.log("REMOVE->", id)
       return Contacts.remove({"_id": id})
     },
-    'contacts.update'(id, name, phone, email, imageUrl) {
+    'contacts.update'(id, name, phone, email, imageUrl, group) {
       if (! Meteor.userId()) {
         throw new Meteor.Error('not-authorized')
       }
-      console.log("EDIT->", id, name, phone, email, imageUrl)
+      console.log("EDIT->", id, name, phone, email, imageUrl, group)
 
       check(id, String)
       check(name, String)
       check(phone, String)
       check(email, String)
       check(imageUrl, String)
+      check(group, String)
 
 
       const contact = Contacts.findOne(id)
+
       return Contacts.update(id,
         { $set: {
           name: name,
           phone: phone,
           email: email,
-          imageUrl: imageUrl
+          imageUrl: imageUrl,
+          group: group
         }
       })
 

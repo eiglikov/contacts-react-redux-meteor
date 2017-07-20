@@ -8,8 +8,7 @@ import AddContactForm from './AddContactForm'
 import Filters from './Filters'
 import ContactsList from './ContactsList'
 
-
-const ContactsApp = ({ loggedIn }) => (
+const ContactsApp = ({ loggedIn, history }) => (
   <div>
     {
       loggedIn ?
@@ -20,7 +19,12 @@ const ContactsApp = ({ loggedIn }) => (
             <ContactsList />
           </div>
         </div>
-      : <p>Loading...</p>
+      : <div className='centered-container centered-text'>
+        <h1><strong className='brand-text-color'>401</strong> Unauthorized</h1>
+        <Link to='/login'>
+          <button className='btn btn-lg btn-primary'>Sign In</button>
+        </Link>
+      </div>
     }
   </div>
 )
@@ -29,8 +33,6 @@ ContactsApp.propTypes = {
   loggedIn: PropTypes.bool
 }
 const mapStateToProps = state => {
-  console.log("state", state)
-
   return {
     loggedIn : state.authReducers.loggedIn
   }

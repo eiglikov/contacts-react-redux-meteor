@@ -26,9 +26,10 @@ class VisibileContactsList extends Component {
   render() {
     const { props: { isFetching, contacts, removeContact, editContact, errorMessage } } = this
 
-    if (isFetching && !contacts.length) {
-      return <p>Loading...</p>
+    if (!contacts.length) {
+      return <h3>No contacts</h3>
     }
+
     if (errorMessage && !contacts.length) {
       return (
         <FetchError
@@ -36,6 +37,7 @@ class VisibileContactsList extends Component {
           onRetry={() => this.fetchData()}
         />)
       }
+
       return (
         <ContactsList
           contacts={contacts}
@@ -59,8 +61,6 @@ class VisibileContactsList extends Component {
       const { contacts, onRemove, onEdit } = props
       // sort contacts by name
       contacts.sort(keysrt('name'))
-      console.log("sorted contacts", contacts);
-
 
       return (
         <div>
@@ -82,11 +82,7 @@ class VisibileContactsList extends Component {
     }
 
     const mapStateToProps = (state, { match }) => {
-      console.log('filter', match.params.filter)
-      // console.log('state', state)
-
       const filter = match.params.filter || 'all'
-      // const filter = 'all'
       return {
         contacts: getVisibleContacts(state, filter),
         filter,

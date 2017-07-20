@@ -9,34 +9,39 @@ class GroupSelector extends Component {
       selectedOption: this.props.selectedOption
     }
   }
-
-  handleGroupChange = (group) => {
-    console.log(group.target)
-    this.props.onSelect(group.target.value)
-    this.setState({
-      selectedOption: group.target.value
-    })
+  componentDidUpdate(prevProps) {
+    if (this.props.selectedOption !== prevProps.selectedOption) {
+      this.setState({selectedOption: this.props.selectedOption})
+    }
   }
-
+  handleGroupChange = (group) => {
+    let groupValue = group.target.value
+    this.setState({
+      selectedOption: groupValue
+    })
+    this.props.onSelect(groupValue)
+  }
   render(){
+    const hideIcon = this.props.hideIcon
+    const smallButtons = this.props.smallButtons
+
     return (
       <div className="input-group input-group-unstyled">
-        <span className="input-group-addon">
+        <span className={classnames('input-group-addon', {'hidden' : hideIcon})}>
           <i className="glyphicon glyphicon-bookmark"></i>
         </span>
-        <div className="btn-toolbar" data-toggle="buttons">
-
-
-          <label className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'all'})}>
+        <div className="btn-group" data-toggle="buttons">
+          <label className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'all'}, {'btn-sm' : smallButtons})}>
             All
             <input
               type="radio"
               name='options'
               value='all'
+              defaultChecked
               onClick={(node) => this.handleGroupChange(node)}
             />
           </label>
-          <label className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'family'})}>
+          <label className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'family'}, {'btn-sm' : smallButtons})}>
             Family
             <input
               type="radio"
@@ -45,7 +50,7 @@ class GroupSelector extends Component {
               onClick={(node) => this.handleGroupChange(node)}
             />
           </label>
-          <label className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'friends'})}>
+          <label className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'friends'}, {'btn-sm' : smallButtons})}>
             Friends
             <input
               type="radio"
@@ -55,7 +60,7 @@ class GroupSelector extends Component {
             />
           </label>
           <label
-            className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'colleagues'})}>
+            className={classnames('btn', 'btn-default', {'btn-primary' : this.state.selectedOption == 'colleagues'}, {'btn-sm' : smallButtons})}>
             Colleagues
             <input
               type="radio"
@@ -73,6 +78,8 @@ class GroupSelector extends Component {
 GroupSelector.propTypes = {
   onSelect: PropTypes.func.isRequired,
   selectedOption: PropTypes.string.isRequired,
+  smallButtons: PropTypes.bool,
+  hideIcon: PropTypes.bool,
 }
 
 export default GroupSelector
