@@ -10,7 +10,6 @@ if(Meteor.isServer){
       return this.stop()
     }
     const query = {}
-    console.log("filter", filter)
 
     if (filter === 'family') {
       query.group = 'family'
@@ -24,6 +23,8 @@ if(Meteor.isServer){
     query.userId = this.userId
     console.log("query", query)
     console.log("this.userId", this.userId)
+    console.log("------------");
+
     return Contacts.find(query, {sort: { name: 1 }})
   })
 }

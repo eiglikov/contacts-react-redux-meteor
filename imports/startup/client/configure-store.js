@@ -4,9 +4,9 @@ import reducers from './reducers/'
 import thunk from 'redux-thunk'
 import asteroid from './configure-asteroid'
 import initializeListeners from './actions/asteroid'
-import {persistStore, autoRehydrate} from 'redux-persist'
+import { persistStore, autoRehydrate } from 'redux-persist'
 
-let persistor
+var persistor
 const configureStore = () => {
   const middlewares = [thunk.withExtraArgument(asteroid)]
 
@@ -17,7 +17,6 @@ const configureStore = () => {
   const enhancers = [
     applyMiddleware(...middlewares),
     autoRehydrate(),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
   ]
 
   const store = createStore(
@@ -37,7 +36,5 @@ const configureStore = () => {
 export default configureStore
 
 export const getPersistor = () => {
-  // console.log(persistor)
-
   return persistor
 }

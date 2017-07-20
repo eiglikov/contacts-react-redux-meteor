@@ -1,33 +1,39 @@
-import React from 'react'
-import FilterLink from './FilterLink'
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+import GroupSelector from './GroupSelector'
 
-const Filters = () => (
-  <div className='row'>
-    {'Groups: '}
-    <FilterLink
-      filter="all"
-    >
-      {'All'}
-    </FilterLink>
-    {' '}
-    <FilterLink
-      filter="family"
-    >
-      {'Family'}
-    </FilterLink>
-    {' '}
-    <FilterLink
-      filter="friends"
-    >
-      {'Friends'}
-    </FilterLink>
-    {' '}
-    <FilterLink
-      filter="colleagues"
-    >
-      {'Colleagues'}
-    </FilterLink>
-  </div>
-        )
+class Filters extends Component {
+  constructor(props) {
+    super(props)
+    const initialPath = this.splitPath(props.location.pathname)
+    this.state = {
+      location: initialPath
+    }
+  }
+  handleSelect = (selected) => {
+    this.setState({
+      location: selected
+    })
+    this.props.history.push('/group/' + selected)
+  }
+  splitPath = (location) => {
+    // split /group/(pathname) into (pathname)
+    return location.split('/')[2]
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.handleSelect(this.splitPath(this.props.location.pathname))
+    }
+  }
+  render(){
+    return(
+      <GroupSelector
+        onSelect={this.handleSelect}
+        hideIcon={true}
+        selectedOption={this.state.location}
+      />
+    )
+  }
+}
 
-        export default Filters
+export default withRouter(Filters)

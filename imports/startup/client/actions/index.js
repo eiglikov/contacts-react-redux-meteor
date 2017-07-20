@@ -1,10 +1,9 @@
-// import random from 'meteor-random'
 import { getIsFetching, getContact, contacts } from '../reducers'
 import { getPersistor } from '../configure-store'
 import { Accounts } from 'meteor/accounts-base'
+import { Random } from 'meteor/random'
 
 export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
-  console.log("Fetching...")
   if (getIsFetching(getState(), filter)) {
     return Promise.resolve()
   }
@@ -33,22 +32,24 @@ export const fetchContacts = (filter) => (dispatch, getState, asteroid) => {
 
 }
 
-export const addTodo = (name, phone, email, imageUrl, group) =>
+export const addTodo = (name, phone, email, imageUrl, group = 'all') =>
 (dispatch, getState, asteroid) => {
-  asteroid.call('contacts.insert', name, phone, email, imageUrl, group)
+  // for optimistic UI we immediately dispatch an DDP_ADDED action
+  let contactId = Random.id()
+
+  asteroid.call('contacts.insert', contactId, name, phone, email, imageUrl, group)
   .then(() => {
     // if this succeeds the Contact has already been added
     // so there is nothing more Contact
-    console.log("Contact Added", name, phone, email, imageUrl, group)
+    console.log("Contact Added")
   })
   .catch((err) => {
     // something went wrong when creating the new Contact
     // since we optimistically added the Contact already we need to remove it now
-    console.log('error:', err)
-
+    console.log('ERROR:', err)
     dispatch({
       type: 'DDP_REMOVED',
-      response: { collection: 'contacts', id },
+      response: { collection: 'contacts', contactId },
     })
   })
 
@@ -56,24 +57,24 @@ export const addTodo = (name, phone, email, imageUrl, group) =>
 }
 
 
-export const editContact = (id, name, phone, email, imageUrl) =>
+export const editContact = (id, name, phone, email, imageUrl, group) =>
 (dispatch, getState, asteroid) => {
-  asteroid.call('contacts.update', id, name, phone, email, imageUrl)
+  asteroid.call('contacts.update', id, name, phone, email, imageUrl, group)
   .then(() => {
-    console.log("contact updated", id, name, phone, email, imageUrl)
+    console.log("contact updated")
   })
-  .catch(() => {
-    dispatch({
-      type: 'DDP_CHANGED',
-      response: { collection: 'contacts', id, doc: { name, phone, email, imageUrl } },
-    })
+  .catch((err) => {
+    console.log("ERROR edit", err);
   })
 }
 
 export const removeContact = (id) => (dispatch, getState, asteroid) => {
   asteroid.call('contacts.remove', id)
+  .then(() => {
+    console.log("contact removed");
+  })
   .catch((err) => {
-    console.log("remove error", err)
+    console.log("remove ERROR", err)
   })
 }
 
@@ -89,7 +90,7 @@ export const signIn = (email, password, history, handleError) =>
     history.push('/group/all')
   })
   .catch((err) => {
-    console.log("login error", err)
+    console.log("login ERROR", err)
     handleError(err.reason)
   })
 }
@@ -99,12 +100,11 @@ export const signUp = (name, email, password, history, handleError) =>
   Accounts.createUser({ username: name, email: email, password: password},
     (err) => {
       if(err){
-        console.log("signup error", err)
+        console.log("signup ERROR", err)
         handleError(err.reason)
       } else {
         dispatch({
-          type: 'LOG_IN',
-          loggedIn: true
+          type: 'SIGN_UP'
         })
         history.push('/login')
       }
@@ -119,13 +119,11 @@ export const logout = () => (dispatch, getState, asteroid) => {
 
   asteroid.logout()
   .then(() => {
-    console.log("LoggedOut")
     getPersistor().pause()
-    console.log("Persistor purged")
+    console.log("Logged Out")
   })
   .catch((err) => {
-    console.log("logout error", err)
-
+    console.log("logout ERROR", err)
   })
 
 }

@@ -20,6 +20,49 @@
   background-color: #2196F3;
   border-color: transparent;
 }
+
+.btn-circle {
+  text-align: center;
+  font-size: 20px;
+
+  margin-bottom: 24px;
+  margin-right: 24px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.2);
+  cursor: pointer;
+  display: inline-block;
+  color: #ffffff;
+  font-size: 30px;
+  height: 60px;
+  width: 60px;
+  outline: none;
+  z-index: 1000;
+}
+
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+// .btn-circle.btn-xl {
+//   width: 70px;
+//   height: 70px;
+//   padding: 10px 16px;
+//   font-size: 24px;
+//   line-height: 1.33;
+//   border-radius: 35px;
+// }
+
+
+
 .centered-text {
   text-align: center;
 }
@@ -29,6 +72,18 @@
   position: absolute;
   padding: 0 30px;
 }
+.contact {
+  cursor: pointer;
+}
+.contact:hover {
+  background-color: #f7f7f7;
+}
+.control-btn-group {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
 .background-image {
   min-height: auto;
   background-size: cover;
@@ -37,6 +92,14 @@
   background-image: url(http://www.studentenraad.ehb.be/img/home/parallax/contact-us2-background.jpg);
 }
 
+.first-uppercase {
+  text-transform: capitalize;
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
 .navbar-collapse.collapse {
   display: block!important;
 }
@@ -63,6 +126,9 @@
 .modal-dialog {
 }
 
+.modal-header {
+  background-color: #f7f7f7;
+}
 .modal-backdrop {
-   background-color: #fff;
+  background-color: rgba(0,0,0,0.502);
 }
