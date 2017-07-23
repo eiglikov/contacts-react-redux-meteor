@@ -39,8 +39,6 @@ class ContactForm extends Component {
       this.props.onClear()
     } else {
       let notEmpty = (this.name.value || this.phone.value || this.email.value) ? true : false
-      console.log("notEmpty", notEmpty);
-
       if(notEmpty){
         let conformation = confirm('Are you sure you want to discard changes?')
         if (conformation){
@@ -148,18 +146,18 @@ class ContactForm extends Component {
                     </div>
                     { Object.getOwnPropertyNames(contact).length ?
                       <GroupButton group={contact.group} toggleModal={this.props.onClear}/> : ''}
+                    </div>
                   </div>
-                </div>
-              }
-            </div>
-            <div className="modal-body">
-              { error.length > 0 ? <div className="alert alert-danger fade in">{error}</div> :''}
-              <form className="form col-md-12 center-block" onSubmit={this.handleSubmitForm}>
-                <div className='input-group input-group-unstyled form-group form-group'>
-                  <span className="input-group-addon">
-                    <i className="glyphicon glyphicon-user"></i>
-                  </span>
-                  { detailView ? <p>{name}</p>
+                }
+              </div>
+              <div className="modal-body">
+                { error.length > 0 ? <div className="alert alert-danger fade in">{error}</div> :''}
+                <form className="form col-md-12 center-block" onSubmit={this.handleSubmitForm}>
+                  <div className='input-group input-group-unstyled form-group form-group'>
+                    <span className="input-group-addon">
+                      <i className="glyphicon glyphicon-user"></i>
+                    </span>
+                    { detailView ? <p>{name}</p>
                     :
                     <input
                       className='form-control'
@@ -178,72 +176,72 @@ class ContactForm extends Component {
                     <i className="glyphicon glyphicon-earphone"></i>
                   </span>
                   { detailView ? <p>{phone}</p>
-                    :
-                    <input
-                      className='form-control'
-                      id='contact-phone'
-                      type="text"
-                      placeholder='phone'
-                      defaultValue={phone}
-                      ref={node => this.phone = node}
-                    />
-                  }
-                </div>
-
-                <div className='input-group input-group-unstyled form-group'>
-                  <span className="input-group-addon">
-                    <i className="glyphicon glyphicon-envelope"></i>
-                  </span>
-                  { detailView ?  <p><a href={`mailto:${email}`}>{email}</a></p>
-                    :
-                    <input
-                      className='form-control'
-                      type="text"
-                      id='contact-email'
-                      placeholder='email'
-                      defaultValue={email}
-                      ref={node => this.email = node}
-                    />
-                  }
-                </div>
-
-                <div className='input-group input-group-unstyled form-group'>
-                  <span className="input-group-addon">
-                    <i className="glyphicon glyphicon-picture"></i>
-                  </span>
-                  { detailView ? <p>{imageUrl}</p>
-                    :
-                    <input
-                      className='form-control'
-                      id='contact-imageUrl'
-                      type="text"
-                      placeholder='image url'
-                      defaultValue={imageUrl}
-                      ref={node => this.imageUrl = node}
-                    />
-                  }
-                </div>
-                { detailView ? ''
                   :
-                    <GroupSelector
-                      onSelect={this.handleSelect}
-                      hideIcon={false}
-                      selectedOption={group}
-                      smallButtons={false}
-                    />
-                }
-                <div className="form-group top-buffer">
-                  <ContactFormButtons
-                    onClear={this.handleClear}
-                    hideSubmit={detailView}
+                  <input
+                    className='form-control'
+                    id='contact-phone'
+                    type="text"
+                    placeholder='phone'
+                    defaultValue={phone}
+                    ref={node => this.phone = node}
                   />
-                </div>
-              </form>
+                }
+              </div>
+
+              <div className='input-group input-group-unstyled form-group'>
+                <span className="input-group-addon">
+                  <i className="glyphicon glyphicon-envelope"></i>
+                </span>
+                { detailView ?  <p><a href={`mailto:${email}`}>{email}</a></p>
+                :
+                <input
+                  className='form-control'
+                  type="text"
+                  id='contact-email'
+                  placeholder='email'
+                  defaultValue={email}
+                  ref={node => this.email = node}
+                />
+              }
             </div>
-            <div className="modal-footer" style={{borderTop: 0}}></div>
+
+            <div className='input-group input-group-unstyled form-group'>
+              <span className="input-group-addon">
+                <i className="glyphicon glyphicon-picture"></i>
+              </span>
+              { detailView ? <p>{imageUrl}</p>
+              :
+              <input
+                className='form-control'
+                id='contact-imageUrl'
+                type="text"
+                placeholder='image url'
+                defaultValue={imageUrl}
+                ref={node => this.imageUrl = node}
+              />
+            }
           </div>
+          { detailView ? ''
+          :
+          <GroupSelector
+            onSelect={this.handleSelect}
+            hideIcon={false}
+            selectedOption={group}
+            smallButtons={false}
+          />
+        }
+        <div className="form-group top-buffer">
+          <ContactFormButtons
+            onClear={this.handleClear}
+            hideSubmit={detailView}
+          />
         </div>
-      </div>
+      </form>
+    </div>
+    <div className="modal-footer" style={{borderTop: 0}}></div>
+  </div>
+</div>
+</div>
 )
 }
 }

@@ -26,8 +26,6 @@ class AuthForm extends Component {
     let email = this.email.value
     let password = this.password.value
     let errors = this.validateInput(name, email, password)
-    console.log("errors", errors);
-
     if (errors){
       this.handleError(errors)
     } else {
@@ -49,7 +47,6 @@ class AuthForm extends Component {
       valid = validate({password: password}, validationRules.authPasswordCheck, {format: "flat"})
       errorDetector += valid ? (' ' + valid) : ''
     }
-    console.log("errorDetector", errorDetector)
     return errorDetector
   }
 

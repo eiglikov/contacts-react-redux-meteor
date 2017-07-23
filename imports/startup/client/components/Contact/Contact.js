@@ -20,8 +20,6 @@ class Contact extends Component {
   }
   componentDidUpdate(prevProps) {
     if (this.props.contact !== prevProps.contact) {
-      console.log("props Updated!", this.props.contact);
-
       this.setState({
         contact: this.props.contact,
         name: this.props.contact.name,
@@ -34,8 +32,6 @@ class Contact extends Component {
   }
   handleRemove = () => {
     let conformation = confirm('Are you sure you want to delete ' + this.state.contact.name + '?')
-    // remove when deploy
-    // conformation = true
     if(conformation){
       this.props.onRemove(this.state.contact.id)
     } else {
@@ -44,9 +40,6 @@ class Contact extends Component {
   }
   handleEdit = (name, phone, email, imageUrl, group, handleError) => {
     this.handleToggleContact()
-
-    console.log("handleEdit in Contact", this.props.contact.id, name, phone, email, imageUrl, group);
-
     this.props.onEdit(this.props.contact.id, name, phone, email, imageUrl, group)
   }
   handleToggleContact = () => {
