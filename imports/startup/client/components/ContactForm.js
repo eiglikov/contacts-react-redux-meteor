@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+import { validate } from 'validate.js'
+import * as validationRules from '../helpers/validation'
 
 import GroupSelector from './GroupSelector'
 import GroupButton from './GroupButton'
@@ -26,24 +28,81 @@ class ContactForm extends Component {
     this.setState({visibile: nextProps.visibile})
   }
   handleError = (err) => {
-    this.setState({
-      error: err
-    })
+    if (typeof err == 'object'){
+      this.setState({ error: err[0] })
+    } else {
+      this.setState({ error: err })
+    }
+  }
+  handleClear = () => {
+    if(this.state.detailView){
+      this.props.onClear()
+    } else {
+      let notEmpty = (this.name.value || this.phone.value || this.email.value) ? true : false
+      console.log("notEmpty", notEmpty);
+
+      if(notEmpty){
+        let conformation = confirm('Are you sure you want to discard changes?')
+        if (conformation){
+          this.name.value = ''
+          this.phone.value = ''
+          this.email.value = ''
+          this.imageUrl.value = ''
+          this.setState({error: ''})
+        } else {
+          console.log("Cancelled")
+        }
+      }
+      this.props.onClear()
+    }
   }
   handleSubmitForm = (e) => {
     e.preventDefault()
-    let name = this.name.value
+    let name = this.name.value.trim()
     let phone = this.phone.value
     let email = this.email.value
     let imageUrl = this.imageUrl.value
-    // Optimistic UI update
-    this.setState({
-      name: name,
-      phone: phone,
-      email: email,
-      imageUrl: imageUrl,
-    })
-    this.props.onSubmit(name, phone, email, imageUrl, this.state.group, this.handleError)
+
+    if (phone && phone.length > 0 && phone.match(/^\d+$/)){
+      phone = Number(phone)
+    }
+
+    let errors = this.validateInput(name, phone, email, imageUrl)
+    if (errors){
+      this.handleError(errors)
+    }
+    else {
+      // Optimistic UI update
+      this.setState({
+        name: name,
+        phone: phone,
+        email: email,
+        imageUrl: imageUrl,
+      })
+      this.props.onSubmit(name, phone, email, imageUrl, this.state.group, this.handleError)
+    }
+  }
+  validateInput = (name, phone, email, imageUrl) => {
+    let errorDetector = ''
+    let valid = validate({name: name}, validationRules.nameCheck, {format: "flat"})
+    errorDetector += valid ? valid : ''
+
+    // checkPhone
+    if (phone && phone.length > 0){
+      valid = validate({phone: phone}, validationRules.phoneCheck, {format: "flat"})
+      errorDetector += valid ? (' ' + valid) : ''
+    }
+    //check email
+    if (email && email.length > 0){
+      valid = validate({email: email}, validationRules.emailCheck, {format: "flat"})
+      errorDetector += valid ? (' ' + valid) : ''
+    }
+    //check image
+    if (imageUrl && imageUrl.length > 0){
+      valid = validate({imageUrl: imageUrl}, validationRules.urlCheck, {format: "flat"})
+      errorDetector += valid ? (' ' + valid) : ''
+    }
+    return errorDetector
   }
   handleSelect = (selected) => {
     this.setState({
@@ -186,7 +245,7 @@ class ContactForm extends Component {
                 }
                 <div className="form-group top-buffer">
                   <ContactFormButtons
-                    onClear={this.props.onClear}
+                    onClear={this.handleClear}
                     hideSubmit={detailView}
                   />
                 </div>
@@ -196,8 +255,8 @@ class ContactForm extends Component {
           </div>
         </div>
       </div>
-    )
-  }
+)
+}
 }
 
 ContactForm.propTypes = {

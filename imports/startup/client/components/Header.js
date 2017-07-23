@@ -13,7 +13,7 @@ const Header = ({ dispatch, loggedIn }) => {
       <div className="container">
         <div className="navbar-header">
           <Link to={loggedIn ? '/group/all' : '/'} className="navbar-brand">
-            <strong className='brand-text-color'>Contacts</strong> Manager
+            <span className='brand-text-color'>Contacts</span> Manager
           </Link>
         </div>
         {

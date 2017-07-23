@@ -1,9 +1,8 @@
 // Methods related to contacts
-
 import { Meteor } from 'meteor/meteor'
+import { Contacts } from './collections'
 import { check } from 'meteor/check'
-import { Contacts } from './collections.js'
-// import random from 'meteor-random'
+import * as checkEnhancers from './checkEnhancers'
 
 Contacts.deny({
   insert: function(){
@@ -21,7 +20,7 @@ if(Meteor.isServer){
 
   Meteor.methods({
     'contacts.fetch'(contactId){
-      check(contactId, String)
+      check(contactId, checkEnhancers.NonEmptyString)
 
       console.log("fetch", contactId)
       // Fetch a single contact when contactId is given, else fetch all contacts.
@@ -33,12 +32,16 @@ if(Meteor.isServer){
       if (!Meteor.userId()) {
         throw new Meteor.Error('not-authorized')
       }
-      check(contactId, String)
-      check(name, String)
-      check(phone, String)
-      check(email, String)
-      check(imageUrl, String)
-      check(group, String)
+
+      console.log("group", group, group.length);
+
+      check(contactId, checkEnhancers.NonEmptyString)
+      check(name, checkEnhancers.NonEmptyString)
+      check(phone, checkEnhancers.ShortNumber)
+      check(email, checkEnhancers.ValidEmail)
+      check(imageUrl, checkEnhancers.ValidUrl)
+      check(group, checkEnhancers.ValidGroup)
+
 
       let userId = Meteor.userId()
       console.log("INSERT->", userId, name, phone, email, imageUrl, group)
@@ -54,31 +57,32 @@ if(Meteor.isServer){
         createdAt: new Date(),
       })
     },
-    'contacts.remove'(id) {
+    'contacts.remove'(contactId) {
       if (! Meteor.userId()) {
         throw new Meteor.Error('not-authorized')
       }
-      check(id, String)
-      console.log("REMOVE->", id)
-      return Contacts.remove({"_id": id})
+      check(contactId, checkEnhancers.NonEmptyString)
+
+      console.log("REMOVE->", contactId)
+      return Contacts.remove({"_id": contactId})
     },
-    'contacts.update'(id, name, phone, email, imageUrl, group) {
+    'contacts.update'(contactId, name, phone, email, imageUrl, group) {
       if (! Meteor.userId()) {
         throw new Meteor.Error('not-authorized')
       }
-      console.log("EDIT->", id, name, phone, email, imageUrl, group)
+      console.log("EDIT->", contactId, name, phone, email, imageUrl, group)
 
-      check(id, String)
-      check(name, String)
-      check(phone, String)
-      check(email, String)
-      check(imageUrl, String)
-      check(group, String)
+      check(contactId, checkEnhancers.NonEmptyString)
+      check(name, checkEnhancers.NonEmptyString)
+      check(phone, checkEnhancers.ShortNumber)
+      check(email, checkEnhancers.ValidEmail)
+      check(imageUrl, checkEnhancers.ValidUrl)
+      check(group, checkEnhancers.ValidGroup)
 
 
-      const contact = Contacts.findOne(id)
+      const contact = Contacts.findOne(contactId)
 
-      return Contacts.update(id,
+      return Contacts.update(contactId,
         { $set: {
           name: name,
           phone: phone,

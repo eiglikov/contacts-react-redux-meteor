@@ -20,7 +20,7 @@ const ContactsApp = ({ loggedIn, history }) => (
           </div>
         </div>
       : <div className='centered-container centered-text'>
-        <h1><strong className='brand-text-color'>401</strong> Unauthorized</h1>
+        <h1>Unauthorized</h1>
         <Link to='/login'>
           <button className='btn btn-lg btn-primary'>Sign In</button>
         </Link>

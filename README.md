@@ -13,7 +13,7 @@
 
 ## Installation
 
-<strong>This project requires Meteor! For info please see <a href='https://www.meteor.com/install'>instructions</a> </strong>
+<span>This project requires Meteor! For info please see <a href='https://www.meteor.com/install'>instructions</a> </span>
 * clone this repo from github: git clone git@github.com:eiglikov/contacts-react-redux-meteor.git
 * in cloned repo run ```meteor```
 * wait for packages to be downloaded and installed(might take a couple of minutes)

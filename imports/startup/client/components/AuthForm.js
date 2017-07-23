@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { withHistory, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { validate } from 'validate.js'
+import * as validationRules from '../helpers/validation'
 
 class AuthForm extends Component {
   constructor(props){
@@ -9,25 +11,49 @@ class AuthForm extends Component {
     this.state = { error: '' }
   }
   handleError = (err) => {
-    this.setState({
-      error: err
-    })
+    if (typeof err == 'object'){
+      let firstErr = err[Object.keys(err)[0]][0];
+      this.setState({ error: firstErr })
+    } else {
+      this.setState({ error: err })
+    }
   }
   handleSubmit = (e) => {
     e.preventDefault()
     let name = ''
     if (this.props.isSignUp){
-      let email = this.name.value
+      name = this.name.value
     }
     let email = this.email.value
     let password = this.password.value
+    let errors = this.validateInput(name, email, password)
+    console.log("errors", errors);
 
-    if (email && password){
-      this.props.onSubmit(name, email, password, this.handleError)
+    if (errors){
+      this.handleError(errors)
     } else {
-      this.handleError('Both email and password must be entered')
+      this.props.onSubmit(name, email, password, this.handleError)
     }
   }
+  validateInput = (name, email, password) => {
+    let valid
+    let errorDetector = ''
+    if (name && name.length > 0){
+      valid = validate({name: name}, validationRules.authNameCheck, {format: "flat"})
+      errorDetector += valid ? (' ' + valid) : ''
+    }
+    if (email && email.length > 0){
+      valid = validate({email: email}, validationRules.authEmailCheck, {format: "flat"})
+      errorDetector += valid ? (' ' + valid) : ''
+    }
+    if (password && password.length > 0){
+      valid = validate({password: password}, validationRules.authPasswordCheck, {format: "flat"})
+      errorDetector += valid ? (' ' + valid) : ''
+    }
+    console.log("errorDetector", errorDetector)
+    return errorDetector
+  }
+
   render(){
     const error = this.state.error
     const isSignUp = this.props.isSignUp
@@ -47,7 +73,7 @@ class AuthForm extends Component {
                       type="text"
                       id="auth-name"
                       className="form-control input-lg"
-                      placeholder="name"
+                      placeholder="username"
                       ref={node => this.name = node}
                     />
                   </div>

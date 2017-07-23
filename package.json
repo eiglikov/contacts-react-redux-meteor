@@ -9,6 +9,7 @@
     "babel-runtime": "^6.23.0",
     "bcrypt": "^1.0.2",
     "classnames": "^2.2.5",
+    "dot": "^1.1.2",
     "lodash": "^4.17.4",
     "meteor-node-stubs": "~0.2.4",
     "prop-types": "^15.5.10",
@@ -21,7 +22,10 @@
     "redux": "^3.7.2",
     "redux-logger": "^2.10.2",
     "redux-persist": "^4.8.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "type": "0.0.3",
+    "validate": "^3.0.1",
+    "validate.js": "^0.11.1"
   },
   "devDependencies": {
     "redux-devtools": "^3.3.1",

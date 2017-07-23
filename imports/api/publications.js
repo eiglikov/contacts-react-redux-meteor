@@ -2,6 +2,8 @@
 
 import { Meteor } from 'meteor/meteor'
 import { Contacts } from './collections.js'
+import { check } from 'meteor/check'
+import { ValidGroup } from './checkEnhancers'
 
 if(Meteor.isServer){
   Meteor.publish('contacts', function(filter = 'all') {
@@ -9,6 +11,7 @@ if(Meteor.isServer){
       this.ready()
       return this.stop()
     }
+    check(filter, ValidGroup)
     const query = {}
 
     if (filter === 'family') {

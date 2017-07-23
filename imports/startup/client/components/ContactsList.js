@@ -24,10 +24,10 @@ class VisibileContactsList extends Component {
   }
 
   render() {
-    const { props: { isFetching, contacts, removeContact, editContact, errorMessage } } = this
+    const { props: { isFetching, contacts, filter, removeContact, editContact, errorMessage } } = this
 
     if (!contacts.length) {
-      return <h3>No contacts</h3>
+      return <h3>No contacts in <span className='first-uppercase brand-text-color'>{filter}</span></h3>
     }
 
     if (errorMessage && !contacts.length) {
