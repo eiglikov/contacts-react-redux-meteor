@@ -4,12 +4,13 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 import configureStore from '../configure-store'
 
 // pages
-import ContactsApp from './ContactsApp'
-import HomeWelcome from './HomeWelcome'
-import SignupPage from './SignupPage'
-import LoginPage from './LoginPage'
-import Header from './Header'
-import NotFound from './NotFound'
+import SignupPage from '../components/Authentication/SignupPage'
+import LoginPage from '../components/Authentication/LoginPage'
+
+import Header from '../components/Pages/Header'
+import ContactsApp from '../components/ContactsApp'
+import HomeWelcome from '../components/Pages/HomeWelcome'
+import NotFound from '../components/Pages/NotFound'
 
 const routes =
 <Provider store={configureStore()}>

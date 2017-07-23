@@ -37,7 +37,7 @@ if(Meteor.isServer){
 
       check(contactId, checkEnhancers.NonEmptyString)
       check(name, checkEnhancers.NonEmptyString)
-      check(phone, checkEnhancers.ShortNumber)
+      check(phone, checkEnhancers.PhoneNumber)
       check(email, checkEnhancers.ValidEmail)
       check(imageUrl, checkEnhancers.ValidUrl)
       check(group, checkEnhancers.ValidGroup)
@@ -74,7 +74,9 @@ if(Meteor.isServer){
 
       check(contactId, checkEnhancers.NonEmptyString)
       check(name, checkEnhancers.NonEmptyString)
-      check(phone, checkEnhancers.ShortNumber)
+      console.log("x", phone, Number(phone), typeof phone, !isNaN(phone));
+
+      check(phone, checkEnhancers.PhoneNumber)
       check(email, checkEnhancers.ValidEmail)
       check(imageUrl, checkEnhancers.ValidUrl)
       check(group, checkEnhancers.ValidGroup)

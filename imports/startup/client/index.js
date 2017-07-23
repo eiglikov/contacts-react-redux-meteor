@@ -1,6 +1,6 @@
 import React  from 'react'
 import ReactDOM  from 'react-dom'
-import routes from './components/routes'
+import routes from './routes/routes'
 
 Meteor.startup(()=> {
   ReactDOM.render(

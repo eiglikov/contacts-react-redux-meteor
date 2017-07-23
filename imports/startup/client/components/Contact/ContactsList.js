@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import * as actions from '../actions'
-import { getVisibleContacts, getIsFetching, getErrorMessage } from '../reducers/'
-import keysrt from '../helpers/keysrt'
+import * as actions from '../../actions'
+import { getVisibleContacts, getIsFetching, getErrorMessage } from '../../reducers'
+import keysrt from '../../helpers/keysrt'
 
 import Contact from './Contact'
-import FetchError from './FetchError'
+import ContactFetchError from './ContactFetchError'
 
 class VisibileContactsList extends Component {
   componentDidMount() {
@@ -32,7 +32,7 @@ class VisibileContactsList extends Component {
 
     if (errorMessage && !contacts.length) {
       return (
-        <FetchError
+        <ContactFetchError
           message={errorMessage}
           onRetry={() => this.fetchData()}
         />)

@@ -10,8 +10,8 @@ const Button = ({ toggleModal }) => {
   )
 }
 
-// Button.PropTypes = {
-//   toggleModule: PropTypes.func.isRequired
-// }
+Button.PropTypes = {
+  toggleModule: PropTypes.func.isRequired
+}
 
 export default Button

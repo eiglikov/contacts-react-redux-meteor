@@ -4,12 +4,14 @@ export const NonEmptyString = Match.Where((x) => {
   check(x, String)
   return x.length > 0 && x.length < 50
 })
-export const ShortNumber = Match.Where((x) => {
+export const PhoneNumber = Match.Where((x) => {
   if (x.length == 0) return true
-
-  console.log("ShortNumber", x.toString().length >= 0 && x.toString().length < 20)
-  check(x, Match.Maybe(String))
-
+  console.log("PhoneNumber", x.toString().length >= 0 && x.toString().length < 20)
+  if (!isNaN(x)){
+    check(Number(x), Match.Maybe(Number))
+  } else {
+    check(x, Match.Maybe(Number))
+  }
   return x.toString().length >= 0 && x.toString().length < 20
 })
 export const ValidEmail = Match.Where((x) => {

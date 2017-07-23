@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import Header from './Header'
-import AddContactForm from './AddContactForm'
-import Filters from './Filters'
-import ContactsList from './ContactsList'
+import Header from './Pages/Header'
+import AddContactForm from './Contact/AddContactForm'
+import Filters from './Groups/Filters'
+import ContactsList from './Contact/ContactsList'
 
 const ContactsApp = ({ loggedIn, history }) => (
   <div>

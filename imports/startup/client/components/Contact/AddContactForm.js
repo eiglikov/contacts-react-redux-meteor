@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { addTodo } from '../actions'
+import { addTodo } from '../../actions'
 
-import GroupSelector from './GroupSelector'
+import GroupSelector from '../Groups/GroupSelector'
 import ContactForm from './ContactForm'
-import Button from './Button'
+import ButtonAddContact from './ButtonAddContact'
 
 
 class AddContactForm extends Component {
@@ -45,7 +45,7 @@ class AddContactForm extends Component {
           detailView={false}
           createView={true}
         />
-        <Button toggleModal={this.toggleModal}/>
+        <ButtonAddContact toggleModal={this.toggleModal}/>
       </div>
     )
   }

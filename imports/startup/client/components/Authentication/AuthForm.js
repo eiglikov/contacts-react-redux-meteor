@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { withHistory, Link } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { validate } from 'validate.js'
-import * as validationRules from '../helpers/validation'
+import * as validationRules from '../../helpers/validation'
 
 class AuthForm extends Component {
   constructor(props){

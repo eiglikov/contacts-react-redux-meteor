@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import GroupButton from './GroupButton'
+import GroupButton from '../Groups/GroupButton'
 import ContactForm from './ContactForm'
 
 class Contact extends Component {
@@ -18,6 +18,20 @@ class Contact extends Component {
       group: props.contact.group
     }
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.contact !== prevProps.contact) {
+      console.log("props Updated!", this.props.contact);
+
+      this.setState({
+        contact: this.props.contact,
+        name: this.props.contact.name,
+        phone: this.props.contact.phone,
+        email: this.props.contact.email,
+        imageUrl: this.props.contact.imageUrl,
+        group: this.props.contact.group
+      })
+    }
+  }
   handleRemove = () => {
     let conformation = confirm('Are you sure you want to delete ' + this.state.contact.name + '?')
     // remove when deploy
@@ -30,13 +44,7 @@ class Contact extends Component {
   }
   handleEdit = (name, phone, email, imageUrl, group, handleError) => {
     this.handleToggleContact()
-    this.setState({
-      name: name,
-      phone: phone,
-      email: email,
-      imageUrl: imageUrl,
-      group: group
-    })
+
     console.log("handleEdit in Contact", this.props.contact.id, name, phone, email, imageUrl, group);
 
     this.props.onEdit(this.props.contact.id, name, phone, email, imageUrl, group)

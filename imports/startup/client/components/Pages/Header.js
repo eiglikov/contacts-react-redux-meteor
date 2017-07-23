@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { logout } from '../actions'
+import { logout } from '../../actions'
 
 const Header = ({ dispatch, loggedIn }) => {
   const handleLogout = () => {

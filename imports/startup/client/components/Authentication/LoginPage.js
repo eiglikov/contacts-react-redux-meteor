@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-// import { withHistory, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { signIn } from '../actions'
+import { signIn } from '../../actions'
 import AuthForm from './AuthForm'
 
 const LoginPage = ({ history, dispatch }) => {

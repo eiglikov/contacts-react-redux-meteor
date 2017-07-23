@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { validate } from 'validate.js'
-import * as validationRules from '../helpers/validation'
+import * as validationRules from '../../helpers/validation'
 
-import GroupSelector from './GroupSelector'
-import GroupButton from './GroupButton'
+import GroupSelector from '../Groups/GroupSelector'
+import GroupButton from '../Groups/GroupButton'
 import ContactFormButtons from './ContactFormButtons'
 
 class ContactForm extends Component {
@@ -72,13 +72,6 @@ class ContactForm extends Component {
       this.handleError(errors)
     }
     else {
-      // Optimistic UI update
-      this.setState({
-        name: name,
-        phone: phone,
-        email: email,
-        imageUrl: imageUrl,
-      })
       this.props.onSubmit(name, phone, email, imageUrl, this.state.group, this.handleError)
     }
   }
@@ -139,7 +132,6 @@ class ContactForm extends Component {
                       alt="Profile picture"
                     />
                   </div>
-
                   <div className='col-xs-9'>
                     <h1>{name}</h1>
                     <div className='btn-group control-btn-group'>
@@ -160,9 +152,6 @@ class ContactForm extends Component {
                 </div>
               }
             </div>
-
-
-
             <div className="modal-body">
               { error.length > 0 ? <div className="alert alert-danger fade in">{error}</div> :''}
               <form className="form col-md-12 center-block" onSubmit={this.handleSubmitForm}>
