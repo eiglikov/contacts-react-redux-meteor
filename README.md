@@ -1,6 +1,6 @@
-# <h1><a href='https://contacts-meteor.herokuapp.com'>
+# <a href='https://contacts-meteor.herokuapp.com'><h1>
   <span style="color:#0097EF">Contacts</span> Manager
-</a></h1>
+</h1></a>
 
 <a href='https://contacts-meteor.herokuapp.com/'>Contacts Manager</a> is a web application for managing a list of people and their contact information.
 
